@@ -1,648 +1,1105 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Repping It: Interactive Fitness Challenge | Gamified Workout Experience</title>
-  
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-    
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js" integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy" crossorigin="anonymous"></script>
-    <meta name="description" content="Repping It transforms everyday activities into exciting fitness challenges. Roll the dice to determine your workout reps based on common occurrences in your day-to-day life. Stay active and motivated while turning mundane moments into fun exercise opportunities. Unleash your inner beast and make fitness a part of your daily routine!.
-    ">
-  
-  
-    <meta name="keywords" content="Repping It,Fitness game,Home workouts,Active lifestyle,Exercise challenges,Fun fitness activities,Dice workout,Motivational fitness,Healthy living,Interactive exercise,Unique workout routines,Fitness tracker,Outdoor workouts,Home fitness challenges">
-    
-    <meta property="og:title" content="Repping It: Interactive Fitness Challenge | Gamified Workout Experience">
-  <meta property="og:description" content="Repping It transforms everyday activities into exciting fitness challenges. Roll the dice to determine your workout reps based on common occurrences in your day-to-day life. Stay active and motivated while turning mundane moments into fun exercise opportunities. Unleash your inner beast and make fitness a part of your daily routine!.
-  ">
-  
-  <meta property="og:type" content="website">
-    
-  
-  <link rel="manifest" href="manifest.json">
-
-
+    <title>Pick a Card - Interactive Card Design</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
-  
-
-   
-   * {
-        box-sizing: border-box;
-        margin: 0;
-        padding: 0;
-        max-width: 100%;
-    
-
-    }
-    
-    .title {
-    display: flex; /* Use flexbox for alignment */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        .controls {
+    margin-top: 30px;
+    display: flex;
+    justify-content: space-between; /* Space between items */
     align-items: center; /* Center items vertically */
-    justify-content: center; /* Center items horizontally */
-    width: 100%; /* Full width */
-    font-size: 3vw; /* Responsive font size */
-    margin: 20px 0; /* Add vertical spacing */
-}
-
-.side-image {
-    width: 50px; /* Fixed width for images */
-    margin: 0 10px; /* Space between images and title */
-    height: auto; /* Maintain aspect ratio */
-}
-
-
-.footer {
+    flex-wrap: wrap; /* Allow wrapping on smaller screens */
+    gap: 20px; /* Space between controls */
+}.card-front {
+    background-image: url('/IMG_4676-removebg-preview.png'); /* Add background image */
+    background-size: cover; /* Cover the entire card */
+    background-position: center; /* Center the image */
     display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
-    padding: 20px;
-    background: black;
-    color: white;
-    font-size: small;
-    width: 100%;
-}
-
-.footer-links {
-    display: flex;
-    flex-wrap: wrap;
-    gap: clamp(10px, 2vw, 20px);
-    color: #e3dede;
-}
-
-.footer-links a {
-    color: rgb(234, 239, 231);
-    text-decoration: none;
-    font-weight: bold;
-}
-    
-    body {
-        font-family: 'Arial', sans-serif;
-        background: linear-gradient(to bottom right, #1c1c1c, #3f3f3f);
-        color: #ffffff;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        flex-direction: column;
-        min-height: 100vh;
-        padding: 20px;
-        background-image: url("/images/IMG_4678 2.JPG");
-    background-size: cover;
-    background-position: center center;
-    background-repeat: no-repeat;
-    background-attachment: fixed;
-    }
-
-    * {
-    box-sizing: border-box; /* Ensure padding and margins don't affect element width */
-}
-
-body {
-    margin: 0;
-    font-family: Arial, sans-serif; /* Set a default font */
-}
-
-.app-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center; /* Center items horizontally */
-    padding: 20px; /* Add some padding around content */
-
-}
-
-
-
-
-
-
-
-.dice-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center; /* Center elements in the dice container */
-}
-
-.action-button {
-    padding: 10px 20px; /* Add padding to buttons */
-    font-size: 1.5rem; /* Responsive font size for buttons */
-    margin: 10px; /* Space around buttons */
-    cursor: pointer; /* Change cursor to pointer on hover */
-}
-
-.dice-image {
-    display: block;
-    margin: 15px auto; /* Center the dice image */
-    width: 60px; /* Fixed width for the dice image */
-}
-
-
-.container{width: fixed;}
-
-.heading-underline{text-decoration: underline;}
-
-    .app-container {
-        text-align: center;
-        background: rgba(30, 30, 30, 0.8);
-        border-radius: 10px;
-        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
-        padding: 20px;
-        max-width: 600px;
-        width: 100%;
-        display: flex;
-    flex-direction: column;
-    align-items: center;
-    
-    }
-    
-    button {
-        background-color: #007bff;
-        color: white;
-        border: none;
-        border-radius: 5px;
-        padding: 10px 20px;
-        font-size: 16px;
-        cursor: pointer;
-        transition: background-color 0.3s;
-        margin-top: 10px;
-    }
-    
-    button:hover {
-        background-color: #0056b3;
-    }
-    
-    .dice-container {
-        margin-top: 20px;
-        
-    }
-    
-    #diceImage {
-        width: 100px; /* Set your desired width */
-        height: auto; /* Maintain aspect ratio */
-        margin-top: 15px;
-        display: block; /* Show image by default */
-        width: 100px; /* Set your desired width */
-    height: auto; /* Maintain aspect ratio */
-    margin: 15px auto; /* Center the image horizontally with margin */
-    display: block; /* Ensure the image is treated as a block element */
+    color: rgb(230, 224, 224);
     
 }
-    
-    
-    /* Modal Styles */
-    .modal {
-        display: none;
-        position: fixed;
-        z-index: 1;
-        left: 0;
-        top: 0;
-        width: 100%;
-        height: 100%;
-        overflow: auto;
-        background-color: rgba(0, 0, 0, 0.8);
-        padding-top: 60px;
-        
-    }
-    
-    .modal-content {
-        background-color: #fefefe;
-        margin: 5% auto;
-        padding: 20px;
-        border: 1px solid #888;
-        width: 80%;
-        color: black;
-        border-radius: 5px;
-        
-    }
-    
-    .close {
-        color: #aaa;
-        float: right;
-        font-size: 28px;
-        font-weight: bold;
-    }
-    
-    .close:hover,
-    .close:focus {
-        color: black;
-        text-decoration: none;
-        cursor: pointer;
-    }
-    
-    /* Scrollable Info Box Styles */
-    .info-section {
-        margin-top: 30px;
-        text-align: left;
-        max-height: 300px;
-        overflow-y: auto;
-        padding: 10px;
-        border: 1px solid #ccc;
-        border-radius: 5px;
-        background-color: rgba(255, 255, 255, 0.1);
-        color: white;
-    }
-
-    #challengeInfo{width: 100%;}
-    
-    /* Responsive Styles */
-    @media (max-width: 768px) {
-        button {
-            padding: 8px 16px;
-            font-size: 14px;
+        body {
+            background: linear-gradient(135deg, #1a1a1a, #2c3e50);
+            color: #fff;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            position: relative;
+            overflow-x: hidden;
         }
-        .footer {
-        flex-direction: column;
-        text-align: center;
-        gap: 15px;
-    }
-    
-    .footer-links {
-        justify-content: center;
-    }
-        .side-image {
-        width: 45px; /* Smaller size for smaller screens */
-    padding-left: 11px;
-    }
 
-    .title {
-        font-size: 5vw; /* Increase font size for small screens */
-        margin: 15px 0; /* Reduce vertical spacing */
-    }
-}
-
-    .action-button {
-        font-size: 1.2rem; /* Smaller button text */
-        padding: 8px 16px; /* Adjust padding */
-    }
-
-    .dice-image {
-        width: 50px; /* Adjust dice image size for smaller screens */
-    }
-
-        #diceImage {
-            width: 80px;/* Smaller width for mobile */
-            width: 100px; /* Set your desired width */
-    height: auto; /* Maintain aspect ratio */
-    margin: 15px auto; /* Center the image horizontally with margin */
-    display: block; /* Ensure the image is treated as a block element */
-
+        .container {
+            max-width: 1200px;
+            text-align: center;
+            padding: 30px;
+            position: relative;
+            z-index: 1;
+            background: rgba(0, 0, 0, 0.5);
+            border-radius: 20px;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
         }
-    
-        .app-container {
-            padding: 15px;
-        }
-    
-        .info-section {
-            max-height: 200px; /* Adjust height for smaller screens */
-        }
-    
-    
-    @media (max-width: 480px) {
+
         h1 {
-            font-size: 1.5em;/* Adjust header size for small screens */
+            font-size: 3rem;
+            margin-bottom: 10px;
+            text-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+            background: linear-gradient(to right, #fff, #ccc);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
-    
-        h2 {
-            font-size: 1.2em; /* Adjust subheader size */
-        }
-    
-        h3 {
-            font-size: 1em; /* Adjust smaller header size */
-        }
-    
-        button {
-            padding: 8px 12px; /* Further reduce button padding */
-            font-size: 12px; /* Smaller font size for buttons */
-        }
-    
-       
-
-        .title {
-        font-size: 6vw; /* Increase font size for very small screens */
-        margin: 10px 0; /* Further reduce vertical spacing */
-    }
-
-    .side-image {
-        width: 45px; /* Even smaller size for very small screens */
-    padding-left: 9px;
-    }
+        .card-back h3 {
+    font-size: clamp(1.2rem, 3vw, 2.5rem); /* Responsive heading size */
 }
+
+.card-back p {
+    font-size: clamp(0.9rem, 2.5vw, 1.5rem); /* Responsive paragraph size */
+}
+
+.card-front .value {
+    font-size: clamp(2rem, 10vw, 4rem); /* Responsive value size */
+}
+        .subtitle {
+            color: rgba(255, 255, 255, 0.8);
+            margin-bottom: 40px;
+            font-style: italic;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .cards-container {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 40px;
+            margin-bottom: 40px;
+           
+        }
+
+        .card-stack {
+            width: 100%;
+            display: none;
+        }
+
+        .card-stack.active {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 40px;
+        }
+
+        .card {
+            width: 280px;
+            height: 400px;
+            perspective: 1500px;
+            cursor: pointer;
+            position: relative;
+            margin-bottom: 20px;
+            background-color: #e74c3c;
+        }
+
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            transform: translateZ(-8px);
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
+            z-index: -1;
+        }
+
+        .card-inner {
+            width: 100%;
+            height: 100%;
+            position: relative;
+            transform-style: preserve-3d;
+            transition: transform 0.5s;
+        }
+
+        .card-inner.flipped {
+            transform: rotateY(180deg);
+        }
+
+        .card-front, .card-back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            backface-visibility: hidden;
+            border-radius: 15px;
+            overflow: hidden;
+        }
+
+        .card-front {
+            background-color: #ffffff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .card-symbol {
+            text-align: center;
+        }
+
+        .symbol {
+            font-size: 100px;
+            display: block;
+            margin-bottom: 10px;
+        }
+
+        .symbol.red {
+            color: #e74c3c;
+        }
+
+        .symbol.black {
+            color: #2c3e50;
+        }
+
+        .value {
+            font-size: 80px;
+            font-weight: bold;
+        }
+
+        .card-back {
+            background: linear-gradient(45deg, #222, #333);
+            color: white;
+            transform: rotateY(180deg);
+            padding: 30px 20px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .card-back h3 {
+            font-size: 24px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .card-back p {
+            font-size: 18px;
+            line-height: 1.6;
+            text-align: center;
+        }
+
+        .controls {
+            margin-top: 30px;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        button {
+            background: rgba(122, 44, 44, 0.15);
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: all 0.3s ease;
+            background-color: #b33b2e;
+        }
+
+        button:hover {
+            background: rgba(141, 42, 42, 0.25);
+            transform: translateY(-3px);
+        }
+.controls {
+    margin-top: 30px;
+    display: flex; /* Use flexbox for layout */
+    justify-content: center; /* Center controls horizontally */
+    align-items: center; /* Center controls vertically */
+    gap: 20px; /* Space between controls */
+    
+}
+
+/* Media query to ensure controls remain side by side on larger screens */
+        button:active {
+            transform: translateY(1px);
+        }
+
+        select {
+            background: rgba(255, 255, 255, 0.15);
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: all 0.3s ease;
+            appearance: none;
+            text-align: center;
+        }
+
+        select:hover {
+            background: rgba(255, 255, 255, 0.25);
+        }
+
+        .dice-container {
+            margin-top: 20px;
+            text-align: center;
+            
+        }
 
         #diceImage {
-            width: 60px; /* Even smaller width for mobile */
-            width: 100px; /* Set your desired width */
-    height: auto; /* Maintain aspect ratio */
-    margin: 15px auto; /* Center the image horizontally with margin */
-    display: block; /* Ensure the image is treated as a block element */
-}
-        
-    
-        .app-container {
-            width: 90%; /* Use more width on mobile */
-        
+            width: 200px;
+            height: 200px;
+            transition: transform 0.5s ease;
         }
+
+        .rolling {
+            animation: rollDice 0.5s ease forwards;
+        }
+
+        #totalReps {
+            margin-top: 15px;
+            font-size: 18px;
+            font-weight: bold;
+        }
+        .card-back h3,
+.card-back p {
+    text-align: center; /* Center text for both heading and paragraph */
+    margin: 0; /* Remove default margins */
+}
+.card-back h3 {
+    font-size: 1.5rem; /* Adjusted for readability on larger screens */
+    margin-bottom: 10px; /* Space below the heading */
+}
+
+.card-back p {
+    font-size: 1rem; /* Adjusted for readability */
+    line-height: 1.4; /* Improved line height for better readability */
+}
+.card-front {
+    display: flex; /* Use flexbox to center content */
+    justify-content: center; /* Center content horizontally */
+    align-items: center; /* Center content vertically */
+}
+        @keyframes rollDice {
+            0% { transform: rotate(0deg); }
+            50% { transform: rotate(180deg); }
+            100% { transform: rotate(360deg); }
+        }
+        h1 {
+    font-size: clamp(1.5rem, 5vw, 3rem); /* Responsive size between 1.5rem and 3rem */
+}
+
+.subtitle {
+    font-size: clamp(1rem, 3vw, 2rem); /* Responsive size between 1rem and 2rem */
+}
+
+h2 {
+    font-size: clamp(20px, 4vw, 36px);
+}
+
+h3 {
+    font-size: clamp(18px, 3.5vw, 30px);
+}
+
+p, ol, ul {
+    font-size: clamp(14px, 2.5vw, 20px);
+    line-height: 1.6;
     
+}
+.card-back h3 {
+    font-size: clamp(1.2rem, 3vw, 2.5rem); /* Responsive heading size */
+}
+
+.card-back p {
+    font-size: clamp(0.9rem, 2.5vw, 1.5rem); /* Responsive paragraph size */
+}
+
+.card-front .value {
+    font-size: clamp(2rem, 10vw, 4rem); /* Responsive value size */
+}
+        @media (max-width: 768px) {
+    h1 {
+        font-size: 2rem; /* Smaller heading for mobile */
+    }
+    .card {
+        width: 90%; /* Maintain width for mobile */
+        height: 300px; /* Adjust height for mobile */
+    }
+}
+    .subtitle {
+        font-size: 1rem; /* Smaller subtitle */
+    }
+    .card-back h3 {
+        font-size: 1.2rem; /* Smaller heading for mobile */
+    }
+
+    .card-back p {
+        font-size: 0.9rem; /* Smaller paragraph text for mobile */
+    }
+
+    .controls {
+        flex-direction: column; /* Ensure controls stack vertically */
+    }
+
+    button, select {
+        max-width: 90%; /* Allow buttons to take more width on mobile */
+    }
+    .card-back h3 {
+        font-size: 1.2rem; /* Smaller heading for mobile */
+    }
+
+    .card-back p {
+        font-size: 0.9rem; /* Smaller paragraph text for mobile */
+    }
+    .card-back h3,
+.card-back p {
+    text-align: center; /* Center text for both heading and paragraph */
+    margin: 0; /* Remove default margins */
+}
+h1 {
+    font-size: clamp(1.5rem, 5vw, 3rem); /* Responsive size between 1.5rem and 3rem */
+}
+
+.subtitle {
+    font-size: clamp(1rem, 3vw, 2rem); /* Responsive size between 1rem and 2rem */
+}
+
+h2 {
+    font-size: clamp(20px, 4vw, 36px);
+}
+
+h3 {
+    font-size: clamp(18px, 3.5vw, 30px);
+}
+
+p, ol, ul {
+    font-size: clamp(14px, 2.5vw, 20px);
+    line-height: 1.6;
+    
+}
+.card-back h3 {
+    font-size: clamp(1.2rem, 3vw, 2.5rem); /* Responsive heading size */
+}
+
+.card-back p {
+    font-size: clamp(0.9rem, 2.5vw, 1.5rem); /* Responsive paragraph size */
+}
+
+.card-front .value {
+    font-size: clamp(2rem, 10vw, 4rem); /* Responsive value size */
+}
+.card-front {
+    display: flex; /* Use flexbox to center content */
+    justify-content: center; /* Center content horizontally */
+    align-items: center; /* Center content vertically */
+}
+    .controls {
+    margin-top: 30px;
+    display: flex; /* Use flexbox for layout */
+    justify-content: center; /* Center controls horizontally */
+    align-items: center; /* Center controls vertically */
+    gap: 20px; /* Space between controls */
+}
+#diceImage {
+            width: 200px;
+            height: 200px;
+            transition: transform 0.5s ease;
+        }
+/* Ensure controls remain side by side on larger screens */
+@media (min-width: 769px) {
+    .controls {
+        flex-direction: row; /* Arrange controls in a row */
+    }
+
+    card-back h3 {
+        font-size: 1.2rem; /* Smaller heading for mobile */
+    }
+
+    .card-back p {
+        font-size: 0.9rem; /* Smaller paragraph text for mobile */
+    }
+}
+#diceImage {
+            width: 200px;
+            height: 200px;
+            transition: transform 0.5s ease;
+        }
+.card-front {
+    display: flex; /* Use flexbox to center content */
+    justify-content: center; /* Center content horizontally */
+    align-items: center; /* Center content vertically */
+}
+h1 {
+    font-size: clamp(1.5rem, 5vw, 3rem); /* Responsive size between 1.5rem and 3rem */
+}
+
+.subtitle {
+    font-size: clamp(1rem, 3vw, 2rem); /* Responsive size between 1rem and 2rem */
+}
+
+h2 {
+    font-size: clamp(20px, 4vw, 36px);
+}
+
+h3 {
+    font-size: clamp(18px, 3.5vw, 30px);
+}
+
+p, ol, ul {
+    font-size: clamp(14px, 2.5vw, 20px);
+    line-height: 1.6;
+    
+}
+.card-back h3 {
+    font-size: clamp(1.2rem, 3vw, 2.5rem); /* Responsive heading size */
+}
+
+.card-back p {
+    font-size: clamp(0.9rem, 2.5vw, 1.5rem); /* Responsive paragraph size */
+}
+
+.card-front .value {
+    font-size: clamp(2rem, 10vw, 4rem); /* Responsive value size */
+}
+@media (max-width: 1024px) { /* Styles for tablets */
+    h1 {
+        font-size: 2.2rem; /* Adjust heading size for tablets */
+    }
+    .card-back h3,
+.card-back p {
+    text-align: center; /* Center text for both heading and paragraph */
+    margin: 0; /* Remove default margins */
+}
+.card-back h3 {
+        font-size: 1.4rem; /* Adjusted heading size for tablets */
+    }
+    h1 {
+    font-size: clamp(1.5rem, 5vw, 3rem); /* Responsive size between 1.5rem and 3rem */
+}
+
+.subtitle {
+    font-size: clamp(1rem, 3vw, 2rem); /* Responsive size between 1rem and 2rem */
+}
+
+h2 {
+    font-size: clamp(20px, 4vw, 36px);
+}
+
+h3 {
+    font-size: clamp(18px, 3.5vw, 30px);
+}
+
+p, ol, ul {
+    font-size: clamp(14px, 2.5vw, 20px);
+    line-height: 1.6;
+    
+}
+    .card-back p {
+        font-size: 1rem; /* Adjusted paragraph size for tablets */
+    }
+}
+.card-front {
+    display: flex; /* Use flexbox to center content */
+    justify-content: center; /* Center content horizontally */
+    align-items: center; /* Center content vertically */
+}
+    .subtitle {
+        font-size: 1.1rem; /* Adjust subtitle size for tablets */
+    }
+
+    .card {
+        width: 80%; /* Adjust width for tablets */
+    }
+
+    .controls {
+        flex-direction: row; /* Allow controls to be side by side on tablets */
+        justify-content: center; /* Center controls */
+    }
+    .card {
+        width: 80%; /* Adjust width for tablets */
+        height: 350px; /* Adjust height for tablets */
+    }
+   
+
+h2 {
+    font-size: clamp(20px, 4vw, 36px);
+}
+
+h3 {
+    font-size: clamp(18px, 3.5vw, 30px);
+}
+
+p, ol, ul {
+    font-size: clamp(14px, 2.5vw, 20px);
+    line-height: 1.6;
+    
+}
+    button, select {
+        max-width: 200px; /* Limit button width on tablets */
+    }
+    .card-back h3 {
+        font-size: 1.2rem; /* Adjusted heading size for tablets */
+    }
+    #diceImage {
+            width: 200px;
+            height: 200px;
+            transition: transform 0.5s ease;
+        }
+    .card-back p {
+        font-size: 1rem; /* Adjusted paragraph size for tablets */
+    }
+    h1 {
+    font-size: clamp(1.5rem, 5vw, 3rem); /* Responsive size between 1.5rem and 3rem */
+}
+.card-back h3 {
+    font-size: clamp(1.2rem, 3vw, 2.5rem); /* Responsive heading size */
+}
+
+.card-back p {
+    font-size: clamp(0.9rem, 2.5vw, 1.5rem); /* Responsive paragraph size */
+}
+
+.card-front .value {
+    font-size: clamp(2rem, 10vw, 4rem); /* Responsive value size */
+}
+.subtitle {
+    font-size: clamp(1rem, 3vw, 2rem); /* Responsive size between 1rem and 2rem */
+}
     </style>
 </head>
-
 <body>
-   
-    <br>
+    <div class="container">
+        <h1>Repping It</h1>
+        
+        
+        <div class="controls">
+            <button id="shuffle-btn">Shuffle</button>
+            <select id="stack-select">
+                <option value="0">Select Stack</option>
+                <option value="1">Fitness Challenges</option>
+                <option value="2">Home Workout</option>
+                <option value="3">Office Workout</option>
+                <option value="4">TV Workout</option>
+                <option value="5">Outdoor Workout</option>
+            </select>
+            <button id="roll-dice-btn">Roll Dice</button>
+            <button id="reset-dice-btn">Reset Dice</button>
+            <button id="tally-btn">Tally Counter</button>
+            <button id="reset-tally-btn">Reset Tally</button>
+            <button id="game-rules-btn">Game Rules</button> <!-- New Game Rules Button -->
+        </div>
 
-
-    <div class="app-container">
-        <h1 class="title"><img src="/images/IMG_4676-removebg-preview.png" class="side-image"alt="Right Bicep Image";style="margin-bottom: -10px;start width: 40px;">Repping It<img src="/images/photo-output-removebg-preview.png"class="side-image"alt="Left Bicep Image";style="margin-bottom: -10px; end; width: 40px;padding-left:11px;padding-bottom:10px"></h1>
         <div class="dice-container">
-            <button id="rollButton">Roll the Dice!</button>
-            <img id="diceImage" src="/images/IMG_4675.PNG" alt="anime woman Image"style="display: block; margin: 15px auto;"/> <!-- Initial image -->
-            <h3 id="totalReps">Total Reps: 0</h3>
-            <button id="resetButton">Reset</button>
+            <img id="diceImage" src="/IMG_4702.PNG" alt="Dice" />
+            <p id="totalReps">Total Reps: 0</p>
         </div>
 
-        <button id="challengeButton">Get a Challenge!</button>
-
-        <div class="info-section" id="challengeInfo">
-            <!-- Challenge information will be displayed here -->
-        </div>
-
-        <div class="info-section" id="gameInfo">
-            <h2 class="heading-underline">Welcome to the Game</h2>
-
-            <br>
-
-            <p>This is not your average workout routine. This is Repping It — a fitness challenge that takes everyday occurrences and turns them into epic workout triggers. Whether you’re watching TV, walking outside, or just chilling, your environment is now your gym. Get creative, stay alert, and move like a beast.</p>
-
-<br>
-
-            <h3 class="heading-underline">Game Setup</h3>
-
-<br>
-
-            <ol>
-                <li>Pick Your Daily Scenario (or let fate decide): Use the dice to randomly pick one or more of the following challenges each day.</li>
-                <li>Track Your Reps: Use the in game tally counter. At the end of the day, add up the total reps.</li>
-                <li>Finish Strong: Complete your reps at once or spread them throughout the day. The only rule is — get it done.</li>
-            </ol>
-
-            <br>
-
-            <h3 class="heading-underline">Warm-Up: “Ignite the Engine”</h3>
-
-            <br>
-
-            <p>Always warm up first to avoid injuries and get in the zone. Here’s a quick 5-minute routine:</p>
-            
-            <br>
-            
-            <ul>
-                <li>30 seconds Jumping Jacks</li>
-                <li>30 seconds Arm Circles (forward + backward)</li>
-                <li>30 seconds Leg Swings (each leg)</li>
-                <li>30 seconds Bodyweight Squats</li>
-                <li>1 minute Jog in Place</li>
-                <li>2 minutes Dynamic Stretching (hip openers, lunges with reach, toe touches)</li>
-            </ul>
-
-<br>
-
-            <h3 class="heading-underline">Stretch it Out: “Cooldown Flow”</h3>
-           
-           <br>
-           
-            <p>After completing your reps, cool down and stretch to reduce soreness:</p>
-            
-            <br>
-            
-            <ul>
-                <li>Forward Fold</li>
-                <li>Hip Flexor Stretch</li>
-                <li>Shoulder Cross Stretch</li>
-                <li>Seated Twist</li>
-                <li>Cat-Cow Stretch (yoga style)</li>
-                <li>Deep Breathing for 2 minutes</li>
-            </ul>
-
-<br>
-
-            <h3 class="heading-underline">Final Word</h3>
-            
-            <br>
-            
-            <p>Repping It isn’t just a workout — it’s a lifestyle challenge. You’ll never watch TV, walk to the shop, or scroll through YouTube the same way again. Every moment becomes an opportunity to move, laugh, and get stronger.</p>
-            
-            <br>
-            
-            <p>Get your reps in. No excuses. Go Beast Mode.</p>
-        </div>
-    </div>
-
-    <!-- Modal for Challenge Details -->
-    <div id="myModal" class="modal">
-        <div class="modal-content">
-            <span class="close">&times;</span>
-            <h2 id="modalTitle">Challenge Title</h2>
-            <p id="modalDescription">Challenge description goes here.</p>
-        </div>
-    </div>
-
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.5/gsap.min.js"></script>
-    <script>
-        const rollButton = document.getElementById('rollButton');
-        const resetButton = document.getElementById('resetButton');
-        const challengeButton = document.getElementById('challengeButton');
-        const diceImage = document.getElementById('diceImage');
-        const totalRepsDisplay = document.getElementById('totalReps');
-        const modal = document.getElementById("myModal");
-        const span = document.getElementsByClassName("close")[0];
-        const modalTitle = document.getElementById('modalTitle');
-        const modalDescription = document.getElementById('modalDescription');
-
-        let totalReps = 0;
-
-        // Array of challenges
-        const challenges = [
-    {
-        title: "Hell’s Kitchen Heat",
-        description: `Every time Gordon Ramsay swears<br><br>Do: Squats based on dice roll<br><br>Explanation:<br><ul>
-                       <li>Stand: Feet shoulder-width apart, toes slightly out.</li>
-                       <li>Lower: Bend hips and knees, keeping chest up and back straight.</li>
-                       <li>Depth: Lower until thighs are parallel to the ground.</li>
-                       <li>Rise: Press through heels to stand up.</li>
-                   </ul>`
-    },
-    {
-        title: "Ad Break Burpees",
-        description: `Every time a YouTube ad comes on<br><br>Do: Burpees based on dice roll.<br><br>Explanation:<br><ul>
-                       <li>Start: Stand straight, then squat down.</li>
-                       <li>Plank: Kick feet back into a plank position.</li>
-                       <li>Push-Up: Perform a push-up (optional).</li>
-                       <li>Jump: Jump feet back to hands and leap up.</li>
-                   </ul>`
-    },
-    {
-        title: "Delivery Driver Drop Set",
-        description: `Every time you see a food delivery rider<br><br>Do: Press-Ups based on dice roll.<br><br>Explanation:<br><ul>
-                       <li>Position: Start in a plank position, hands shoulder-width apart.</li>
-                       <li>Lower: Bend elbows to lower your body, keeping back straight.</li>
-                       <li>Push: Press back up to starting position.</li>
-                   </ul>`
-    },
-    {
-        title: "Pothole Pounder",
-        description: `Each pothole you see<br><br>Do: High Knees per pothole based on dice roll.<br><br>Explanation:<br><ul>
-                       <li>Stand: Feet hip-width apart.</li>
-                       <li>Run: Jog in place, driving knees up towards your chest.</li>
-                       <li>Arms: Pump arms to maintain rhythm.</li>
-                       <li>Speed: Increase intensity as you go.</li>
-                   </ul>`
-    },
-    {
-        title: "L Plate Lifter",
-        description: `Every car/bike with an L plate.<br><br>Do: Sit-Ups based on dice roll.<br><br>Explanation:<br><ul>
-                       <li>Lie Down: On your back, knees bent, feet flat on the floor.</li>
-                       <li>Hands: Place hands behind your head or crossed on your chest.</li>
-                       <li>Lift: Curl your torso towards your knees.</li>
-                       <li>Lower: Return to starting position.</li>
-                   </ul>`
-    },
-    {
-        title: "Construction Crusher",
-        description: `Each time you see roadworks<br><br>Do: Plank Punches each arm based on dice roll.<br><br>Explanation:<br><ul>
-                       <li>Position: Start in a plank position.</li>
-                       <li>Punch: Alternate punching forward with each hand.</li>
-                       <li>Core: Keep your core tight and hips stable.</li>
-                   </ul>`
-    },
-    {
-        title: "Channel Surfing Dips",
-        description: `Each time you change channels on TV<br><br>Do: Tricep Dips based on dice roll.<br><br>Explanation:<br><ul>
-                       <li>Sit: On the edge of a bench/chair, hands at your sides.</li>
-                       <li>Lower: Bend elbows to lower your body.</li>
-                       <li>Push: Press back up until arms are straight.</li>
-                       <li>Feet: Keep legs extended or bent for easier variation.</li>
-                   </ul>`
-    },
-    {
-        title: "Birdwatcher Flutter Kicks",
-        description: `Every time you see a bird<br><br>Do: Flutter Kicks based on dice roll.<br><br>Explanation:<br><ul>
-                       <li>Lie Down: On your back, hands under your hips.</li>
-                       <li>Lift: Raise legs off the ground slightly.</li>
-                       <li>Kick: Alternate kicking legs up and down.</li>
-                       <li>Core: Keep your lower back pressed to the floor.</li>
-                   </ul>`
-    },
-];
-
-        // Function to roll the dice
-        rollButton.addEventListener('click', () => {
-            const roll = [5, 10, 15, 20, 25, 30][Math.floor(Math.random() * 6)];
-            totalReps += roll;
-            totalRepsDisplay.textContent = `Total Reps: ${totalReps}`;
-
-            // Update the dice image's src with the roll value
-            diceImage.src = `/images/IMG_4675_${roll}.PNG`; // Ensure to have corresponding images for each roll value
-
-            // GSAP animation for the dice image
-            gsap.fromTo(diceImage.src = `/images/IMG_4675.PNG`, { scale: 1.2 }, { scale: 1, duration: 0.2, yoyo: true, repeat: 1 });
-        });
-
-        // Function to reset the reps
-        resetButton.addEventListener('click', () => {
-            totalReps = 0;
-            totalRepsDisplay.textContent = `Total Reps: ${totalReps}`;
-            diceImage.src = `/images/IMG_4675_${roll}.PNG`;
-        });
-
-        // Function to get a random challenge
-        challengeButton.addEventListener('click', () => {
-            const randomChallenge = challenges[Math.floor(Math.random() * challenges.length)];
-            modalTitle.textContent = randomChallenge.title;
-            modalDescription.innerHTML = randomChallenge.description;
-            modal.style.display = "block";
-
-            // GSAP animation for modal
-            gsap.fromTo(diceImage, { scale: 1.2 }, { scale: 1, duration: 0.2, yoyo: true, repeat: 1 });
-        });
-
-        // Close the modal when the user clicks on <span> (x)
-        span.onclick = function () {
-            modal.style.display = "none";
-        }
-
-        // Close the modal when the user clicks anywhere outside of the modal
-        window.onclick = function (event) {
-            if (event.target === modal) {
-                modal.style.display = "none";
-            }
-        }
-    </script>
-
-
-<footer class="footer">
-    <div class="footer-links">
-
-     
-
-
-      <a href="/index.html" target="_blank">Website
-        <img src="/images/photo-output 4.PNG" style="color: white"alt="Website logo" width="30">
-      </a> 
-
-
-<a href="https://www.instagram.com/dbs_workouts?igsh=MXQ2OHY0a2QzeTFzaw%3D%3D&utm_source=qr" target="_blank">Instagram
-    <img src="/images/instagram 2.png" style="color: white"alt="instagram logo" width="30">
-  </a>
-   
-
-   
-    
-  
-      
-    
-
-    
-    </div>
-    
-  
+        <p id="tallyCountDisplay">Tally Count: 0</p> <!-- Tally Count Display -->
 
         
+        <div class="cards-container">
+            <!-- Stack 1 - Fitness Challenges -->
+            <div class="card-stack" id="stack1">
+                <div class="card" id="card1">
+                    <div class="card-inner">
+                        <div class="card-front"style="background-color: #b33b2e;">
+                            <div class="card-symbol">
+                               
+                                <span class="value">1</span>
+                            </div>
+                        </div>
+                        <div class="card-back">
+                            <h3>Hell's Kitchen Heat</h3>
+                            <p> <br>Every time Gordon Ramsay swears<br><br>Do: Squats based on dice roll.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="card" id="card2">
+                    <div class="card-inner">
+                        <div class="card-front";>
+                            <div class="card-symbol">
+                               
+                                <span class="value"style="color: black;">2</span>
+                            </div>
+                        </div>
+                        <div class="card-back">
+                            <h3>Every Siren Counts</h3>
+                            <p>Every time you hear a siren<br><br>Do: Jumping Jacks based on dice roll.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="card" id="card3">
+                    <div class="card-inner">
+                        <div class="card-front"style="background-color: #b33b2e;">
+                            <div class="card-symbol">
+                               
+                                <span class="value">3</span>
+                            </div>
+                        </div>
+                        <div class="card-back">
+                            <h3>Bark and Burn</h3>
+                            <p>Each time you see a dog<br><br>Do: Lunges based on dice roll.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="card" id="card4">
+                    <div class="card-inner">
+                        <div class="card-front">
+                            <div class="card-symbol">
+                                
+                                <span class="value"style="color: black;">4</span>
+                            </div>
+                        </div>
+                        <div class="card-back">
+                            <h3>Text to Flex</h3>
+                            <p> Every time you receive a text<br><br>Do: Plank for seconds based on dice roll.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
-    <div class="footer-contact">
-       
+            <!-- Stack 2 - Home Workout -->
+            <div class="card-stack" id="stack2">
+                <div class="card" id="card5">
+                    <div class="card-inner">
+                        <div class="card-front">
+                            <div class="card-symbol">
+                                
+                                <span class="value">1</span>
+                            </div>
+                        </div>
+                        <div class="card-back">
+                            <h3>Laugh Out Loud</h3>
+                            <p> Every time you hear a laugh<br><br>Do: Sit-ups based on dice roll.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="card" id="card6">
+                    <div class="card-inner">
+                        <div class="card-front">
+                            <div class="card-symbol">
+                                
+                                <span class="value">2</span>
+                            </div>
+                        </div>
+                        <div class="card-back">
+                            <h3>Call to Action</h3>
+                            <p>Every time the phone rings<br><br>Do: High knees based on dice roll.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="card" id="card7">
+                    <div class="card-inner">
+                        <div class="card-front">
+                            <div class="card-symbol">
+                               
+                                <span class="value">3</span>
+                            </div>
+                        </div>
+                        <div class="card-back">
+                            <h3>YouTube Ad App</h3>Every time a new song starts
+                            <p>Every time YouTube ad appears<br><br>Do: Wall sits for seconds based on dice roll.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="card" id="card8">
+                    <div class="card-inner">
+                        <div class="card-front">
+                            <div class="card-symbol">
+                                
+                                <span class="value">4</span>
+                            </div>
+                        </div>
+                        <div class="card-back">
+                            <h3>Tweet and Tone</h3>
+                            <p>Every time you see a bird<br><br>Do: Burpees based on dice roll.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Stack 3 - Office Workout -->
+            <div class="card-stack" id="stack3">
+                <div class="card" id="card9">
+                    <div class="card-inner">
+                        <div class="card-front">
+                            <div class="card-symbol">
+                               
+                                <span class="value">1</span>
+                            </div>
+                        </div>
+                        <div class="card-back">
+                            <h3>Inbox Intervals</h3>
+                            <p>Every email notification<br><br>Do: Chair dips based on dice roll.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="card" id="card10">
+                    <div class="card-inner">
+                        <div class="card-front">
+                            <div class="card-symbol">
+                                
+                                <span class="value">2</span>
+                            </div>
+                        </div>
+                        <div class="card-back">
+                            <h3>Every Check In</h3>
+                            <p> Every time you check your phone"<br><br>Do: Calf raises based on dice roll.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="card" id="card11">
+                    <div class="card-inner">
+                        <div class="card-front">
+                            <div class="card-symbol">
+                               
+                                <span class="value">3</span>
+                            </div>
+                        </div>
+                        <div class="card-back">
+                            <h3>Sip & Sweat</h3>
+                            <p>Every coffee break<br><br>Do: Desk push-ups based on dice roll.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="card" id="card12">
+                    <div class="card-inner">
+                        <div class="card-front">
+                            <div class="card-symbol">
+                                
+                                <span class="value">4</span>
+                            </div>
+                        </div>
+                        <div class="card-back">
+                            <h3>Rise and Shine</h3>
+                            <p>Every time you stand up<br><br>Do: Squats based on dice roll.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Stack 4 - TV Workout -->
+            <div class="card-stack" id="stack4">
+                <div class="card" id="card13">
+                    <div class="card-inner">
+                        <div class="card-front">
+                            <div class="card-symbol">
+                               
+                                <span class="value">1</span>
+                            </div>
+                        </div>
+                        <div class="card-back">
+                            <h3>King of Spades</h3>
+                            <p> For every snack you grab<br><br>Do: Mountain climbers based on dice roll.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="card" id="card14">
+                    <div class="card-inner">
+                        <div class="card-front">
+                            <div class="card-symbol">
+                               
+                                <span class="value">2</span>
+                            </div>
+                        </div>
+                        <div class="card-back">
+                            <h3></h3>
+                            <p>Every time a character changes outfits<br><br>Do: Jumping jacks based on dice roll.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="card" id="card15">
+                    <div class="card-inner">
+                        <div class="card-front">
+                            <div class="card-symbol">
+                               
+                                <span class="value">3</span>
+                            </div>
+                        </div>
+                        <div class="card-back">
+                            <h3>Galactic Gains</h3>
+                            <p>Every time you see a light saber in starwars<br><br>Do: Bicycle crunches based on dice roll.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="card" id="card16">
+                    <div class="card-inner">
+                        <div class="card-front">
+                            <div class="card-symbol">
+                               
+                                <span class="value">4</span>
+                            </div>
+                        </div>
+                        <div class="card-back">
+                            <h3>Showtime Sweat</h3>
+                            <p>For every new show that comes to netflix<br><br>Do: Push-ups based on dice roll.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Stack 5 - Study Break Workout -->
+            <div class="card-stack" id="stack5">
+                <div class="card" id="card17">
+                    <div class="card-inner">
+                        <div class="card-front">
+                            <div class="card-symbol">
+                               
+                                <span class="value">4</span>
+                            </div>
+                        </div>
+                        <div class="card-back">
+                            <h3>Delivery Driver Drop Set</h3>
+                            <p><br>Every time you see a food delivery rider<br><br>Do: Arm circles based on dice roll.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="card" id="card18">
+                    <div class="card-inner">
+                        <div class="card-front">
+                            <div class="card-symbol">
+                                
+                                <span class="value">5</span>
+                            </div>
+                        </div>
+                        <div class="card-back">
+                            <h3>Pothole Pounder</h3>
+                            <p>Each pothole you see<br><br>Do: Stretches based on dice roll.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="card" id="card19">
+                    <div class="card-inner">
+                        <div class="card-front">
+                            <div class="card-symbol">
+                               
+                                <span class="value">6</span>
+                            </div>
+                        </div>
+                        <div class="card-back">
+                            <h3>L Plate Lifter</h3>
+                            <p>Every car/bike with a L plate<br><br>Do: Toe touches based on dice roll.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="card" id="card20">
+                    <div class="card-inner">
+                        <div class="card-front">
+                            <div class="card-symbol">
+                                
+                                <span class="value">7</span>
+                            </div>
+                        </div>
+                        <div class="card-back">
+                            <h3>Construction Crusher</h3>
+                            <p>Each time you see roadworks<br><br>Do: Plank seconds based on dice roll.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
-</footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const shuffleBtn = document.getElementById('shuffle-btn');
+            const rollDiceBtn = document.getElementById('roll-dice-btn');
+            const resetDiceBtn = document.getElementById('reset-dice-btn');
+            const stackSelect = document.getElementById('stack-select');
+            const diceImage = document.getElementById('diceImage');
+            const totalRepsDisplay = document.getElementById('totalReps');
+            const tallyCountDisplay = document.getElementById('tallyCountDisplay'); // Tally Count Display Element
+            const cards = document.querySelectorAll('.card-inner');
+
+            let totalReps = 0;
+            let tallyCount = 0;
+
+            // Add the ability to flip cards when clicked
+            cards.forEach(card => {
+                card.addEventListener('click', () => {
+                    card.classList.toggle('flipped');
+                });
+            });
+
+            // Show the selected card stack
+            stackSelect.addEventListener('change', (event) => {
+                const selectedStack = event.target.value;
+                
+                // Hide all stacks
+                const stacks = document.querySelectorAll('.card-stack');
+                stacks.forEach(stack => {
+                    stack.style.display = 'none';
+                });
+                
+                // Show the selected stack
+                if (selectedStack !== "0") {
+                    document.getElementById(`stack${selectedStack}`).style.display = 'flex';
+                }
+            });
+
+            // Function to shuffle cards
+            const shuffleCards = () => {
+                const activeStack = document.querySelector('.card-stack[style*="display: flex"]');
+                
+                if (!activeStack) {
+                    alert("Please select a stack first!");
+                    return;
+                }
+                
+                const cards = Array.from(activeStack.querySelectorAll('.card'));
+                
+                // Fisher-Yates shuffle algorithm
+                for (let i = cards.length - 1; i > 0; i--) {
+                    const j = Math.floor(Math.random() * (i + 1));
+                    activeStack.appendChild(cards[j]); // Move card to the end
+                }
+                
+                // Reset any cards that were flipped
+                cards.forEach(card => {
+                    card.querySelector('.card-inner').classList.remove('flipped');
+                });
+            };
+
+            // Function to roll the dice
+            const rollDice = () => {
+                const roll = Math.floor(Math.random() * 6) + 1;
+                totalReps += roll;
+                totalRepsDisplay.textContent = `Total Reps: ${totalReps}`;
+                
+                diceImage.src = '/IMG_4702.PNG'; // Set dice image to IMG_4702.PNG
+                
+                // Add rolling animation
+                diceImage.classList.add('rolling');
+                setTimeout(() => {
+                    diceImage.classList.remove('rolling');
+                }, 500);
+            };
+
+            // Function to reset the dice
+            const resetDice = () => {
+                totalReps = 0;
+                totalRepsDisplay.textContent = `Total Reps: ${totalReps}`;
+                diceImage.src = `/IMG_4702.PNG`;
+            };
+
+            // Tally functionality
+            const tallyBtn = document.getElementById('tally-btn');
+            const resetTallyBtn = document.getElementById('reset-tally-btn');
+
+            // Function to increment the tally
+            const incrementTally = () => {
+                tallyCount++;
+                tallyCountDisplay.textContent = `Tally Count: ${tallyCount}`; // Update display
+            };
+
+            // Function to reset the tally
+            const resetTally = () => {
+                tallyCount = 0;
+                tallyCountDisplay.textContent = `Tally Count: ${tallyCount}`; // Update display
+            };
+
+            // Add event listeners for buttons
+            shuffleBtn.addEventListener('click', shuffleCards);
+            rollDiceBtn.addEventListener('click', rollDice);
+            resetDiceBtn.addEventListener('click', resetDice);
+            tallyBtn.addEventListener('click', incrementTally);
+            resetTallyBtn.addEventListener('click', resetTally);
+            
+            // Initialize the first stack as visible
+            document.getElementById('stack1').style.display = 'flex';
+            stackSelect.value = "1";
+        });
+
+       
+c </script>
+   
+   <div id="gameRulesModal" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0, 0, 0, 0.7); z-index: 1000; justify-content: center; align-items: center;">
+    <div style="background:rgb(15, 14, 14); padding:20px; border-radius:10px; max-width:600px; margin:auto; position:relative;">
+        <span class="close" style="position:absolute; top:10px; right:15px; cursor:pointer; font-size:24px;">&times;</span>
+        <h2>Game Setup</h2>
+       <br>
+       
+        <p>1. Pick Your Daily Scenario (or let fate decide): Use the dice to randomly pick one or more of the following challenges each day.</p>
+        <p>2. Track Your Reps: Use the in-game tally counter. At the end of the day, add up the total reps.</p>
+        <p>3. Finish Strong: Complete your reps at once or spread them throughout the day.<br> The only rule is — get it done.</p>
+       <br> 
+        
+        <h3>Warm-Up: “Ignite the Engine”</h3>
+        <p>Always warm up first to avoid injuries and get in the zone. Here’s a quick 5-minute routine:</p>
+        <br>
+        
+        <ul>
+            <li>30 seconds Jumping Jacks</li>
+            <li>30 seconds Arm Circles (forward + backward)</li>
+            <li>30 seconds Leg Swings (each leg)</li>
+            <li>30 seconds Bodyweight Squats</li>
+            <li>1 minute Jog in Place</li>
+            <li>2 minutes Dynamic Stretching (hip openers, lunges with reach, toe touches)</li>
+        </ul>
+
+<br>
+
+        <h3>Stretch it Out: “Cooldown Flow”</h3>
+
+        <br>
+       
+        <p>After completing your reps, cool down and stretch to reduce soreness:</p>
+        
+        <br>
+        
+        <ul>
+            <li>Forward Fold</li>
+            <li>Hip Flexor Stretch</li>
+            <li>Shoulder Cross Stretch</li>
+            <li>Seated Twist</li>
+            <li>Cat-Cow Stretch (yoga style)</li>
+            <li>Deep Breathing for 2 minutes</li>
+        </ul>
+        <br>
+        
+        <h3>Final Word</h3>
+
+        <br>
+        <p>Repping It isn’t just a workout — it’s a lifestyle challenge. You’ll never watch TV, walk to the shop, or scroll through YouTube the same way again. Every moment becomes an opportunity to move, laugh, and get stronger.</p>
+        <p>Get your reps in. No excuses. Go Beast Mode.</p>
+    </div>
+</div>  
 
 <script>
-    if ('serviceWorker' in navigator) {
-      window.addEventListener('load', () => {
-        navigator.serviceWorker.register('/pwabuilder-sw.js') // Ensure the path is correct
-          .then(reg => {
-            console.log('Service Worker registered:', reg.scope);
-            
-            // Check for updates
-            reg.onupdatefound = () => {
-              const installingWorker = reg.installing;
-              installingWorker.onstatechange = () => {
-                if (installingWorker.state === 'installed') {
-                  if (navigator.serviceWorker.controller) {
-                    // New update available
-                    console.log('New content is available; please refresh.');
-                  } else {
-                    // Content is cached for offline use
-                    console.log('Content is cached for offline use.');
-                  }
-                }
-              };
-            };
-          })
-          .catch(err => console.error('Service Worker registration failed:', err));
-      });
-    }
-    </script>
-  
-</body>
+    // Get modal element
+    const gameRulesModal = document.getElementById('gameRulesModal');
+    const gameRulesBtn = document.getElementById('game-rules-btn');
+    const closeModal = document.getElementsByClassName('close')[0];
 
+    // Open the modal when the Game Rules button is clicked
+    gameRulesBtn.onclick = function() {
+        gameRulesModal.style.display = "flex"; // Change to flex for centering
+    }
+
+    // Close the modal when the close button is clicked
+    closeModal.onclick = function() {
+        gameRulesModal.style.display = "none";
+    }
+
+    // Close the modal when clicking anywhere outside of the modal
+    window.onclick = function(event) {
+        if (event.target === gameRulesModal) {
+            gameRulesModal.style.display = "none";
+        }
+    }
+</script>
+</script>
+</body>
 </html>
