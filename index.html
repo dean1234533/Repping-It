@@ -11,6 +11,7 @@
             padding: 0;
             box-sizing: border-box;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+       
         }
         .controls {
     margin-top: 30px;
@@ -36,15 +37,15 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            padding: 20px;
+            
             position: relative;
             overflow-x: hidden;
         }
-
+.h3{text-align: center;justify-content: center;align-items: center;}
         .container {
             max-width: 1200px;
             text-align: center;
-            padding: 30px;
+            
             position: relative;
             z-index: 1;
             background: rgba(0, 0, 0, 0.5);
@@ -52,7 +53,18 @@
             backdrop-filter: blur(10px);
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
         }
-
+        .card-front, .card-back {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden;
+    border-radius: 15px;
+    overflow: hidden;
+    display: flex; /* Use flexbox to center content */
+    justify-content: center; /* Center content horizontally */
+    align-items: center; /* Center content vertically */
+    text-align: center; /* Center text */
+}
         h1 {
             font-size: 3rem;
             margin-bottom: 10px;
@@ -82,6 +94,7 @@
         .cards-container {
             display: flex;
             justify-content: center;
+            text-align: center;
             flex-wrap: wrap;
             gap: 40px;
             margin-bottom: 40px;
@@ -107,7 +120,7 @@
             cursor: pointer;
             position: relative;
             margin-bottom: 20px;
-            background-color: #e74c3c;
+            
         }
 
         .card::before {
@@ -585,24 +598,17 @@ p, ol, ul {
         
         
         <div class="controls">
+            
             <button id="shuffle-btn">Shuffle</button>
-            <select id="stack-select">
-                <option value="0">Select Stack</option>
-                <option value="1">Fitness Challenges</option>
-                <option value="2">Home Workout</option>
-                <option value="3">Office Workout</option>
-                <option value="4">TV Workout</option>
-                <option value="5">Outdoor Workout</option>
-            </select>
             <button id="roll-dice-btn">Roll Dice</button>
             <button id="reset-dice-btn">Reset Dice</button>
             <button id="tally-btn">Tally Counter</button>
             <button id="reset-tally-btn">Reset Tally</button>
-            <button id="game-rules-btn">Game Rules</button> <!-- New Game Rules Button -->
+           
         </div>
 
         <div class="dice-container">
-            <img id="diceImage" src="/IMG_4702.PNG" alt="Dice" />
+            <img id="diceImage" src="IMG_4702.PNG" alt="Dice" />
             <p id="totalReps">Total Reps: 0</p>
         </div>
 
@@ -636,7 +642,7 @@ p, ol, ul {
                         </div>
                         <div class="card-back">
                             <h3>Every Siren Counts</h3>
-                            <p>Every time you hear a siren<br><br>Do: Jumping Jacks based on dice roll.</p>
+                            <p><br>Every time you hear a siren<br><br>Do: Jumping Jacks based on dice roll.</p>
                         </div>
                     </div>
                 </div>
@@ -650,7 +656,7 @@ p, ol, ul {
                         </div>
                         <div class="card-back">
                             <h3>Bark and Burn</h3>
-                            <p>Each time you see a dog<br><br>Do: Lunges based on dice roll.</p>
+                            <p><br>Each time you see a dog<br><br>Do: Lunges based on dice roll.</p>
                         </div>
                     </div>
                 </div>
@@ -664,12 +670,30 @@ p, ol, ul {
                         </div>
                         <div class="card-back">
                             <h3>Text to Flex</h3>
-                            <p> Every time you receive a text<br><br>Do: Plank for seconds based on dice roll.</p>
+                            <p><br> Every time you receive a text<br><br>Do: Plank for seconds based on dice roll.</p>
                         </div>
                     </div>
                 </div>
             </div>
-
+            <button id="game-rules-btn">Game Rules</button> <!-- New Game Rules Button -->
+            <select id="stack-select">
+                
+                <option value="0">Select Stack</option>
+                <option value="1">Fitness Challenges</option>
+                <option value="2">Home Workout</option>
+                <option value="3">Office Workout</option>
+                <option value="4">TV Workout</option>
+               <option value="5">Outdoor Workout</option>
+               
+               
+                
+                <select id="difficulty-select">
+                    <select id="difficulty-select">
+                    <option value="low">Low (2, 4, 6, 8, 10, 12)</option>
+                    <option value="medium">Medium (4, 8, 12, 16, 20, 24)</option>
+                    <option value="high">High (5, 10, 15, 20, 25, 30)</option>
+                
+                </select>
             <!-- Stack 2 - Home Workout -->
             <div class="card-stack" id="stack2">
                 <div class="card" id="card5">
@@ -682,7 +706,7 @@ p, ol, ul {
                         </div>
                         <div class="card-back">
                             <h3>Laugh Out Loud</h3>
-                            <p> Every time you hear a laugh<br><br>Do: Sit-ups based on dice roll.</p>
+                            <p><br> Every time you hear a laugh<br><br>Do: Sit-ups based on dice roll.</p>
                         </div>
                     </div>
                 </div>
@@ -696,7 +720,7 @@ p, ol, ul {
                         </div>
                         <div class="card-back">
                             <h3>Call to Action</h3>
-                            <p>Every time the phone rings<br><br>Do: High knees based on dice roll.</p>
+                            <p><br>Every time the phone rings<br><br>Do: High knees based on dice roll.</p>
                         </div>
                     </div>
                 </div>
@@ -710,7 +734,7 @@ p, ol, ul {
                         </div>
                         <div class="card-back">
                             <h3>YouTube Ad App</h3>Every time a new song starts
-                            <p>Every time YouTube ad appears<br><br>Do: Wall sits for seconds based on dice roll.</p>
+                            <p><br>Every time YouTube ad appears<br><br>Do: Wall sits for seconds based on dice roll.</p>
                         </div>
                     </div>
                 </div>
@@ -724,7 +748,7 @@ p, ol, ul {
                         </div>
                         <div class="card-back">
                             <h3>Tweet and Tone</h3>
-                            <p>Every time you see a bird<br><br>Do: Burpees based on dice roll.</p>
+                            <p><br>Every time you see a bird<br><br>Do: Burpees based on dice roll.</p>
                         </div>
                     </div>
                 </div>
@@ -742,7 +766,7 @@ p, ol, ul {
                         </div>
                         <div class="card-back">
                             <h3>Inbox Intervals</h3>
-                            <p>Every email notification<br><br>Do: Chair dips based on dice roll.</p>
+                            <p><br>Every email notification<br><br>Do: Chair dips based on dice roll.</p>
                         </div>
                     </div>
                 </div>
@@ -756,7 +780,7 @@ p, ol, ul {
                         </div>
                         <div class="card-back">
                             <h3>Every Check In</h3>
-                            <p> Every time you check your phone"<br><br>Do: Calf raises based on dice roll.</p>
+                            <p><br> Every time you check your phone"<br><br>Do: Calf raises based on dice roll.</p>
                         </div>
                     </div>
                 </div>
@@ -770,7 +794,7 @@ p, ol, ul {
                         </div>
                         <div class="card-back">
                             <h3>Sip & Sweat</h3>
-                            <p>Every coffee break<br><br>Do: Desk push-ups based on dice roll.</p>
+                            <p><br>Every coffee break<br><br>Do: Desk push-ups based on dice roll.</p>
                         </div>
                     </div>
                 </div>
@@ -784,7 +808,7 @@ p, ol, ul {
                         </div>
                         <div class="card-back">
                             <h3>Rise and Shine</h3>
-                            <p>Every time you stand up<br><br>Do: Squats based on dice roll.</p>
+                            <p><br>Every time you stand up<br><br>Do: Squats based on dice roll.</p>
                         </div>
                     </div>
                 </div>
@@ -802,7 +826,7 @@ p, ol, ul {
                         </div>
                         <div class="card-back">
                             <h3>King of Spades</h3>
-                            <p> For every snack you grab<br><br>Do: Mountain climbers based on dice roll.</p>
+                            <p><br> For every snack you grab<br><br>Do: Mountain climbers based on dice roll.</p>
                         </div>
                     </div>
                 </div>
@@ -816,7 +840,7 @@ p, ol, ul {
                         </div>
                         <div class="card-back">
                             <h3></h3>
-                            <p>Every time a character changes outfits<br><br>Do: Jumping jacks based on dice roll.</p>
+                            <p><br>Every time a character changes outfits<br><br>Do: Jumping jacks based on dice roll.</p>
                         </div>
                     </div>
                 </div>
@@ -830,7 +854,7 @@ p, ol, ul {
                         </div>
                         <div class="card-back">
                             <h3>Galactic Gains</h3>
-                            <p>Every time you see a light saber in starwars<br><br>Do: Bicycle crunches based on dice roll.</p>
+                            <p><br>Every time you see a light saber in starwars<br><br>Do: Bicycle crunches based on dice roll.</p>
                         </div>
                     </div>
                 </div>
@@ -844,7 +868,7 @@ p, ol, ul {
                         </div>
                         <div class="card-back">
                             <h3>Showtime Sweat</h3>
-                            <p>For every new show that comes to netflix<br><br>Do: Push-ups based on dice roll.</p>
+                            <p><br>For every new show that comes to netflix<br><br>Do: Push-ups based on dice roll.</p>
                         </div>
                     </div>
                 </div>
@@ -876,7 +900,7 @@ p, ol, ul {
                         </div>
                         <div class="card-back">
                             <h3>Pothole Pounder</h3>
-                            <p>Each pothole you see<br><br>Do: Stretches based on dice roll.</p>
+                            <p><br>Each pothole you see<br><br>Do: Stretches based on dice roll.</p>
                         </div>
                     </div>
                 </div>
@@ -890,7 +914,7 @@ p, ol, ul {
                         </div>
                         <div class="card-back">
                             <h3>L Plate Lifter</h3>
-                            <p>Every car/bike with a L plate<br><br>Do: Toe touches based on dice roll.</p>
+                            <p><br>Every car/bike with a L plate<br><br>Do: Toe touches based on dice roll.</p>
                         </div>
                     </div>
                 </div>
@@ -904,7 +928,7 @@ p, ol, ul {
                         </div>
                         <div class="card-back">
                             <h3>Construction Crusher</h3>
-                            <p>Each time you see roadworks<br><br>Do: Plank seconds based on dice roll.</p>
+                            <p><br>Each time you see roadworks<br><br>Do: Plank seconds based on dice roll.</p>
                         </div>
                     </div>
                 </div>
@@ -972,26 +996,43 @@ p, ol, ul {
                 });
             };
 
-            // Function to roll the dice
             const rollDice = () => {
-                const roll = Math.floor(Math.random() * 6) + 1;
-                totalReps += roll;
-                totalRepsDisplay.textContent = `Total Reps: ${totalReps}`;
-                
-                diceImage.src = '/IMG_4702.PNG'; // Set dice image to IMG_4702.PNG
-                
-                // Add rolling animation
-                diceImage.classList.add('rolling');
-                setTimeout(() => {
-                    diceImage.classList.remove('rolling');
-                }, 500);
-            };
+    const difficulty = document.getElementById('difficulty-select').value;
+    let maxRoll;
+
+    // Define the maximum roll based on difficulty
+    switch (difficulty) {
+        case 'low':
+            maxRoll = 12; // Max value for low difficulty
+            break;
+        case 'medium':
+            maxRoll = 24; // Max value for medium difficulty
+            break;
+        case 'high':
+            maxRoll = 30; // Max value for high difficulty
+            break;
+        default:
+            maxRoll = 6; // Default value
+    }
+
+    const roll = Math.floor(Math.random() * (maxRoll / 2)) + 1; // Roll based on difficulty
+    totalReps += roll;
+    totalRepsDisplay.textContent = `Total Reps: ${totalReps}`;
+
+    diceImage.src = 'IMG_4702.PNG'; // Set dice image to IMG_4702.PNG
+
+    // Add rolling animation
+    diceImage.classList.add('rolling');
+    setTimeout(() => {
+        diceImage.classList.remove('rolling');
+    }, 500);
+};
 
             // Function to reset the dice
             const resetDice = () => {
                 totalReps = 0;
                 totalRepsDisplay.textContent = `Total Reps: ${totalReps}`;
-                diceImage.src = `/IMG_4702.PNG`;
+                diceImage.src = `IMG_4702.PNG`;
             };
 
             // Tally functionality
@@ -1031,24 +1072,16 @@ c </script>
         <h2>Game Setup</h2>
        <br>
        
-        <p>1. Pick Your Daily Scenario (or let fate decide): Use the dice to randomly pick one or more of the following challenges each day.</p>
-        <p>2. Track Your Reps: Use the in-game tally counter. At the end of the day, add up the total reps.</p>
+        <p>1. Pick Your Daily Scenario (or let fate decide): Use the cards to randomly pick one or more of the following challenges each day.Then roll the dice to get your reps.</p>
+        <p>2. Track Your Reps: Use the in-game dice rep counter. At the end of the day, add up the total reps.</p>
         <p>3. Finish Strong: Complete your reps at once or spread them throughout the day.<br> The only rule is — get it done.</p>
        <br> 
         
         <h3>Warm-Up: “Ignite the Engine”</h3>
-        <p>Always warm up first to avoid injuries and get in the zone. Here’s a quick 5-minute routine:</p>
+        <p>Always warm up first to avoid injuries and get in the zone. </p>
         <br>
         
-        <ul>
-            <li>30 seconds Jumping Jacks</li>
-            <li>30 seconds Arm Circles (forward + backward)</li>
-            <li>30 seconds Leg Swings (each leg)</li>
-            <li>30 seconds Bodyweight Squats</li>
-            <li>1 minute Jog in Place</li>
-            <li>2 minutes Dynamic Stretching (hip openers, lunges with reach, toe touches)</li>
-        </ul>
-
+        
 <br>
 
         <h3>Stretch it Out: “Cooldown Flow”</h3>
@@ -1057,23 +1090,16 @@ c </script>
        
         <p>After completing your reps, cool down and stretch to reduce soreness:</p>
         
-        <br>
+       
         
-        <ul>
-            <li>Forward Fold</li>
-            <li>Hip Flexor Stretch</li>
-            <li>Shoulder Cross Stretch</li>
-            <li>Seated Twist</li>
-            <li>Cat-Cow Stretch (yoga style)</li>
-            <li>Deep Breathing for 2 minutes</li>
-        </ul>
+       
         <br>
         
         <h3>Final Word</h3>
 
         <br>
         <p>Repping It isn’t just a workout — it’s a lifestyle challenge. You’ll never watch TV, walk to the shop, or scroll through YouTube the same way again. Every moment becomes an opportunity to move, laugh, and get stronger.</p>
-        <p>Get your reps in. No excuses. Go Beast Mode.</p>
+       
     </div>
 </div>  
 
