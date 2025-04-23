@@ -21,7 +21,7 @@
     flex-wrap: wrap; /* Allow wrapping on smaller screens */
     gap: 20px; /* Space between controls */
 }.card-front {
-    background-image: url('/IMG_4676-removebg-preview.png'); /* Add background image */
+    background-image: url('IMG_4676-removebg-preview.png'); /* Add background image */
     background-size: cover; /* Cover the entire card */
     background-position: center; /* Center the image */
     display: flex;
@@ -64,6 +64,7 @@
     justify-content: center; /* Center content horizontally */
     align-items: center; /* Center content vertically */
     text-align: center; /* Center text */
+   
 }
         h1 {
             font-size: 3rem;
@@ -83,6 +84,7 @@
 
 .card-front .value {
     font-size: clamp(2rem, 10vw, 4rem); /* Responsive value size */
+display: none;
 }
         .subtitle {
             color: rgba(255, 255, 255, 0.8);
@@ -98,9 +100,10 @@
             flex-wrap: wrap;
             gap: 40px;
             margin-bottom: 40px;
+            
            
         }
-
+       
         .card-stack {
             width: 100%;
             display: none;
@@ -675,30 +678,14 @@ p, ol, ul {
                     </div>
                 </div>
             </div>
-            <button id="game-rules-btn">Game Rules</button> <!-- New Game Rules Button -->
-            <select id="stack-select">
-                
-                <option value="0">Select Stack</option>
-                <option value="1">Fitness Challenges</option>
-                <option value="2">Home Workout</option>
-                <option value="3">Office Workout</option>
-                <option value="4">TV Workout</option>
-               <option value="5">Outdoor Workout</option>
-               
-               
-                
-                <select id="difficulty-select">
-                    <select id="difficulty-select">
-                    <option value="low">Low (2, 4, 6, 8, 10, 12)</option>
-                    <option value="medium">Medium (4, 8, 12, 16, 20, 24)</option>
-                    <option value="high">High (5, 10, 15, 20, 25, 30)</option>
+            
                 
                 </select>
             <!-- Stack 2 - Home Workout -->
             <div class="card-stack" id="stack2">
                 <div class="card" id="card5">
                     <div class="card-inner">
-                        <div class="card-front">
+                        <div class="card-front"style="background-color: #b33b2e;">
                             <div class="card-symbol">
                                 
                                 <span class="value">1</span>
@@ -726,7 +713,7 @@ p, ol, ul {
                 </div>
                 <div class="card" id="card7">
                     <div class="card-inner">
-                        <div class="card-front">
+                        <div class="card-front"style="background-color: #b33b2e;">
                             <div class="card-symbol">
                                
                                 <span class="value">3</span>
@@ -753,12 +740,16 @@ p, ol, ul {
                     </div>
                 </div>
             </div>
-            
+           
+               
+               
+                
+                
             <!-- Stack 3 - Office Workout -->
             <div class="card-stack" id="stack3">
                 <div class="card" id="card9">
                     <div class="card-inner">
-                        <div class="card-front">
+                        <div class="card-front"style="background-color: #b33b2e;">
                             <div class="card-symbol">
                                
                                 <span class="value">1</span>
@@ -786,7 +777,7 @@ p, ol, ul {
                 </div>
                 <div class="card" id="card11">
                     <div class="card-inner">
-                        <div class="card-front">
+                        <div class="card-front"style="background-color: #b33b2e;">
                             <div class="card-symbol">
                                
                                 <span class="value">3</span>
@@ -818,7 +809,7 @@ p, ol, ul {
             <div class="card-stack" id="stack4">
                 <div class="card" id="card13">
                     <div class="card-inner">
-                        <div class="card-front">
+                        <div class="card-front"style="background-color: #b33b2e;">
                             <div class="card-symbol">
                                
                                 <span class="value">1</span>
@@ -846,7 +837,7 @@ p, ol, ul {
                 </div>
                 <div class="card" id="card15">
                     <div class="card-inner">
-                        <div class="card-front">
+                        <div class="card-front"style="background-color: #b33b2e;">
                             <div class="card-symbol">
                                
                                 <span class="value">3</span>
@@ -878,7 +869,7 @@ p, ol, ul {
             <div class="card-stack" id="stack5">
                 <div class="card" id="card17">
                     <div class="card-inner">
-                        <div class="card-front">
+                        <div class="card-front"style="background-color: #b33b2e;">
                             <div class="card-symbol">
                                
                                 <span class="value">4</span>
@@ -906,7 +897,7 @@ p, ol, ul {
                 </div>
                 <div class="card" id="card19">
                     <div class="card-inner">
-                        <div class="card-front">
+                        <div class="card-front"style="background-color: #b33b2e;">
                             <div class="card-symbol">
                                
                                 <span class="value">6</span>
@@ -934,8 +925,31 @@ p, ol, ul {
                 </div>
             </div>
         </div>
-    </div>
+        <div class="bottom-controls controls">
+        <button id="game-rules-btn">Game Rules</button> <!-- New Game Rules Button -->
+        <select id="stack-select">
+            
+            <option value="0">Select Stack</option>
+            <option value="1">Fitness Challenges</option>
+            <option value="2">Home Workout</option>
+            <option value="3">Office Workout</option>
+            <option value="4">TV Workout</option>
+           <option value="5">Outdoor Workout</option>
+           
+           
+            
+            <select id="difficulty-select">
+                <select id="difficulty-select">
+                <option value="low">Low (2, 4, 6, 8, 10, 12)</option>
+                <option value="medium">Medium (4, 8, 12, 16, 20, 24)</option>
+                <option value="high">High (5, 10, 15, 20, 25, 30)</option>
+            </div>
+    
+            </div>
 
+
+
+    
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             const shuffleBtn = document.getElementById('shuffle-btn');
