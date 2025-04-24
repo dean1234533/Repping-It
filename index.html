@@ -3,7 +3,25 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pick a Card - Interactive Card Design</title>
+    <title>Move more: your fitness & Recreation Guide</title>
+  
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js" integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy" crossorigin="anonymous"></script>
+    <meta name="description" content="Repping It transforms everyday activities into exciting fitness challenges. Roll the dice to determine your workout reps based on common occurrences in your day-to-day life. Stay active and motivated while turning mundane moments into fun exercise opportunities. Unleash your inner beast and make fitness a part of your daily routine!.
+    ">
+  
+  
+    <meta name="keywords" content="Repping It,Fitness game,Home workouts,Active lifestyle,Exercise challenges,Fun fitness activities,Dice workout,Motivational fitness,Healthy living,Interactive exercise,Unique workout routines,Fitness tracker,Outdoor workouts,Home fitness challenges">
+    
+    <meta property="og:title" content="Repping It: Interactive Fitness Challenge | Gamified Workout Experience">
+  <meta property="og:description" content="Repping It transforms everyday activities into exciting fitness challenges. Roll the dice to determine your workout reps based on common occurrences in your day-to-day life. Stay active and motivated while turning mundane moments into fun exercise opportunities. Unleash your inner beast and make fitness a part of your daily routine!.
+  ">
+  <meta property="og:url" content="https://dbworkouts.co.uk/Game.html">
+  <meta property="og:type" content="website">
+    
+  <link rel="canonical" href="https://dbworkouts.co.uk/Game.html/" />
+  <link rel="manifest" href="manifest.json">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
         * {
@@ -12,6 +30,13 @@
             box-sizing: border-box;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
        
+            .footer {
+        flex-direction: column;
+        text-align: center;
+        gap: 15px;
+    }
+
+
         }
         .controls {
     margin-top: 30px;
@@ -21,7 +46,7 @@
     flex-wrap: wrap; /* Allow wrapping on smaller screens */
     gap: 20px; /* Space between controls */
 }.card-front {
-    background-image: url('IMG_4676-removebg-preview.png'); /* Add background image */
+    background-image: url('IMG_4715.JPG'); /* Add background image */
     background-size: cover; /* Cover the entire card */
     background-position: center; /* Center the image */
     display: flex;
@@ -29,6 +54,19 @@
     align-items: center;
     color: rgb(230, 224, 224);
     
+}
+
+
+ a{
+    text-align: center;
+    padding: 20px;
+    text-decoration: none;
+    
+    color: rgb(247, 243, 243);
+}
+
+.footer img {
+    margin-left: 5px; /* Add space between text and image */
 }
         body {
             background: linear-gradient(135deg, #1a1a1a, #2c3e50);
@@ -63,9 +101,12 @@
     display: flex; /* Use flexbox to center content */
     justify-content: center; /* Center content horizontally */
     align-items: center; /* Center content vertically */
-    text-align: center; /* Center text */
-   
+    text-align: center; /* Center text *
+    align-items: flex-start; /* Align items to the top */
+    padding-top: 20px; /* Add padding to move text down from the top */
 }
+   
+
         h1 {
             font-size: 3rem;
             margin-bottom: 10px;
@@ -596,7 +637,10 @@ p, ol, ul {
     </style>
 </head>
 <body>
+   
     <div class="container">
+        
+        
         <h1>Repping It</h1>
         
         
@@ -925,7 +969,12 @@ p, ol, ul {
                 </div>
             </div>
         </div>
-        <div class="bottom-controls controls">
+
+        
+<a href="https://dbworkouts.co.uk/index.html">Website:
+                <img src="photo-output 7.PNG" style="color: white"alt="Website logo" width="30">
+              </a> 
+        <div class="bottom-controls controls"style="margin-bottom: 35px;">
         <button id="game-rules-btn">Game Rules</button> <!-- New Game Rules Button -->
         <select id="stack-select">
             
@@ -947,9 +996,15 @@ p, ol, ul {
     
             </div>
 
-
-
-    
+            
+            
+                 
+            
+            
+                  
+            
+               
+            
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             const shuffleBtn = document.getElementById('shuffle-btn');
@@ -1087,7 +1142,7 @@ c </script>
        <br>
        
         <p>1. Pick Your Daily Scenario (or let fate decide): Use the cards to randomly pick one or more of the following challenges each day.Then roll the dice to get your reps.</p>
-        <p>2. Track Your Reps: Use the in-game dice rep counter. At the end of the day, add up the total reps.</p>
+        <p>2. Track Your Reps: Use the in-game tally counter. At the end of the day, add up the total reps.</p>
         <p>3. Finish Strong: Complete your reps at once or spread them throughout the day.<br> The only rule is — get it done.</p>
        <br> 
         
@@ -1117,6 +1172,7 @@ c </script>
     </div>
 </div>  
 
+</footer>
 <script>
     // Get modal element
     const gameRulesModal = document.getElementById('gameRulesModal');
@@ -1139,6 +1195,64 @@ c </script>
             gameRulesModal.style.display = "none";
         }
     }
+
+
+
+
+</script>
+<script>
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('/pwabuilder-sw.js') // Ensure the path is correct
+          .then(reg => {
+            console.log('Service Worker registered:', reg.scope);
+            
+            // Check for updates
+            reg.onupdatefound = () => {
+              const installingWorker = reg.installing;
+              installingWorker.onstatechange = () => {
+                if (installingWorker.state === 'installed') {
+                  if (navigator.serviceWorker.controller) {
+                    // New update available
+                    console.log('New content is available; please refresh.');
+                  } else {
+                    // Content is cached for offline use
+                    console.log('Content is cached for offline use.');
+                  }
+                }
+              };
+            };
+          })
+          .catch(err => console.error('Service Worker registration failed:', err));
+      });
+    }
+
+
+
+    function startMiniGame() {
+    // Logic for mini-game (e.g., jump to dodge)
+}
+
+function displayLeaderboard() {
+    // Fetch and display leaderboard data
+}
+
+const missions = [
+    { name: "Complete 50 Reps", reward: "Unlock a new outfit" },
+    // Add more missions
+];
+
+function checkMissions() {
+    // Logic to check if missions are completed
+}
+
+function provideFeedback() {
+    // Play sound or show animation on task completion
+}
+
+
+
+    </script>
 </script>
 </script>
 </body>
