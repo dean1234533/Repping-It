@@ -1172,7 +1172,7 @@ line-height: 10px;
     
 // Simple test service worker
 self.addEventListener('install', event => {
-  console.log('dean1234533.github.io/Repping-It/pwabuilder-sw (4).js');
+  console.log('/Repping-It/pwabuilder-sw (4).js');
   self.skipWaiting();
 });
 
@@ -1189,7 +1189,7 @@ self.addEventListener('fetch', event => {
 
         if ('serviceWorker' in navigator) {
   window.addEventListener('load', () => {
-    navigator.serviceWorker.register('dean1234533.github.io/Repping-It/pwabuilder-sw (4).js') // make sure this path is correct
+    navigator.serviceWorker.register('/Repping-It/pwabuilder-sw (4).js') // make sure this path is correct
       .then(registration => {
         console.log('Service Worker registered with scope:', registration.scope);
       })
@@ -1200,7 +1200,7 @@ self.addEventListener('fetch', event => {
 }
     
   if (typeof navigator.serviceWorker !== 'undefined') {
-    navigator.serviceWorker.register('dean1234533.github.io/Repping-It/pwabuilder-sw (4).js')
+    navigator.serviceWorker.register('/Repping-It/pwabuilder-sw (4).js')
   }
 
 
