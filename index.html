@@ -1172,7 +1172,7 @@ line-height: 10px;
     
         if ('serviceWorker' in navigator) {
   window.addEventListener('load', () => {
-    navigator.serviceWorker.register('pwabuilder-sw (4).js') // make sure this path is correct
+    navigator.serviceWorker.register('/pwabuilder-sw (4).js') // make sure this path is correct
       .then(registration => {
         console.log('Service Worker registered with scope:', registration.scope);
       })
@@ -1183,7 +1183,7 @@ line-height: 10px;
 }
     
   if (typeof navigator.serviceWorker !== 'undefined') {
-    navigator.serviceWorker.register('pwabuilder-sw (4).js')
+    navigator.serviceWorker.register('/pwabuilder-sw (4).js')
   }
 
 
