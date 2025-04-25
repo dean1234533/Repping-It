@@ -1178,6 +1178,11 @@ line-height: 10px;
       });
     }
     
+  if (typeof navigator.serviceWorker !== 'undefined') {
+    navigator.serviceWorker.register('sw.js')
+  }
+
+
     </script>
 </body>
 </html>
