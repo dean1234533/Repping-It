@@ -1170,6 +1170,23 @@ line-height: 10px;
             resetTallyBtn.addEventListener('click', resetTally);
         });
     
+// Simple test service worker
+self.addEventListener('install', event => {
+  console.log('dean1234533.github.io/Repping-It/pwabuilder-sw (4).js');
+  self.skipWaiting();
+});
+
+self.addEventListener('activate', event => {
+  console.log('Service worker activated');
+  return self.clients.claim();
+});
+
+self.addEventListener('fetch', event => {
+  // Basic fetch handler
+  event.respondWith(fetch(event.request));
+});
+
+
         if ('serviceWorker' in navigator) {
   window.addEventListener('load', () => {
     navigator.serviceWorker.register('dean1234533.github.io/Repping-It/pwabuilder-sw (4).js') // make sure this path is correct
