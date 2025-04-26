@@ -1341,20 +1341,25 @@ line-height: 10px;
    // Audio context for fallback sound
 let audioContext;
 
-// Initialize audio context on user interaction to comply with autoplay policies
-document.addEventListener('click', initAudioContext, { once: true });
-
+// Function to initialize audio context
 function initAudioContext() {
   if (!audioContext) {
     audioContext = new (window.AudioContext || window.webkitAudioContext)();
   }
+  
+  // Resume audio context if it's suspended (browser policy requirement)
+  if (audioContext.state === 'suspended') {
+    audioContext.resume();
+  }
 }
 
-// Fallback beep function using Web Audio API
+// Initialize on page interaction to handle autoplay restrictions
+document.addEventListener('click', initAudioContext);
+document.addEventListener('touchstart', initAudioContext);
+
+// Fallback beep using Web Audio API
 function createBeep() {
-  if (!audioContext) {
-    initAudioContext();
-  }
+  initAudioContext();
   
   const oscillator = audioContext.createOscillator();
   const gainNode = audioContext.createGain();
@@ -1374,12 +1379,12 @@ function createBeep() {
   }, 300);
 }
 
-// Play sound with fallback
+// Function to reload and play sound
 function playSound() {
-  const buzzer = document.getElementById('buzzer');
-  buzzer.currentTime = 0;
+  // Create new audio element each time instead of reusing
+  const buzzer = new Audio('digital-timer-beeping-epic-stock-media-1-00-08.mp3');
   
-  // Try to play the audio file
+  // Try to play the audio
   const playPromise = buzzer.play();
   
   if (playPromise !== undefined) {
@@ -1411,7 +1416,7 @@ function startTimer() {
     return;
   }
 
-  // Initialize audio context when user starts timer
+  // Initialize audio context when timer starts
   initAudioContext();
   
   updateDisplay();
@@ -1422,7 +1427,15 @@ function startTimer() {
 
     if (timeLeft <= 0) {
       clearInterval(countdown);
-      playSound(); // Use our improved sound function
+      // Try both methods for maximum compatibility
+      playSound();
+      
+      // Also try using the original buzzer element as backup
+      const originalBuzzer = document.getElementById('buzzer');
+      originalBuzzer.currentTime = 0;
+      originalBuzzer.play().catch(() => {
+        console.log("Backup method failed, already tried alternative");
+      });
     }
   }, 1000);
 }
@@ -1441,12 +1454,18 @@ function resetTimer() {
   document.getElementById('timer').textContent = "00:00";
   document.getElementById('minutes').value = "";
   document.getElementById('seconds').value = "";
+  
+  // Reset audio element when timer is reset
+  const buzzer = document.getElementById('buzzer');
+  buzzer.pause();
+  buzzer.currentTime = 0;
 }
 
-// Make sure we have the right event listeners
+// Double-ensure the audio is properly set up
 document.addEventListener('DOMContentLoaded', () => {
-  // Preload audio to improve playback chance
+  // Set the src again to ensure it's properly loaded
   const buzzer = document.getElementById('buzzer');
+  buzzer.src = 'digital-timer-beeping-epic-stock-media-1-00-08.mp3';
   buzzer.load();
 });
 
