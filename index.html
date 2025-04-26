@@ -23,7 +23,23 @@
     <link rel="canonical" href="https://dbworkouts.co.uk/Game.html/" />
     <link rel="manifest" href="manifest.json">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <style>
+    <script>
+        if ('serviceWorker' in navigator) {
+          navigator.serviceWorker.register('/Repping-It/pwabuilder-sw (4).js')
+          .then(registration => {
+            console.log('Service worker registered with scope:', registration.scope);
+          })
+          .catch(error => {
+            console.log('Service worker registration failed:', error);
+          });
+        }
+      </script>
+   
+   
+   
+   
+   
+   <style>
         * {
             box-sizing: border-box;
             margin: 0;
@@ -680,7 +696,11 @@ line-height: 10px;
               <div id="stack6" class="card-stack">
                 <div class="card">
                     <div class="card-inner">
-                        <div class="card-front">Tap To Flip </div>
+                        
+                        <a href="https://youtube.com/shorts/AhunaH0K2VM" style="color: #b33b2e; text-decoration: underline;">Squats </div>
+                        <div class="card-front">Tap To Flip 
+                        </a>
+                   
                         <div class="card-back">
                             <h3>Pyramid Sweat</h3><br>
                             <p>You start with 1 rep, go up to a peak (say 10), then back down to 1.</p><br><br>
