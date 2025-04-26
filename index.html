@@ -90,7 +90,29 @@
         pointer-events: none;
         z-index: 10;
     }
-
+    #timer {
+            font-size: 5rem;
+            margin: 20px;
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 1.2rem;
+            margin: 5px;
+            cursor: pointer;
+            border: none;
+            border-radius: 8px;
+            background-color: #e94f37;
+            color: white;
+        }
+        input {
+            width: 80px;
+            padding: 10px;
+            font-size: 1.2rem;
+            text-align: center;
+            margin: 5px;
+            border-radius: 8px;
+            border: 1px solid #ccc;
+        }
 .footer-links {
     display: flex;
     flex-wrap: wrap;
@@ -840,20 +862,6 @@ line-height: 10px;
         </div>
       
 
-        <div>
-            <input type="number" id="minutes" placeholder="Min" min="0">
-            <input type="number" id="seconds" placeholder="Sec" min="0" max="59">
-        </div>
-        
-        <div id="timer">00:00</div>
-        
-        <div>
-            <button onclick="startTimer()">Start</button>
-            <button onclick="resetTimer()">Reset</button>
-        </div>
-        
-        <!-- Buzzer sound -->
-        <audio id="buzzer" src="https://actions.google.com/sounds/v1/alarms/beep_short.ogg"></audio>
         
         
 
@@ -864,8 +872,11 @@ line-height: 10px;
             <button id="prev-card-btn">Previous Card</button>
             <button id="next-card-btn">Next Card</button>
         </div>
-        
+
         <div class="section-divider"></div>
+        
+
+        
         
         <!-- New Difficulty Selector -->
         <div class="difficulty-container">
@@ -903,7 +914,26 @@ line-height: 10px;
             <div id="totalReps">Total Reps: 0</div>
             <div id="tallyCountDisplay">Tally Count: 0</div>
         </div>
-    
+
+        <div class="section-divider"></div>
+
+        <div>
+            <input type="number" id="minutes" placeholder="Min" min="0">
+            <input type="number" id="seconds" placeholder="Sec" min="0" max="59">
+        </div>
+        <audio id="buzzer" src="https://actions.google.com/sounds/v1/alarms/beep_short.ogg"></audio>
+        <div id="timer">00:00</div>
+        
+        <div>
+            <button onclick="startTimer()">Start</button>
+            <button onclick="resetTimer()">Reset</button>
+        </div>
+        
+        <!-- Buzzer sound -->
+       
+        
+        
+        
     
         <footer class="footer">
             <div class="footer-links">
@@ -1308,52 +1338,117 @@ line-height: 10px;
             tallyBtn.addEventListener('click', incrementTally);
             resetTallyBtn.addEventListener('click', resetTally);
         });
-    
-       
+   // Audio context for fallback sound
+let audioContext;
+
+// Initialize audio context on user interaction to comply with autoplay policies
+document.addEventListener('click', initAudioContext, { once: true });
+
+function initAudioContext() {
+  if (!audioContext) {
+    audioContext = new (window.AudioContext || window.webkitAudioContext)();
+  }
+}
+
+// Fallback beep function using Web Audio API
+function createBeep() {
+  if (!audioContext) {
+    initAudioContext();
+  }
+  
+  const oscillator = audioContext.createOscillator();
+  const gainNode = audioContext.createGain();
+  
+  oscillator.connect(gainNode);
+  gainNode.connect(audioContext.destination);
+  
+  oscillator.type = 'square';
+  oscillator.frequency.value = 800;
+  gainNode.gain.value = 0.5;
+  
+  oscillator.start();
+  
+  // Beep for 0.3 seconds
+  setTimeout(() => {
+    oscillator.stop();
+  }, 300);
+}
+
+// Play sound with fallback
+function playSound() {
+  const buzzer = document.getElementById('buzzer');
+  buzzer.currentTime = 0;
+  
+  // Try to play the audio file
+  const playPromise = buzzer.play();
+  
+  if (playPromise !== undefined) {
+    playPromise
+      .then(() => {
+        console.log("Buzzer sound played successfully");
+      })
+      .catch(error => {
+        console.log("Error playing buzzer sound:", error);
+        // Use Web Audio API as fallback
+        createBeep();
+      });
+  }
+}
+
 let countdown;
 let timeLeft = 0;
 
 function startTimer() {
-    clearInterval(countdown);
+  clearInterval(countdown);
 
-    let minutes = parseInt(document.getElementById('minutes').value) || 0;
-    let seconds = parseInt(document.getElementById('seconds').value) || 0;
+  const minutes = parseInt(document.getElementById('minutes').value) || 0;
+  const seconds = parseInt(document.getElementById('seconds').value) || 0;
 
-    timeLeft = (minutes * 60) + seconds;
+  timeLeft = (minutes * 60) + seconds;
 
-    if (timeLeft <= 0) {
-        alert("Set a valid time!");
-        return;
-    }
+  if (timeLeft <= 0) {
+    alert("Please set a valid time!");
+    return;
+  }
 
+  // Initialize audio context when user starts timer
+  initAudioContext();
+  
+  updateDisplay();
+
+  countdown = setInterval(() => {
+    timeLeft--;
     updateDisplay();
 
-    countdown = setInterval(() => {
-        timeLeft--;
-        updateDisplay();
-
-        if (timeLeft <= 0) {
-            clearInterval(countdown);
-            document.getElementById('buzzer').play();
-        }
-    }, 1000);
+    if (timeLeft <= 0) {
+      clearInterval(countdown);
+      playSound(); // Use our improved sound function
+    }
+  }, 1000);
 }
 
 function updateDisplay() {
-    let mins = Math.floor(timeLeft / 60);
-    let secs = timeLeft % 60;
+  const mins = Math.floor(timeLeft / 60);
+  const secs = timeLeft % 60;
 
-    document.getElementById('timer').textContent = 
-        `${mins.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
+  document.getElementById('timer').textContent = 
+    `${mins.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
 }
 
 function resetTimer() {
-    clearInterval(countdown);
-    timeLeft = 0;
-    document.getElementById('timer').textContent = "00:00";
-    document.getElementById('minutes').value = "";
-    document.getElementById('seconds').value = "";
+  clearInterval(countdown);
+  timeLeft = 0;
+  document.getElementById('timer').textContent = "00:00";
+  document.getElementById('minutes').value = "";
+  document.getElementById('seconds').value = "";
 }
+
+// Make sure we have the right event listeners
+document.addEventListener('DOMContentLoaded', () => {
+  // Preload audio to improve playback chance
+  const buzzer = document.getElementById('buzzer');
+  buzzer.load();
+});
 
 
 
