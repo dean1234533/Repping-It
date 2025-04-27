@@ -21,19 +21,8 @@
     <meta property="og:type" content="website">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <link rel="canonical" href="https://dean1234533.github.io/Repping-It"/>
-    <link rel="manifest" href="manifest.json">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <script>
-        if ('serviceWorker' in navigator) {
-          navigator.serviceWorker.register('/Repping-It/pwabuilder-sw (4).js')
-          .then(registration => {
-            console.log('Service worker registered with scope:', registration.scope);
-          })
-          .catch(error => {
-            console.log('Service worker registration failed:', error);
-          });
-        }
-      </script>
+    
    
    
    
@@ -297,10 +286,10 @@ p, ol, ul {
             color: #f6eded;
 justify-content: center;
 text-align: center;
-line-height: 3px;
+line-height: 2px;
             transform: rotateY(180deg);
             font-size: 25px;
-            padding-top: 4px;
+            padding-top: 2px;
             text-align: center;
         }
 
@@ -867,7 +856,7 @@ line-height: 3px;
                         <div class="card-back">
                             <h3>Stair Climb Challenge</h3><br>
                             <p>Set a timer for 10 minutes and climb stairs continuously. Aim for maximum repetitions!</p><br><br>
-                            <p>For added intensity, do:<br><br> <a href="https://www.youtube.com/watch?v=ZQ6c_8qC5zM" style="color: #b33b2e; text-decoration: underline;">Step Ups</a></p>
+                            <p>For added intensity, do:<br><br> Step Ups</p>
                         </div>
                     </div>
                 </div>
@@ -877,7 +866,7 @@ line-height: 3px;
                         <div class="card-back">
                             <h3>Nature Walk Fitness Challenge</h3><br>
                             <p>Set a timer for 30 minutes and explore a natural area. Stop every 5 minutes to do 10 push-ups!</p><br><br>
-                            <p>Mix it up with:<br><br> <a href="https://www.youtube.com/watch?v=E1yci0eSRP8" style="color: #b33b2e; text-decoration: underline;">Walking Lunges</a></p>
+                            <p>Mix it up with:<br><br> <a href="https://youtube.com/shorts/QC1RKGE9wjc" style="color: #b33b2e; text-decoration: underline;">Alternating Lunges</a></p>
                         </div>
                     </div>
                 </div>
@@ -887,7 +876,7 @@ line-height: 3px;
                         <div class="card-back">
                             <h3>Fitness Alphabet Challenge</h3><br>
                             <p>Set a timer for 20 minutes. Spell out a word using exercises (A=Arm Circles, B=Burpees). Complete the reps as you go!</p><br><br>
-                            <p>For each letter do:<br><br> <a href="https://www.youtube.com/watch?v=3kA4_Vq4AL8" style="color: #b33b2e; text-decoration: underline;">Jumping Jacks</a></p>
+                            <p>For each letter do:<br><br> <a href="https://youtube.com/shorts/wKvR_B0Gbus" style="color: #b33b2e; text-decoration: underline;">Cross Jacks</a></p>
                         </div>
                     </div>
                 </div>
@@ -897,7 +886,7 @@ line-height: 3px;
                         <div class="card-back">
                             <h3>5-Minute Freestyle Challenge</h3><br>
                             <p>Set a timer for 5 minutes and perform any exercise you want. Switch it up every minute!</p><br><br>
-                            <p>Try combining with:<br><br> <a href="https://www.youtube.com/watch?v=8uL8gK4_5-0" style="color: #b33b2e; text-decoration: underline;">High Knees</a></p>
+                            <p>Try combining with:<br><br> <a href="https://youtube.com/shorts/F1nZSWab1aA" style="color: #b33b2e; text-decoration: underline;">High Knees</a></p>
                         </div>
                     </div>
                 </div>
@@ -909,7 +898,7 @@ line-height: 3px;
                         <div class="card-back">
                             <h3>Split Time Challenge</h3><br>
                             <p>Set a timer for 20 minutes. Alternate between 2 minutes of high-intensity exercise and 2 minutes of low-intensity recovery.</p><br><br>
-                            <p>For high intensity, do:<br><br> <a href="https://www.youtube.com/watch?v=tcF35ZsD4W8" style="color: #b33b2e; text-decoration: underline;">Burpees</a></p>
+                            <p>For high intensity, do:<br><br> <a href="https://youtube.com/shorts/-r0tnaEJsGw" style="color: #b33b2e; text-decoration: underline;">Burpees</a></p>
                         </div>
                     </div>
                 </div>
@@ -920,7 +909,7 @@ line-height: 3px;
                         <div class="card-back">
                             <h3>15-Minute Circuit Countdown</h3><br>
                             <p>Set a timer for 15 minutes. Complete a circuit of exercises for 1 minute each, resting for 15 seconds between.</p><br><br>
-                            <p>Include exercises like:<br><br> <a href="https://www.youtube.com/watch?v=U4Gz7l85z9o" style="color: #b33b2e; text-decoration: underline;">Squats</a></p>
+                            <p>Include exercises like:<br><br> <a href="https://youtube.com/shorts/AhunaH0K2VM" style="color: #b33b2e; text-decoration: underline;">Squats</a></p>
                         </div>
                     </div>
                 </div>
@@ -1538,39 +1527,6 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 
-
-// Simple test service worker
-self.addEventListener('install', event => {
-  console.log('dean1234533.github.io/Repping-It/pwabuilder-sw (4).js');
-  self.skipWaiting();
-});
-
-self.addEventListener('activate', event => {
-  console.log('Service worker activated');
-  return self.clients.claim();
-});
-
-self.addEventListener('fetch', event => {
-  // Basic fetch handler
-  event.respondWith(fetch(event.request));
-});
-
-
-        if ('serviceWorker' in navigator) {
-  window.addEventListener('load', () => {
-    navigator.serviceWorker.register('dean1234533.github.io/Repping-It/pwabuilder-sw (4).js') // make sure this path is correct
-      .then(registration => {
-        console.log('Service Worker registered with scope:', registration.scope);
-      })
-      .catch(error => {
-        console.log('Service Worker registration failed:', error);
-      });
-  });
-}
-    
-  if (typeof navigator.serviceWorker !== 'undefined') {
-    navigator.serviceWorker.register('dean1234533.github.io/Repping-It/pwabuilder-sw (4).js')
-  }
 
 
     </script>
