@@ -1,123 +1,75 @@
-self.addEventListener('install', event => {
-  event.waitUntil(
-    caches.open('dbworkouts-cache').then(cache => {
-      return cache.addAll([
-        '/',
-        '/index.html',
-        '/manifest.json',
-        '/icons/icon-192x192.png',
-        '/icons/icon-512x512.png'
-      ]);
-    })
-  );
-});
+// service-worker.js
 
-self.addEventListener('fetch', event => {
-  event.respondWith(
-    caches.match(event.request).then(response => {
-      return response || fetch(event.request);
-    })
-  );
-});
-
-
-  self.addEventListener('fetch', event => {
-    event.respondWith(
-      caches.match(event.request).then(response => {
-        return response || fetch(event.request);
-      })
-    );
-  });
-// Inside your service worker (sw.js)
-self.addEventListener('sync', (event) => {
-  if (event.tag === 'sync-data') {
-      event.waitUntil(syncData());
-  }
-});
-
-async function syncData() {
-  // Fetch and sync data with your server
-}
-// Function to handle link clicks
-function handleLinks(event) {
-  // Prevent the default link behavior
-  event.preventDefault();
-  
-  // Get the link's href attribute
-  const url = event.currentTarget.getAttribute('href');
-  
-  // Update the browser's URL without reloading the page
-  window.history.pushState({}, '', url);
-  
-  // Load the new content based on the URL
-  loadContent(url);
-}
-
-// Function to load content for the given URL
-function loadContent(url) {
-  fetch(url)
-      .then(response => {
-          if (!response.ok) {
-              throw new Error('Network response was not ok');
-          }
-          return response.text();
-      })
-      .then(html => {
-          // Update the page content
-          document.getElementById('app').innerHTML = html;
-      })
-      .catch(error => {
-          console.error('There was a problem with the fetch operation:', error);
-      });
-}
-
-// Attach event listeners to all links
-document.querySelectorAll('a').forEach(link => {
-  link.addEventListener('click', handleLinks);
-});
-const CACHE_NAME = 'my-pwa-cache-v1';
+const CACHE_NAME = 'repping-it-cache-v1';
 const urlsToCache = [
-    '/',
-    '/index.html',
-    '/styles.css',
-    '/app.js',
-    // Add other assets you want to cache
+  '.',
+  'index.html',
+  'css/style.css',
+  'js/main.js',
+  
+  'photo-output 7.PNG',
+  'digital-timer-beeping-epic-stock-media-1-00-08.mp3',
+  'annie-spratt-6a3nqQ1YwBw-unsplash.jpg',
+  'IMG_4715.JPG',
+  'IMG_4702.PNG',
+
+  'https://dean1234533.github.io/Repping-It/' // Ensure the base URL is included for offline navigation
 ];
 
-// Install the service worker and cache assets
-self.addEventListener('install', event => {
-    event.waitUntil(
-        caches.open(CACHE_NAME)
-            .then(cache => {
-                console.log('Caching app shell');
-                return cache.addAll(urlsToCache);
-            })
-    );
+self.addEventListener('install', (event) => {
+  event.waitUntil(
+    caches.open(CACHE_NAME)
+      .then((cache) => {
+        console.log('Opened cache');
+        return cache.addAll(urlsToCache);
+      })
+  );
 });
 
-// Serve cached assets when offline
-self.addEventListener('fetch', event => {
-    event.respondWith(
-        caches.match(event.request)
-            .then(response => {
-                // Return cached response if available, else fetch from network
-                return response || fetch(event.request);
-            })
-    );
+self.addEventListener('fetch', (event) => {
+  event.respondWith(
+    caches.match(event.request)
+      .then((response) => {
+        // Cache hit - return response
+        if (response) {
+          return response;
+        }
+        return fetch(event.request).then(
+          (response) => {
+            // Check if we received a valid response
+            if (!response || response.status !== 200 || response.type !== 'basic') {
+              return response;
+            }
+
+            // IMPORTANT: Clone the response. A response is a stream
+            // and because we want the browser to consume the response
+            // as well as the cache consuming the response, we need
+            // to clone it so we have two independent copies
+            const responseToCache = response.clone();
+
+            caches.open(CACHE_NAME)
+              .then((cache) => {
+                cache.put(event.request, responseToCache);
+              });
+
+            return response;
+          }
+        );
+      })
+  );
 });
 
-// Activate the service worker and clean up old caches
-self.addEventListener('activate', event => {
-    const cacheWhitelist = [CACHE_NAME];
-    event.waitUntil(
-        caches.keys().then(cacheNames => {
-            return Promise.all(
-                cacheNames.map(cacheName => {
-                    if (!cacheWhitelist.includes(cacheName)) {
-                        return caches.delete(cacheName);
-                    }
-                })
-            );
+self.addEventListener('activate', (event) => {
+  const cacheWhitelist = [CACHE_NAME];
+  event.waitUntil(
+    caches.keys().then((cacheNames) => {
+      return Promise.all(
+        cacheNames.map((cacheName) => {
+          if (cacheWhitelist.indexOf(cacheName) === -1) {
+            return caches.delete(cacheName);
+          }
         })
-    );
+      );
+    })
+  );
 });
