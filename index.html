@@ -486,6 +486,7 @@ line-height: 10px;
                 <option value="2">Family Fun</option>
                 <option value="7">Party Clash</option>
                 <option value="8">Fit Parents</option>
+                <option value="9">Time Crusher</option>
             </select>
             <button id="shuffle-btn">Shuffle Cards</button>
             <button id="game-rules-btn">Game Rules</button>
@@ -859,7 +860,72 @@ line-height: 10px;
                     </div>
                 </div>
             </div>
-        </div>
+            <div id="stack1" class="card-stack">
+                <div class="card">
+                    <div class="card-inner">
+                        <div class="card-front">Tap To Flip</div>
+                        <div class="card-back">
+                            <h3>Stair Climb Challenge</h3><br>
+                            <p>Set a timer for 10 minutes and climb stairs continuously. Aim for maximum repetitions!</p><br><br>
+                            <p>For added intensity, do:<br><br> <a href="https://www.youtube.com/watch?v=ZQ6c_8qC5zM" style="color: #b33b2e; text-decoration: underline;">Step Ups</a></p>
+                        </div>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-inner">
+                        <div class="card-front">Tap To Flip</div>
+                        <div class="card-back">
+                            <h3>Nature Walk Fitness Challenge</h3><br>
+                            <p>Set a timer for 30 minutes and explore a natural area. Stop every 5 minutes to do 10 push-ups!</p><br><br>
+                            <p>Mix it up with:<br><br> <a href="https://www.youtube.com/watch?v=E1yci0eSRP8" style="color: #b33b2e; text-decoration: underline;">Walking Lunges</a></p>
+                        </div>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-inner">
+                        <div class="card-front">Tap To Flip</div>
+                        <div class="card-back">
+                            <h3>Fitness Alphabet Challenge</h3><br>
+                            <p>Set a timer for 20 minutes. Spell out a word using exercises (A=Arm Circles, B=Burpees). Complete the reps as you go!</p><br><br>
+                            <p>For each letter do:<br><br> <a href="https://www.youtube.com/watch?v=3kA4_Vq4AL8" style="color: #b33b2e; text-decoration: underline;">Jumping Jacks</a></p>
+                        </div>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-inner">
+                        <div class="card-front">Tap To Flip</div>
+                        <div class="card-back">
+                            <h3>5-Minute Freestyle Challenge</h3><br>
+                            <p>Set a timer for 5 minutes and perform any exercise you want. Switch it up every minute!</p><br><br>
+                            <p>Try combining with:<br><br> <a href="https://www.youtube.com/watch?v=8uL8gK4_5-0" style="color: #b33b2e; text-decoration: underline;">High Knees</a></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div id="stack9" class="card-stack">
+                <div class="card">
+                    <div class="card-inner">
+                        <div class="card-front">Tap To Flip</div>
+                        <div class="card-back">
+                            <h3>Split Time Challenge</h3><br>
+                            <p>Set a timer for 20 minutes. Alternate between 2 minutes of high-intensity exercise and 2 minutes of low-intensity recovery.</p><br><br>
+                            <p>For high intensity, do:<br><br> <a href="https://www.youtube.com/watch?v=tcF35ZsD4W8" style="color: #b33b2e; text-decoration: underline;">Burpees</a></p>
+                        </div>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-inner">
+                        <div class="card-front">Tap To Flip</div>
+                        <div class="card-back">
+                            <h3>15-Minute Circuit Countdown</h3><br>
+                            <p>Set a timer for 15 minutes. Complete a circuit of exercises for 1 minute each, resting for 15 seconds between.</p><br><br>
+                            <p>Include exercises like:<br><br> <a href="https://www.youtube.com/watch?v=U4Gz7l85z9o" style="color: #b33b2e; text-decoration: underline;">Squats</a></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+         </div>
       
 
         
@@ -1172,6 +1238,7 @@ line-height: 10px;
                 const selectedCardStack = document.getElementById(stackId);
                 selectedCardStack.style.display = 'flex';
                 currentCardIndex = 0;
+
                 showCurrentCard();
             }
             
@@ -1253,6 +1320,7 @@ line-height: 10px;
                     // Wrap around to the first card
                     currentCardIndex = 0;
                     showCurrentCard();
+                    
                 }
             });
 
