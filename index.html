@@ -1526,8 +1526,9 @@ document.addEventListener('DOMContentLoaded', () => {
   buzzer.load();
 });
 
-
-
+chrome.action.onClicked.addListener(() => {
+  chrome.tabs.create({ url: "https://github.com/dean1234533/Repping-It/edit/main/index.html" });
+});
 
     </script>
 </body>
