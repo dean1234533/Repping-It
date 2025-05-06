@@ -437,10 +437,9 @@ line-height: 2px;
         }
     /* Additional small device optimizations */
     @media (max-width: 480px) {
-        .card {
-            width: clamp(100px, 40vw, 140px);
-            height: clamp(150px, 60vw, 210px);
-        }
+       
+            
+        
         
         .card-back {
             font-size: clamp(16px, 5vw, 25px);
@@ -1733,17 +1732,17 @@ function handleResize() {
     // Small phones
     cardContainer.style.width = '95vw';
     cardContainer.style.height = '80vh'; // Leave some space for scrolling
-    cardContainer.style.overflowY = 'auto'; // Allow scrolling
+   
 } else if (viewport.width < 768) {
     // Mobile devices
     cardContainer.style.width = '90vw';
     cardContainer.style.height = '85vh'; // Leave some space for scrolling
-    cardContainer.style.overflowY = 'auto'; // Allow scrolling
+   
 } else if (viewport.width < 1024) {
     // Tablets
     cardContainer.style.width = '80vw';
     cardContainer.style.height = '90vh'; // Leave some space for scrolling
-    cardContainer.style.overflowY = 'auto'; // Allow scrolling
+   
 } else {
     // Desktop
     cardContainer.style.width = '';
