@@ -1730,23 +1730,26 @@ function handleResize() {
 
     // Improved card container sizing for better mobile experience
     if (viewport.width < 480) {
-        // Small phones
-        cardContainer.style.width = '95vw';
-        cardContainer.style.height = '60vh'; // Adjusted height
-    } else if (viewport.width < 768) {
-        // Mobile devices
-        cardContainer.style.width = '90vw';
-        cardContainer.style.height = '65vh'; // Adjusted height
-    } else if (viewport.width < 1024) {
-        // Tablets
-        cardContainer.style.width = '80vw';
-        cardContainer.style.height = '70vh'; // Adjusted height
-    } else {
-        // Desktop
-        cardContainer.style.width = '70vw';
-        cardContainer.style.height = '75vh'; // Adjusted height
-    }
-
+    // Small phones
+    cardContainer.style.width = '95vw';
+    cardContainer.style.height = '80vh'; // Leave some space for scrolling
+    cardContainer.style.overflowY = 'auto'; // Allow scrolling
+} else if (viewport.width < 768) {
+    // Mobile devices
+    cardContainer.style.width = '90vw';
+    cardContainer.style.height = '85vh'; // Leave some space for scrolling
+    cardContainer.style.overflowY = 'auto'; // Allow scrolling
+} else if (viewport.width < 1024) {
+    // Tablets
+    cardContainer.style.width = '80vw';
+    cardContainer.style.height = '90vh'; // Leave some space for scrolling
+    cardContainer.style.overflowY = 'auto'; // Allow scrolling
+} else {
+    // Desktop
+    cardContainer.style.width = '';
+    cardContainer.style.height = ''; // Adjusted height
+    cardContainer.style.overflowY = 'visible'; // Default behavior
+}
     // Landscape mode specific adjustments with better handling
     if (viewport.width > viewport.height) {
         // Make cards less tall in landscape mode, but not too small
