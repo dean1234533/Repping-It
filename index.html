@@ -2076,8 +2076,8 @@ document.addEventListener('DOMContentLoaded', () => {
                     // Default dice images (replace with your actual paths for 1-6)
                     // Make sure you have IMG_4702_1.PNG, IMG_4702_2.PNG, ..., IMG_4702_6.PNG
                     const diceImagePaths = [
-                        'IMG_4702_1.PNG', 'IMG_4702_2.PNG', 'IMG_4702_3.PNG',
-                        'IMG_4702_4.PNG', 'IMG_4702_5.PNG', 'IMG_4702_6.PNG'
+                        'IMG_4702_1.PNG', 'IMG_4702_1.PNG', 'IMG_4702_1.PNG',
+                        'IMG_4702_1.PNG', 'IMG_4702_1.PNG', 'IMG_4702_1.PNG'
                     ];
 
                      if (diceImagePaths.length === 0) {
@@ -2139,24 +2139,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 });
                  console.log('Roll dice button listener added.');
             }
- // --- BEGIN FIX FOR DICE VISIBILITY ---
- const diceImage = document.getElementById('diceImageElement'); // Use the ID you defined
-    if (diceImage) {
-        diceImage.style.display = 'block'; // Or 'inline-block', matching your CSS
-        diceImage.style.visibility = 'visible';
-        diceImage.style.opacity = '1';
-        // Ensure the src is set if it might be cleared elsewhere (unlikely for 'always showing')
-        // if (!diceImage.src) diceImage.src = 'images/dice-face-1.png';
-        console.log('Dice image visibility ensured.');
-    }
-
-    const diceArea = document.getElementById('diceArea'); // If using a container
-    if (diceArea) {
-        diceArea.style.display = 'block'; // Or 'flex', matching your CSS
-        diceArea.style.visibility = 'visible';
-        diceArea.style.opacity = '1';
-        console.log('Dice area visibility ensured.');
-    }
+ 
             // Reset dice button
             const resetDiceBtn = document.getElementById('reset-dice-btn');
             if (resetDiceBtn) {
