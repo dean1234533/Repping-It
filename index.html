@@ -24,36 +24,37 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     
    <style>
-    * {
-        box-sizing: border-box;
-        margin: 0;
-        padding: 0;
-        font-family: Arial, sans-serif;
-    }
+   * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+        }
 
-    body {
-        background: linear-gradient(135deg, #1a1a1a, #2c3e50);
-        color: #fff;
-        min-height: 100vh;
-        display: flex;
-        flex-direction: column;
-        justify-content: space-between;
-        align-items: center;
-        position: relative;
-        overflow-x: hidden;
-        touch-action: manipulation; /* Prevents zooming on double-tap */
-    }
+        body {
+            background: linear-gradient(135deg, #1a1a1a, #2c3e50);
+            color: #fff;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            align-items: center;
+            position: relative;
+            overflow-x: hidden;
+        }
 
-    .footer {
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: space-between;
-        align-items: center;
-        padding: 20px;
-        color: white;
-        font-size: small;
-        width: 100%;
-    }
+        .footer {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    
+    color: white;
+    font-size: small;
+    width: 100%;
+}
+
 
     /* Add hover effect glow */
     .card:hover .card-inner {
@@ -74,399 +75,363 @@
         z-index: 10;
     }
 
-    #timer {
-        font-size: clamp(2rem, 5vw, 5rem);
-        margin: 20px;
-    }
+.footer-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: clamp(10px, 2vw, 20px);
+    color: #e3dede;
+}
 
-    button {
-        padding: 10px 20px;
-        font-size: clamp(0.9rem, 2vw, 1.2rem);
-        margin: 5px;
-        cursor: pointer;
-        border: none;
-        border-radius: 8px;
-        background-color: #e94f37;
-        color: white;
-        touch-action: manipulation; /* Better touch handling */
-    }
+.footer-links a {
+    color: rgb(234, 239, 231);
+    text-decoration: none;
+    font-weight: bold;
+}
 
-    input {
-        width: 80px;
-        padding: 10px;
-        font-size: clamp(0.9rem, 2vw, 1.2rem);
-        text-align: center;
-        margin: 5px;
-        border-radius: 8px;
-        border: 1px solid #ccc;
-    }
 
-    .footer-links {
-        display: flex;
-        flex-wrap: wrap;
-        gap: clamp(10px, 2vw, 20px);
-        color: #e3dede;
-    }
 
-    .footer-links a {
-        color: rgb(234, 239, 231);
-        text-decoration: none;
-        font-weight: bold;
-    }
-
-    .container {
-        max-width: 1200px;
-        width: 90%; /* Changed from 100% to 90% */
-        text-align: center;
-        position: relative;
-        z-index: 1;
-        background: rgba(0, 0, 0, 0.5);
-        border-radius: 20px;
-        backdrop-filter: blur(10px);
-        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
-        padding: 20px;
-        margin: 20px auto;
-    }
-
-    h1 {
-        font-size: clamp(1.5rem, 5vw, 3rem);
-        margin-bottom: 10px;
-        text-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
-        background: linear-gradient(to right, #fff, #ccc);
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-    }
-
-    .controls {
-        margin-top: 30px;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        flex-wrap: wrap;
-        gap: 20px;
-    }
-
-    select, button {
-        background: rgba(255, 255, 255, 0.15);
-        color: white;
-        border: none;
-        padding: 12px 25px;
-        border-radius: 25px;
-        cursor: pointer;
-        font-size: clamp(14px, 2vw, 16px);
-        transition: all 0.3s ease;
-    }
-
-    button {
-        background-color: #b33b2e;
-    }
-
-    button:hover {
-        background: rgba(141, 42, 42, 0.25);
-        transform: translateY(-3px);
-    }
-
-    button:active {
-        transform: translateY(1px);
-    }
-
-    select:hover {
-        background: rgba(255, 255, 255, 0.25);
-    }
-
-    .card-container {
-        width: 100%;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        position: relative;
-        height: 350px;
-        margin: 30px 0;
-    }
-
-    .card-stack {
-        display: none;
-        position: absolute;
-        width: 100%;
-        height: 100%;
-        justify-content: center;
-        align-items: center;
-    }
-
-    .card {
-        display: none;
-        perspective: 1000px;
-        width: 224px;
-        height: 336px;
-        margin: 0 auto;
-        position: relative; /* Added for gloss effect */
-        overflow: hidden; /* Added for gloss effect */
-    }
-
-    .card-inner {
-        position: relative;
-        width: 100%;
-        height: 100%;
-        text-align: center;
-        transition: transform 0.6s;
-        transform-style: preserve-3d;
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-        border-radius: 8px;
-        cursor: pointer;
-    }
-
-    .card-inner.flipped {
-        transform: rotateY(180deg);
-    }
-
-    h1 {
-        font-size: clamp(24px, 5vw, 48px);
-    }
-
-    h2 {
-        font-size: clamp(20px, 4vw, 36px);
-    }
-
-    h3 {
-        font-size: clamp(18px, 3.5vw, 30px);
-    }
-
-    p, ol, ul {
-        font-size: clamp(14px, 2.5vw, 20px);
-        line-height: 1.6;
-    }
-
-    .card-front, .card-back {
-        position: absolute;
-        width: 100%;
-        height: 100%;
-        -webkit-backface-visibility: hidden;
-        backface-visibility: hidden;
-        align-items: center;
-        justify-content: center;
-        border-radius: 8px;
-        padding: 1px;
-    }
-
-    .card-front {
-        background-image: url('IMG_4715.JPG'); /* Add background image */
-        background-size: cover; /* Cover the entire card */
-        background-position: center; /* Center the image */
-        justify-content: center;
-        align-items: center;
-        color: rgb(230, 224, 224);
-    }
-
-    .card-front {
-        display: flex;
-        text-align: center;
-        justify-content: center;
-        background-color: #3498db;
-        color: white;
-        font-size: 14px;
-        text-align: center;
-    }
-
-    .card-back {
-        background-image: url('annie-spratt-6a3nqQ1YwBw-unsplash.jpg'); /* Add background image */
-        background-size: cover; /* Cover the entire card */
-        background-position: center; /* Center the image */
-        display: grid;
-        color: #f6eded;
-        justify-content: center;
-        text-align: center;
-        line-height: 2px;
-        transform: rotateY(180deg);
-        font-size: 25px;
-        padding-top: 2px;
-        text-align: center;
-    }
-
-    /* Gloss Effect */
-    .card:before {
-        content: '';
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background: rgba(255, 255, 255, 0.1);
-        background: linear-gradient(180deg, rgba(255, 255, 255, 0.1) 50%, rgba(255, 255, 255, 0) 100%);
-        border-radius: 8px;
-        opacity: 0.5; /* Adjust opacity for gloss */
-        pointer-events: none; /* Prevents interfering with clicks */
-    }
-
-    .navigation {
-        width: 100%;
-        display: flex;
-        justify-content: center;
-        gap: 20px;
-        margin-top: 20px;
-        margin-bottom: 30px;  
-    }
-
-    .dice-container {
-        margin-top: 30px;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        gap: 15px;
-    }
-
-    .dice {
-        width: 80px;
-        height: 80px;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-    }
-
-    #diceImage {
-        width: clamp(100px, 20vw, 200px);
-        height: clamp(100px, 20vw, 200px);
-        transition: transform 0.5s ease;
-    }
-
-    .rolling {
-        animation: rollDice 0.5s ease-out 3;
-    }
-
-    @keyframes rollDice {
-        0% { transform: rotate(0deg) scale(1); }
-        50% { transform: rotate(180deg) scale(1.2); }
-        100% { transform: rotate(360deg) scale(1); }
-    }
-
-    .dice-controls, .tally-controls {
-        display: flex;
-        justify-content: center;  
-        gap: 15px;            
-        margin: 20px 0;
-        flex-wrap: wrap; /* Allow wrapping on small screens */
-    }
-
-    .stats {
-        margin-top: 30px;       
-        margin-bottom: 20px;    
-        display: flex;
-        justify-content: center;
-        gap: 30px;
-        font-size: clamp(14px, 2.5vw, 18px);
-        flex-wrap: wrap; /* Allow wrapping on small screens */
-    }
-
-    /* Difficulty buttons container */
-    .difficulty-container {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        gap: 20px;
-        margin: 30px 0;          
-    }
-
-    .difficulty-title {
-        font-size: clamp(16px, 3vw, 20px);
-        margin-bottom: 10px;    
-    }
-
-    .difficulty-buttons {
-        display: flex;
-        justify-content: center;
-        gap: 15px;              
-        flex-wrap: wrap;
-    }
-
-    /* Style difficulty buttons differently */
-    .difficulty-btn {
-        padding: 12px 25px;
-        border-radius: 25px;
-        min-width: 120px;
-        font-weight: bold;
-        transition: all 0.3s ease;
-    }
-
-    .difficulty-btn.active {
-        box-shadow: 0 0 15px rgba(255, 255, 255, 0.5);
-        transform: scale(1.05);
-    }
-
-    .low-btn {
-        background-color: #27ae60;  
-    }
-
-    .medium-btn {
-        background-color: #f39c12;  
-    }
-
-    .high-btn {
-        background-color: #e74c3c;  
-    }
-
-    /* Section dividers */
-    .section-divider {
-        width: 80%;
-        height: 1px;
-        background: linear-gradient(to right, transparent, rgba(255, 255, 255, 0.5), transparent);
-        margin: 30px auto;
-    }
-
-    /* Modal Styles */
-    .modal-header {
-        background-color: #b33b2e; /* Same color as buttons */
-        color: white;
-    }
-
-    /* Improved responsive styles */
-    @media (max-width: 768px) {
-        .controls, .difficulty-buttons {
-            flex-direction: column;
-            align-items: center;
-        }
-        
-        .card {
-            width: clamp(120px, 45vw, 160px);
-            height: clamp(180px, 67.5vw, 240px);
-        }
-        
-        .card-back-list {
-            margin-top: -25px;
-        }
-        
-        .dice {
-            width: 60px;
-            height: 60px;
-        }
-        
-        p {
-            margin-top: -10px;
-        }
-        
-        #diceImage {
-            width: clamp(80px, 40vw, 150px);
-            height: clamp(80px, 40vw, 150px);
-        }
-        
-        .stats {
-            flex-direction: column;
-            gap: 10px;
-            align-items: center;
-        }
-
-        a {
-            padding: 10px;
-        }
-        
         .container {
-            width: 95%;
-            padding: 15px 10px;
+            max-width: 1200px;
+            width: 100%;
+            text-align: center;
+            position: relative;
+            z-index: 1;
+            background: rgba(0, 0, 0, 0.5);
+            border-radius: 20px;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            padding: 20px;
+            margin: 20px auto;
         }
-        
+
+        h1 {
+            font-size: clamp(1.5rem, 5vw, 3rem);
+            margin-bottom: 10px;
+            text-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+            background: linear-gradient(to right, #fff, #ccc);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .controls {
+            margin-top: 30px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        select, button {
+            background: rgba(255, 255, 255, 0.15);
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: all 0.3s ease;
+        }
+
+        button {
+            background-color: #b33b2e;
+        }
+
+        button:hover {
+            background: rgba(141, 42, 42, 0.25);
+            transform: translateY(-3px);
+        }
+
+        button:active {
+            transform: translateY(1px);
+        }
+
+        select:hover {
+            background: rgba(255, 255, 255, 0.25);
+        }
+
         .card-container {
-            height: clamp(250px, 70vw, 350px);
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            height: 350px;
+            margin: 30px 0;
+            
         }
-    }
+
+        .card-stack {
+            display: none;
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            justify-content: center;
+            align-items: center;
+           
+        }
+
+        .card {
+            display: none;
+            perspective: 1000px;
+            width: 224px;
+            height: 336px;
+            margin: 0 auto;
+            position: relative; /* Added for gloss effect */
+            overflow: hidden; /* Added for gloss effect */
+        
+        }
+
+        .card-inner {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            text-align: center;
+            transition: transform 0.6s;
+            transform-style: preserve-3d;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            border-radius: 8px;
+            cursor: pointer;
+            
+         
+        }
+
+        .card-inner.flipped {
+            transform: rotateY(180deg);
+            
+           
+        }
+        h1 {
+    font-size: clamp(24px, 5vw, 48px);
+}
+
+h2 {
+    font-size: clamp(20px, 4vw, 36px);
+}
+
+h3 {
+    font-size: clamp(18px, 3.5vw, 30px);
+}
+
+p, ol, ul {
+    font-size: clamp(14px, 2.5vw, 20px);
+    line-height: 1.6;
     
+}
+
+        .card-front, .card-back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            -webkit-backface-visibility: hidden;
+            backface-visibility: hidden;
+            align-items: center;
+            justify-content: center;
+            border-radius: 8px;
+            padding: 15px;
+        }
+    .card-front {
+    background-image: url('IMG_4715.JPG'); /* Add background image */
+    background-size: cover; /* Cover the entire card */
+    background-position: center; /* Center the image */;
+    justify-content: center;
+    align-items: center;
+    color: rgb(230, 224, 224);
+    
+}
+        .card-front {
+           
+        display: flex;
+        text-align: center;
+        justify-content: center;
+            background-color: #3498db;
+            color: white;
+            font-size: 14px;
+            text-align: center;
+            
+        }
+
+        .card-back {
+            background-image: url('annie-spratt-6a3nqQ1YwBw-unsplash.jpg'); /* Add background image */
+            background-size: cover; /* Cover the entire card */
+    background-position: center; /* Center the image */
+            display: grid;
+            color: #f6eded;
+justify-content: center;
+text-align: center;
+line-height: 2px;
+            transform: rotateY(180deg);
+            font-size: 25px;
+            padding-top: 2px;
+            text-align: center;
+        }
+
+        /* Gloss Effect */
+        .card:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(255, 255, 255, 0.1);
+            background: linear-gradient(180deg, rgba(255, 255, 255, 0.1) 50%, rgba(255, 255, 255, 0) 100%);
+            border-radius: 8px;
+            opacity: 0.5; /* Adjust opacity for gloss */
+            pointer-events: none; /* Prevents interfering with clicks */
+        }
+
+        .navigation {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 20px;
+            margin-bottom: 30px;  
+        }
+
+        .dice-container {
+            
+            margin-top: 30px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .dice {
+            width: 80px;
+            height: 80px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        #diceImage {
+            
+            width: 200px;
+            height: 200px;
+            transition: transform 0.5s ease;
+        }
+
+        .rolling {
+            
+            animation: rollDice 0.5s ease-out 3;
+        }
+
+        @keyframes rollDice {
+            0% { transform: rotate(0deg) scale(1); }
+            50% { transform: rotate(180deg) scale(1.2); }
+            100% { transform: rotate(360deg) scale(1); }
+        }
+
+        .dice-controls, .tally-controls {
+            display: flex;
+            justify-content: center;  
+            gap: 15px;            
+            margin: 20px 0;          
+        }
+
+        .stats {
+            margin-top: 30px;       
+            margin-bottom: 20px;    
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            font-size: 18px;
+        }
+
+        /* Difficulty buttons container */
+        .difficulty-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px;
+            margin: 30px 0;          
+        }
+
+        .difficulty-title {
+            font-size: 20px;
+            margin-bottom: 10px;    
+        }
+
+        .difficulty-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 15px;              
+            flex-wrap: wrap;
+        }
+
+        /* Style difficulty buttons differently */
+        .difficulty-btn {
+            padding: 12px 25px;
+            border-radius: 25px;
+            min-width: 120px;
+            font-weight: bold;
+            transition: all 0.3s ease;
+        }
+
+        .difficulty-btn.active {
+            box-shadow: 0 0 15px rgba(255, 255, 255, 0.5);
+            transform: scale(1.05);
+        }
+
+        .low-btn {
+            background-color: #27ae60;  
+        }
+
+        .medium-btn {
+            background-color: #f39c12;  
+        }
+
+        .high-btn {
+            background-color: #e74c3c;  
+        }
+
+        /* Section dividers */
+        .section-divider {
+            width: 80%;
+            height: 1px;
+            background: linear-gradient(to right, transparent, rgba(255, 255, 255, 0.5), transparent);
+            margin: 30px auto;
+        }
+
+        /* Modal Styles */
+        .modal-header {
+            background-color: #b33b2e; /* Same color as buttons */
+            color: white;
+        }
+
+        @media (max-width: 768px) {
+            .controls, .difficulty-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .card {
+                width: 160px;
+                height: 240px;
+                ;
+            }
+            .card-back-list{margin-top: -25px;}
+            .dice {
+                width: 60px;
+                height: 60px;
+            }
+            p{margin-top: -10px;}
+            #diceImage {
+                width: 150px;
+                height: 150px;
+            }
+            
+            .stats {
+                flex-direction: column;
+                gap: 10px;
+                align-items: center;
+            }
+
+            a{padding: 10px;}
+        }
     /* Additional small device optimizations */
     @media (max-width: 480px) {
         .card {
@@ -1111,618 +1076,701 @@
     </div>
 
    <script>
-        // Fixed Audio Context Initialization
         let audioContext;
 
-        // Improved audio context initialization with better mobile support
-        function initAudioContext() {
-            try {
-                if (!audioContext) {
-                    // Use AudioContext with fallbacks for older browsers
-                    audioContext = new (window.AudioContext || window.webkitAudioContext)();
-                }
-
-                // Resume audio context if it's suspended (browser policy requirement)
-                if (audioContext && audioContext.state === 'suspended') {
-                    audioContext.resume();
-                }
-                return true;
-            } catch (error) {
-                console.error("Audio Context initialization failed:", error);
-                return false;
-            }
+// Improved audio context initialization with better mobile support
+function initAudioContext() {
+    try {
+        if (!audioContext) {
+            // Use AudioContext with fallbacks for older browsers
+            audioContext = new (window.AudioContext || window.webkitAudioContext)();
         }
 
-        // Initialize on user interaction to handle autoplay restrictions
-        // Using { once: true } as initializing on first interaction is usually sufficient
-        document.addEventListener('click', initAudioContext, { once: true });
-        document.addEventListener('touchstart', initAudioContext, { once: true });
-
-         // Function to show custom message box (replacing alert)
-        function showMessageBox(message) {
-            const messageBox = document.getElementById('messageBox');
-            const messageBoxText = document.getElementById('messageBoxText');
-            if (messageBox && messageBoxText) {
-                messageBoxText.textContent = message;
-                messageBox.classList.remove('hidden');
-            }
+        // Resume audio context if it's suspended (browser policy requirement)
+        if (audioContext && audioContext.state === 'suspended') {
+            audioContext.resume();
         }
+        return true;
+    } catch (error) {
+        console.error("Audio Context initialization failed:", error);
+        return false;
+    }
+}
 
-        // Function to hide custom message box
-        function hideMessageBox() {
-            const messageBox = document.getElementById('messageBox');
-            if (messageBox) {
-                messageBox.classList.add('hidden');
-            }
-        }
+// Initialize on user interaction to handle autoplay restrictions
+// Using { once: true } as initializing on first interaction is usually sufficient
+document.addEventListener('click', initAudioContext, { once: true });
+document.addEventListener('touchstart', initAudioContext, { once: true });
 
+// Function to show custom message box (replacing alert)
+function showMessageBox(message) {
+    const messageBox = document.getElementById('messageBox');
+    const messageBoxText = document.getElementById('messageBoxText');
+    if (messageBox && messageBoxText) {
+        messageBoxText.textContent = message;
+        messageBox.classList.remove('hidden');
+    }
+}
 
-        // Enhanced fallback beep using Web Audio API with better mobile support
-        function createBeep() {
-            if (!initAudioContext()) return;
+// Function to hide custom message box
+function hideMessageBox() {
+    const messageBox = document.getElementById('messageBox');
+    if (messageBox) {
+        messageBox.classList.add('hidden');
+    }
+}
 
-            try {
-                const oscillator = audioContext.createOscillator();
-                const gainNode = audioContext.createGain();
+// Enhanced fallback beep using Web Audio API with better mobile support
+function createBeep() {
+    if (!initAudioContext()) return;
 
-                oscillator.connect(gainNode);
-                gainNode.connect(audioContext.destination);
+    try {
+        const oscillator = audioContext.createOscillator();
+        const gainNode = audioContext.createGain();
 
-                oscillator.type = 'square';
-                oscillator.frequency.value = 800;
-                gainNode.gain.value = 0.3; // Lower volume for mobile
+        oscillator.connect(gainNode);
+        gainNode.connect(audioContext.destination);
 
-                oscillator.start();
+        oscillator.type = 'square';
+        oscillator.frequency.value = 800;
+        gainNode.gain.value = 0.3; // Lower volume for mobile
 
-                // Beep for 0.3 seconds
-                setTimeout(() => {
-                    oscillator.stop();
-                }, 300);
-            } catch (error) {
-                console.error("Beep creation failed:", error);
-            }
-        }
+        oscillator.start();
 
-        // Improved sound player with multiple fallbacks for mobile
-        function playSound() {
-            // First try: HTML5 Audio
-            try {
-                // Create new audio element each time instead of reusing
-                // Note: Make sure 'digital-timer-beeping-epic-stock-media-1-00-08.mp3' is accessible
-                const buzzer = new Audio('digital-timer-beeping-epic-stock-media-1-00-08.mp3');
-                buzzer.volume = 0.5; // Lower volume for mobile
+        // Beep for 0.3 seconds
+        setTimeout(() => {
+            oscillator.stop();
+        }, 300);
+    } catch (error) {
+        console.error("Beep creation failed:", error);
+    }
+}
 
-                // Try to play the audio
-                const playPromise = buzzer.play();
+// Improved sound player with multiple fallbacks for mobile
+function playSound() {
+    // First try: HTML5 Audio
+    try {
+        // Create new audio element each time instead of reusing
+        // Note: Make sure 'digital-timer-beeping-epic-stock-media-1-00-08.mp3' is accessible
+        const buzzer = new Audio('digital-timer-beeping-epic-stock-media-1-00-08.mp3');
+        buzzer.volume = 0.5; // Lower volume for mobile
 
-                if (playPromise !== undefined) {
-                    playPromise
-                        .then(() => {
-                            console.log("Buzzer sound played successfully");
-                        })
-                        .catch(error => {
-                            console.log("Error playing buzzer sound:", error);
-                            // Second try: Use existing audio element (less reliable on mobile autoplay)
-                            const originalBuzzer = document.getElementById('buzzer');
-                            if (originalBuzzer) {
-                                originalBuzzer.currentTime = 0;
-                                originalBuzzer.play().catch(() => {
-                                    // Third try: Web Audio API as final fallback
-                                    createBeep();
-                                });
-                            } else {
-                                // Direct to third try if no audio element exists
-                                createBeep();
-                            }
+        // Try to play the audio
+        const playPromise = buzzer.play();
+
+        if (playPromise !== undefined) {
+            playPromise
+                .then(() => {
+                    console.log("Buzzer sound played successfully");
+                })
+                .catch(error => {
+                    console.log("Error playing buzzer sound:", error);
+                    // Second try: Use existing audio element (less reliable on mobile autoplay)
+                    const originalBuzzer = document.getElementById('buzzer');
+                    if (originalBuzzer) {
+                        originalBuzzer.currentTime = 0;
+                        originalBuzzer.play().catch(() => {
+                            // Third try: Web Audio API as final fallback
+                            createBeep();
                         });
-                }
-            } catch (error) {
-                console.error("Sound playback failed:", error);
-                createBeep(); // Final fallback
+                    } else {
+                        // Direct to third try if no audio element exists
+                        createBeep();
+                    }
+                });
+        }
+    } catch (error) {
+        console.error("Sound playback failed:", error);
+        createBeep(); // Final fallback
+    }
+}
+
+// Improved touch handling for mobile devices
+function enableTouchSupport() {
+    // Map touch events to mouse events for card interactions
+    document.addEventListener('touchstart', function(e) {
+        // Don't prevent default for elements that need native touch behavior
+        const target = e.target;
+        const targetTagName = target.tagName.toLowerCase();
+        const isInteractive = targetTagName === 'button' ||
+                             targetTagName === 'input' ||
+                             targetTagName === 'select' ||
+                             target.closest('.card-inner'); // Include card-inner for flip
+
+        if (isInteractive) {
+            // Prevent default only if we are handling the interaction
+            e.preventDefault();
+
+            // Map the first touch point to mousedown for interactive elements
+            if (e.touches.length > 0) {
+                const touch = e.touches[0];
+                const mouseEvent = new MouseEvent('mousedown', {
+                    clientX: touch.clientX,
+                    clientY: touch.clientY,
+                    bubbles: true,
+                    cancelable: true // Make event cancelable
+                });
+                // Dispatch on the actual element that was touched
+                touch.target.dispatchEvent(mouseEvent);
             }
         }
+    }, {passive: false}); // Use passive: false when preventing default
 
-        // Improved touch handling for mobile devices
-        function enableTouchSupport() {
-            // Map touch events to mouse events for card interactions
-            document.addEventListener('touchstart', function(e) {
-                // Don't prevent default for elements that need native touch behavior
-                const target = e.target;
-                const targetTagName = target.tagName.toLowerCase();
-                const isInteractive = targetTagName === 'button' ||
-                                     targetTagName === 'input' ||
-                                     targetTagName === 'select' ||
-                                     target.closest('.card-inner'); // Include card-inner for flip
-
-                if (isInteractive) {
-                    // Prevent default only if we are handling the interaction
-                    e.preventDefault();
-
-                    // Map the first touch point to mousedown for interactive elements
-                    if (e.touches.length > 0) {
-                        const touch = e.touches[0];
-                        const mouseEvent = new MouseEvent('mousedown', {
-                            clientX: touch.clientX,
-                            clientY: touch.clientY,
-                            bubbles: true,
-                            cancelable: true // Make event cancelable
-                        });
-                        // Dispatch on the actual element that was touched
-                        touch.target.dispatchEvent(mouseEvent);
-                    }
-                }
-            }, {passive: false}); // Use passive: false when preventing default
-
-            document.addEventListener('touchmove', function(e) {
-                // Only handle touch moves for card interactions for the tilt effect
-                if (e.target.closest('.card')) {
-                     // Prevent default to avoid scrolling while tilting
-                    e.preventDefault();
-                    // Map the first touch point to mousemove
-                    if (e.touches.length > 0) {
-                        const touch = e.touches[0];
-                        const mouseEvent = new MouseEvent('mousemove', {
-                            clientX: touch.clientX,
-                            clientY: touch.clientY,
-                            bubbles: true
-                        });
-                        // Dispatch on the card element
-                        e.target.closest('.card').dispatchEvent(mouseEvent);
-                    }
-                }
-            }, {passive: false}); // Use passive: false when preventing default
-
-            document.addEventListener('touchend', function(e) {
-                // For touch end on interactive elements
-                 // Prevent default to avoid double-tap zoom and ensure our click fires
-                e.preventDefault();
-
-                if (e.changedTouches.length > 0) {
-                    const touch = e.changedTouches[0];
-
-                    // Find the element at the release position
-                    // Use elementFromPoint for more accurate targeting after touchmove
-                    const element = document.elementFromPoint(touch.clientX, touch.clientY);
-
-                    if (element) {
-                         // Dispatch mouseup and click events
-                        const mouseUpEvent = new MouseEvent('mouseup', {
-                            clientX: touch.clientX,
-                            clientY: touch.clientY,
-                            bubbles: true,
-                            cancelable: true
-                        });
-                         // Dispatch on the found element
-                        element.dispatchEvent(mouseUpEvent);
-
-                        const clickEvent = new MouseEvent('click', {
-                            clientX: touch.clientX,
-                            clientY: touch.clientY,
-                            bubbles: true,
-                            cancelable: true
-                        });
-                         // Dispatch on the found element
-                        element.dispatchEvent(clickEvent);
-                    }
-                }
-            }, {passive: false}); // Use passive: false when preventing default
-
-             // Prevent default touchstart on the body to help prevent unwanted scrolling/zooming
-            document.body.addEventListener('touchstart', function(e) {
-                // Only prevent default if the target is not an input or select
-                const targetTagName = e.target.tagName.toLowerCase();
-                if (targetTagName !== 'input' && targetTagName !== 'select' && targetTagName !== 'button') {
-                     e.preventDefault();
-                }
-            }, { passive: false });
-        }
-
-
-        // Enhanced card animation initialization
-        function initCardAnimation(card) {
-            if (!card) return;
-
-            const cardInner = card.querySelector('.card-inner');
-            let shine = card.querySelector('.card-shine');
-
-            // Ensure shine element exists
-            if (!shine) {
-                shine = document.createElement('div');
-                shine.className = 'card-shine';
-                card.appendChild(shine);
-            }
-
-            // Check if card is already flipped from previous state (e.g., after shuffle)
-            if (cardInner && (cardInner.getAttribute('data-flipped') === 'true' ||
-                cardInner.classList.contains('flipped'))) {
-
-                // Ensure consistent state
-                cardInner.classList.add('flipped');
-                cardInner.setAttribute('data-flipped', 'true');
-                cardInner.style.transform = 'rotateY(180deg)';
-            } else if (cardInner) {
-                 // Ensure non-flipped state is consistent
-                 cardInner.classList.remove('flipped');
-                 cardInner.setAttribute('data-flipped', 'false');
-                 cardInner.style.transform = 'rotateY(0deg)'; // Ensure it's reset
-            }
-
-
-            // Determine if device supports hover effects (for tilt)
-            const supportsHover = window.matchMedia('(hover: hover)').matches;
-
-            // Remove existing mousemove/mouseleave listeners to prevent duplicates after shuffle
-            const oldMouseMove = card.onmousemove;
-            const oldMouseLeave = card.onmouseleave;
-            if (oldMouseMove) card.removeEventListener('mousemove', oldMouseMove);
-            if (oldMouseLeave) card.removeEventListener('mouseleave', oldMouseLeave);
-
-
-            if (supportsHover && cardInner) {
-                // Add mouseenter/mousemove for 3D tilt effect (but only when not flipped)
-                const mouseMoveHandler = (e) => {
-                    // Check current flipped state before applying tilt
-                    const isFlipped = cardInner.classList.contains('flipped') ||
-                                     cardInner.getAttribute('data-flipped') === 'true';
-
-                    if (isFlipped) {
-                         // Reset transform and opacity if it was tilted before flipping
-                         cardInner.style.transform = 'rotateY(180deg)'; // Ensure it stays flipped
-                         if (shine) shine.style.opacity = '0';
-                         return;
-                    }
-
-                    const rect = card.getBoundingClientRect();
-                    const centerX = rect.left + rect.width / 2;
-                    const centerY = rect.top + rect.height / 2;
-                    const mouseX = e.clientX - centerX;
-                    const mouseY = e.clientY - centerY;
-
-                    // Calculate rotation angles
-                    const rotateY = mouseX * 0.05; // Adjust for sensitivity
-                    const rotateX = -mouseY * 0.05; // Negative for correct direction
-
-                    // Use direct style manipulation for better performance
-                    cardInner.style.transform = `rotateY(${rotateY}deg) rotateX(${rotateX}deg)`;
-
-                    // Animate shine effect
-                    if (shine) {
-                         // Position shine based on mouse position relative to the card
-                         const shineX = ((e.clientX - rect.left) / rect.width) * 100;
-                         const shineY = ((e.clientY - rect.top) / rect.height) * 100;
-                         shine.style.setProperty('--x', `${shineX}%`);
-                         shine.style.setProperty('--y', `${shineY}%`);
-
-                        const distance = Math.sqrt(mouseX * mouseX + mouseY * mouseY);
-                        const maxDistance = Math.sqrt((rect.width / 2) * (rect.width / 2) + (rect.height / 2) * (rect.height / 2));
-                        const normalizedDistance = Math.min(distance / maxDistance, 1);
-
-                        shine.style.opacity = (0.4 * normalizedDistance).toString(); // Adjust max opacity
-                    }
-                };
-
-                // Reset on mouse leave
-                const mouseLeaveHandler = () => {
-                    // Check current flipped state before resetting
-                    const isFlipped = cardInner.classList.contains('flipped') ||
-                                     cardInner.getAttribute('data-flipped') === 'true';
-
-                    if (isFlipped) {
-                        cardInner.style.transform = 'rotateY(180deg)'; // Ensure it stays flipped
-                        if (shine) shine.style.opacity = '0';
-                        return;
-                    }
-
-                    // Use direct style for better performance
-                    cardInner.style.transform = 'rotateY(0deg) rotateX(0deg)';
-
-                    if (shine) {
-                        shine.style.opacity = '0';
-                    }
-                };
-
-                card.addEventListener('mousemove', mouseMoveHandler);
-                card.addEventListener('mouseleave', mouseLeaveHandler);
-
-                // Store handlers to remove them later if needed (e.g., on shuffle)
-                card.onmousemove = mouseMoveHandler;
-                card.onmouseleave = mouseLeaveHandler;
-            } else if (cardInner) {
-                 // Ensure no tilt transform is applied if hover is not supported
-                 const isFlipped = cardInner.classList.contains('flipped') ||
-                                     cardInner.getAttribute('data-flipped') === 'true';
-                 cardInner.style.transform = isFlipped ? 'rotateY(180deg)' : 'rotateY(0deg)';
-                 if (shine) shine.style.opacity = '0'; // Hide shine if no hover
+    document.addEventListener('touchmove', function(e) {
+        // Only handle touch moves for card interactions for the tilt effect
+        if (e.target.closest('.card')) {
+             // Prevent default to avoid scrolling while tilting
+            e.preventDefault();
+            // Map the first touch point to mousemove
+            if (e.touches.length > 0) {
+                const touch = e.touches[0];
+                const mouseEvent = new MouseEvent('mousemove', {
+                    clientX: touch.clientX,
+                    clientY: touch.clientY,
+                    bubbles: true
+                });
+                // Dispatch on the card element
+                e.target.closest('.card').dispatchEvent(mouseEvent);
             }
         }
+    }, {passive: false}); // Use passive: false when preventing default
 
-        // Enhanced card flip handler with better mobile support
-        function handleCardFlip(event) {
-            // Find the closest card-inner element to the click target
-            const cardInner = event.target.closest('.card-inner');
-            if (!cardInner) return; // Exit if the click wasn't inside a card-inner
+    document.addEventListener('touchend', function(e) {
+        // For touch end on interactive elements
+         // Prevent default to avoid double-tap zoom and ensure our click fires
+        e.preventDefault();
 
-            // Prevent flipping if the click target was an interactive element inside the card
-            const targetTagName = event.target.tagName.toLowerCase();
-            if (targetTagName === 'button' || targetTagName === 'input' || targetTagName === 'select') {
+        if (e.changedTouches.length > 0) {
+            const touch = e.changedTouches[0];
+
+            // Find the element at the release position
+            // Use elementFromPoint for more accurate targeting after touchmove
+            const element = document.elementFromPoint(touch.clientX, touch.clientY);
+
+            if (element) {
+                 // Dispatch mouseup and click events
+                const mouseUpEvent = new MouseEvent('mouseup', {
+                    clientX: touch.clientX,
+                    clientY: touch.clientY,
+                    bubbles: true,
+                    cancelable: true
+                });
+                 // Dispatch on the found element
+                element.dispatchEvent(mouseUpEvent);
+
+                const clickEvent = new MouseEvent('click', {
+                    clientX: touch.clientX,
+                    clientY: touch.clientY,
+                    bubbles: true,
+                    cancelable: true
+                });
+                 // Dispatch on the found element
+                element.dispatchEvent(clickEvent);
+            }
+        }
+    }, {passive: false}); // Use passive: false when preventing default
+
+     // Prevent default touchstart on the body to help prevent unwanted scrolling/zooming
+    document.body.addEventListener('touchstart', function(e) {
+        // Only prevent default if the target is not an input or select
+        const targetTagName = e.target.tagName.toLowerCase();
+        if (targetTagName !== 'input' && targetTagName !== 'select' && targetTagName !== 'button') {
+             e.preventDefault();
+        }
+    }, { passive: false });
+}
+
+// Enhanced card animation initialization
+function initCardAnimation(card) {
+    if (!card) return;
+
+    const cardInner = card.querySelector('.card-inner');
+    let shine = card.querySelector('.card-shine');
+
+    // Ensure shine element exists
+    if (!shine) {
+        shine = document.createElement('div');
+        shine.className = 'card-shine';
+        card.appendChild(shine);
+    }
+
+    // Check if card is already flipped from previous state (e.g., after shuffle)
+    if (cardInner && (cardInner.getAttribute('data-flipped') === 'true' ||
+        cardInner.classList.contains('flipped'))) {
+
+        // Ensure consistent state
+        cardInner.classList.add('flipped');
+        cardInner.setAttribute('data-flipped', 'true');
+        cardInner.style.transform = 'rotateY(180deg)';
+    } else if (cardInner) {
+         // Ensure non-flipped state is consistent
+         cardInner.classList.remove('flipped');
+         cardInner.setAttribute('data-flipped', 'false');
+         cardInner.style.transform = 'rotateY(0deg)'; // Ensure it's reset
+    }
+
+    // Determine if device supports hover effects (for tilt)
+    const supportsHover = window.matchMedia('(hover: hover)').matches;
+
+    // Remove existing mousemove/mouseleave listeners to prevent duplicates after shuffle
+    const oldMouseMove = card.onmousemove;
+    const oldMouseLeave = card.onmouseleave;
+    if (oldMouseMove) card.removeEventListener('mousemove', oldMouseMove);
+    if (oldMouseLeave) card.removeEventListener('mouseleave', oldMouseLeave);
+
+    if (supportsHover && cardInner) {
+        // Add mouseenter/mousemove for 3D tilt effect (but only when not flipped)
+        const mouseMoveHandler = (e) => {
+            // Check current flipped state before applying tilt
+            const isFlipped = cardInner.classList.contains('flipped') ||
+                             cardInner.getAttribute('data-flipped') === 'true';
+
+            if (isFlipped) {
+                 // Reset transform and opacity if it was tilted before flipping
+                 cardInner.style.transform = 'rotateY(180deg)'; // Ensure it stays flipped
+                 if (shine) shine.style.opacity = '0';
                  return;
             }
 
-            // Toggle the flipped class
-            const isCurrentlyFlipped = cardInner.classList.contains('flipped');
+            const rect = card.getBoundingClientRect();
+            const centerX = rect.left + rect.width / 2;
+            const centerY = rect.top + rect.height / 2;
+            const mouseX = e.clientX - centerX;
+            const mouseY = e.clientY - centerY;
 
-            if (!isCurrentlyFlipped) {
-                // Flip to back
-                cardInner.classList.add('flipped');
-                cardInner.setAttribute('data-flipped', 'true');
-                // Apply the flipped transform immediately for responsiveness
-                cardInner.style.transform = 'rotateY(180deg)';
+            // Calculate rotation angles
+            const rotateY = mouseX * 0.05; // Adjust for sensitivity
+            const rotateX = -mouseY * 0.05; // Negative for correct direction
 
-                 // Hide shine when flipped
-                 const shine = cardInner.parentElement?.querySelector('.card-shine');
-                 if(shine) shine.style.opacity = '0';
+            // Use direct style manipulation for better performance
+            cardInner.style.transform = `rotateY(${rotateY}deg) rotateX(${rotateX}deg)`;
 
-            } else {
-                // Flip to front
-                cardInner.classList.remove('flipped');
-                cardInner.setAttribute('data-flipped', 'false');
-                 // Apply the non-flipped transform immediately
-                cardInner.style.transform = 'rotateY(0deg)';
+            // Animate shine effect
+            if (shine) {
+                 // Position shine based on mouse position relative to the card
+                 const shineX = ((e.clientX - rect.left) / rect.width) * 100;
+                 const shineY = ((e.clientY - rect.top) / rect.height) * 100;
+                 shine.style.setProperty('--x', `${shineX}%`);
+                 shine.style.setProperty('--y', `${shineY}%`);
 
-                 // Shine will reappear on mousemove if hover is supported
+                const distance = Math.sqrt(mouseX * mouseX + mouseY * mouseY);
+                const maxDistance = Math.sqrt((rect.width / 2) * (rect.width / 2) + (rect.height / 2) * (rect.height / 2));
+                const normalizedDistance = Math.min(distance / maxDistance, 1);
+
+                shine.style.opacity = (0.4 * normalizedDistance).toString(); // Adjust max opacity
             }
+        };
 
-            // Stop event propagation to prevent multiple flips if nested elements are clicked
-            event.stopPropagation();
-        }
+        // Reset on mouse leave
+        const mouseLeaveHandler = () => {
+            // Check current flipped state before resetting
+            const isFlipped = cardInner.classList.contains('flipped') ||
+                             cardInner.getAttribute('data-flipped') === 'true';
 
-        // Better handling of the timer
-        let countdown;
-        let timeLeft = 0;
-
-        function startTimer() {
-            clearInterval(countdown);
-
-            const minutesInput = document.getElementById('minutes');
-            const secondsInput = document.getElementById('seconds');
-
-            const minutes = parseInt(minutesInput?.value) || 0;
-            const seconds = parseInt(secondsInput?.value) || 0;
-
-            timeLeft = (minutes * 60) + seconds;
-
-            if (timeLeft <= 0) {
-                showMessageBox("Please set a valid time!"); // Use custom message box
+            if (isFlipped) {
+                cardInner.style.transform = 'rotateY(180deg)'; // Ensure it stays flipped
+                if (shine) shine.style.opacity = '0';
                 return;
             }
 
-            // Initialize audio context when timer starts
-            initAudioContext();
+            // Use direct style for better performance
+            cardInner.style.transform = 'rotateY(0deg) rotateX(0deg)';
 
-            updateDisplay();
+            if (shine) {
+                shine.style.opacity = '0';
+            }
+        };
 
-            countdown = setInterval(() => {
-                timeLeft--;
-                updateDisplay();
+        card.addEventListener('mousemove', mouseMoveHandler);
+        card.addEventListener('mouseleave', mouseLeaveHandler);
 
-                if (timeLeft <= 0) {
-                    clearInterval(countdown);
-                    playSound();
-                }
-            }, 1000);
-        }
+        // Store handlers to remove them later if needed (e.g., on shuffle)
+        card.onmousemove = mouseMoveHandler;
+        card.onmouseleave = mouseLeaveHandler;
+    } else if (cardInner) {
+         // Ensure no tilt transform is applied if hover is not supported
+         const isFlipped = cardInner.classList.contains('flipped') ||
+                             cardInner.getAttribute('data-flipped') === 'true';
+         cardInner.style.transform = isFlipped ? 'rotateY(180deg)' : 'rotateY(0deg)';
+         if (shine) shine.style.opacity = '0'; // Hide shine if no hover
+    }
+}
 
-        function updateDisplay() {
-            const timerDisplay = document.getElementById('timer');
-            if (!timerDisplay) return;
+// Enhanced card flip handler with better mobile support
+function handleCardFlip(event) {
+    // Find the closest card-inner element to the click target
+    const cardInner = event.target.closest('.card-inner');
+    if (!cardInner) return; // Exit if the click wasn't inside a card-inner
 
-            const mins = Math.floor(timeLeft / 60);
-            const secs = timeLeft % 60;
+    // Prevent flipping if the click target was an interactive element inside the card
+    const targetTagName = event.target.tagName.toLowerCase();
+    if (targetTagName === 'button' || targetTagName === 'input' || targetTagName === 'select') {
+         return;
+    }
 
-            timerDisplay.textContent =
-                `${mins.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
-        }
+    // Toggle the flipped class
+    const isCurrentlyFlipped = cardInner.classList.contains('flipped');
 
-        function resetTimer() {
+    if (!isCurrentlyFlipped) {
+        // Flip to back
+        cardInner.classList.add('flipped');
+        cardInner.setAttribute('data-flipped', 'true');
+        // Apply the flipped transform immediately for responsiveness
+        cardInner.style.transform = 'rotateY(180deg)';
+
+         // Hide shine when flipped
+         const shine = cardInner.parentElement?.querySelector('.card-shine');
+         if(shine) shine.style.opacity = '0';
+
+    } else {
+        // Flip to front
+        cardInner.classList.remove('flipped');
+        cardInner.setAttribute('data-flipped', 'false');
+         // Apply the non-flipped transform immediately
+        cardInner.style.transform = 'rotateY(0deg)';
+
+         // Shine will reappear on mousemove if hover is supported
+    }
+
+    // Stop event propagation to prevent multiple flips if nested elements are clicked
+    event.stopPropagation();
+}
+
+// Better handling of the timer
+let countdown;
+let timeLeft = 0;
+
+function startTimer() {
+    clearInterval(countdown);
+
+    const minutesInput = document.getElementById('minutes');
+    const secondsInput = document.getElementById('seconds');
+
+    const minutes = parseInt(minutesInput?.value) || 0;
+    const seconds = parseInt(secondsInput?.value) || 0;
+
+    timeLeft = (minutes * 60) + seconds;
+
+    if (timeLeft <= 0) {
+        showMessageBox("Please set a valid time!"); // Use custom message box
+        return;
+    }
+
+    // Initialize audio context when timer starts
+    initAudioContext();
+
+    updateDisplay();
+
+    countdown = setInterval(() => {
+        timeLeft--;
+        updateDisplay();
+
+        if (timeLeft <= 0) {
             clearInterval(countdown);
-            timeLeft = 0;
+            playSound();
+        }
+    }, 1000);
+}
 
-            const timerDisplay = document.getElementById('timer');
-            if (timerDisplay) {
-                timerDisplay.textContent = "00:00";
-            }
+function updateDisplay() {
+    const timerDisplay = document.getElementById('timer');
+    if (!timerDisplay) return;
 
-            const minutesInput = document.getElementById('minutes');
-            if (minutesInput) {
-                minutesInput.value = "";
-            }
+    const mins = Math.floor(timeLeft / 60);
+    const secs = timeLeft % 60;
 
-            const secondsInput = document.getElementById('seconds');
-            if (secondsInput) {
-                secondsInput.value = "";
+    timerDisplay.textContent =
+        `${mins.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
+}
+
+function resetTimer() {
+    clearInterval(countdown);
+    timeLeft = 0;
+
+    const timerDisplay = document.getElementById('timer');
+    if (timerDisplay) {
+        timerDisplay.textContent = "00:00";
+    }
+
+    const minutesInput = document.getElementById('minutes');
+    if (minutesInput) {
+        minutesInput.value = "";
+    }
+
+    const secondsInput = document.getElementById('seconds');
+    if (secondsInput) {
+        secondsInput.value = "";
+    }
+}
+
+// FIXED: Improved card navigation functions
+// This is the key function that shows the current card based on window.currentCardIndex
+function showCurrentCard() {
+    console.log('showCurrentCard called');
+    // Get the currently visible stack
+    const visibleStack = document.querySelector('.card-stack[style*="display: flex"]') ||
+                         document.getElementById('stack1'); // Fallback to stack1
+
+    if (!visibleStack) {
+        console.error("No visible card stack found.");
+        // Ensure card container is hidden if no stack is found
+        const cardContainer = document.querySelector('.card-container');
+        if(cardContainer) cardContainer.style.display = 'none';
+        return;
+    }
+
+    const currentStackId = visibleStack.id;
+    console.log('Current Stack ID:', currentStackId);
+
+    // Get all cards in the current stack
+    const cardsInCurrentStack = Array.from(document.querySelectorAll(`#${currentStackId} .card`));
+    console.log('Number of cards in stack:', cardsInCurrentStack.length);
+
+    if (cardsInCurrentStack.length === 0) {
+        console.warn(`No cards found in stack: ${currentStackId}. Hiding card container.`);
+        const cardContainer = document.querySelector('.card-container');
+        if(cardContainer) cardContainer.style.display = 'none';
+        return;
+    } else {
+        const cardContainer = document.querySelector('.card-container');
+        if(cardContainer) cardContainer.style.display = 'flex'; // Ensure container is visible
+    }
+
+    // Ensure index is within bounds
+    if (window.currentCardIndex >= cardsInCurrentStack.length) {
+        window.currentCardIndex = 0; // Reset to the first card if index is too high
+        console.log('Index out of bounds (too high), resetting to 0');
+    } else if (window.currentCardIndex < 0) {
+        window.currentCardIndex = cardsInCurrentStack.length - 1; // Wrap around to the last card
+        console.log('Index out of bounds (too low), wrapping to last card');
+    }
+    console.log('Final currentCardIndex:', window.currentCardIndex);
+
+    // Update cards visibility
+    cardsInCurrentStack.forEach((card, index) => {
+        const cardInner = card.querySelector('.card-inner');
+
+        if (index === window.currentCardIndex) {
+            console.log(`Showing card at index: ${index}`);
+            card.style.display = 'block'; // Set display to block
+
+            // Ensure any flipped state is preserved
+            if (cardInner) {
+                const isFlipped = cardInner.classList.contains('flipped') ||
+                                 cardInner.getAttribute('data-flipped') === 'true';
+
+                if (isFlipped) {
+                    cardInner.classList.add('flipped');
+                    cardInner.setAttribute('data-flipped', 'true');
+                    cardInner.style.transform = 'rotateY(180deg)';
+                } else {
+                    cardInner.classList.remove('flipped');
+                    cardInner.setAttribute('data-flipped', 'false');
+                    cardInner.style.transform = 'rotateY(0deg)';
+                }
+                // Re-initialize animation and shine for the displayed card
+                initCardAnimation(card);
             }
+        } else {
+            console.log(`Hiding card at index: ${index}`);
+            card.style.display = 'none'; // Set display to none
+            // Ensure cards that are hidden are not flipped or tilted
+            if (cardInner) {
+                cardInner.classList.remove('flipped');
+                cardInner.setAttribute('data-flipped', 'false');
+                cardInner.style.transform = 'rotateY(0deg)';
+            }
+            const shine = card.querySelector('.card-shine');
+            if(shine) shine.style.opacity = '0';
+        }
+    });
+
+    // Save current index for this stack for persistence
+    localStorage.setItem(`currentCardIndex_${currentStackId}`, window.currentCardIndex.toString());
+    console.log('Updated localStorage with currentCardIndex:', window.currentCardIndex);
+}
+
+// FIXED: Improved card navigation event handlers
+// This function sets up the navigation buttons with clean event handlers
+function initCardNavigation() {
+    const prevBtn = document.getElementById('prev-card-btn');
+    const nextBtn = document.getElementById('next-card-btn');
+
+    if (prevBtn) {
+        // Remove any existing event listeners to avoid duplicates
+        const oldPrevHandler = prevBtn._clickHandler;
+        if (oldPrevHandler) {
+            prevBtn.removeEventListener('click', oldPrevHandler);
         }
 
-        // Improved card navigation
-        // Use a global variable to store the current card index for the active stack
+        // Create new handler
+        const prevHandler = () => {
+            console.log('Previous button clicked');
+            const visibleStack = document.querySelector('.card-stack[style*="display: flex"]');
+            const stackId = visibleStack?.id || 'stack1';
+            const cardsInStack = document.querySelectorAll(`#${stackId} .card`);
+
+            if (cardsInStack.length === 0) {
+                console.warn('No cards in stack, cannot navigate.');
+                return; // Do nothing if no cards
+            }
+
+            console.log('Before decrement:', window.currentCardIndex);
+            window.currentCardIndex--; // Decrement index
+            // Wrap around if going below the first card
+            if (window.currentCardIndex < 0) {
+                window.currentCardIndex = cardsInStack.length - 1;
+            }
+            console.log('After decrement:', window.currentCardIndex);
+
+            showCurrentCard(); // Show the previous card
+        };
+
+        // Store the handler reference for future cleanup
+        prevBtn._clickHandler = prevHandler;
+        prevBtn.addEventListener('click', prevHandler);
+        console.log('Previous card button listener added or replaced.');
+    }
+
+    if (nextBtn) {
+        // Remove any existing event listeners to avoid duplicates
+        const oldNextHandler = nextBtn._clickHandler;
+        if (oldNextHandler) {
+            nextBtn.removeEventListener('click', oldNextHandler);
+        }
+
+        // Create new handler
+        const nextHandler = () => {
+            console.log('Next button clicked');
+            const visibleStack = document.querySelector('.card-stack[style*="display: flex"]');
+            const stackId = visibleStack?.id || 'stack1';
+            const cardsInStack = document.querySelectorAll(`#${stackId} .card`);
+
+            if (cardsInStack.length === 0) {
+                console.warn('No cards in stack, cannot navigate.');
+                return; // Do nothing if no cards
+            }
+
+            console.log('Before increment:', window.currentCardIndex);
+            window.currentCardIndex++; // Increment index
+            // Wrap around if going beyond the last card
+            if (window.currentCardIndex >= cardsInStack.length) {
+                window.currentCardIndex = 0;
+            }
+            console.log('After increment:', window.currentCardIndex);
+
+            showCurrentCard(); // Show the next card
+        };
+
+        // Store the handler reference for future cleanup
+        nextBtn._clickHandler = nextHandler;
+        nextBtn.addEventListener('click', nextHandler);
+        console.log('Next card button listener added or replaced.');
+    }
+}
+
+// FIXED: Function to initialize navigation when the DOM is loaded
+function initializeCardNavigationOnLoad() {
+    // Ensure window.currentCardIndex is set to 0 if not already defined
+    if (typeof window.currentCardIndex === 'undefined') {
         window.currentCardIndex = 0;
+    }
+    
+    // Initialize the card navigation controls
+    initCardNavigation();
+    
+    // Show the current card based on the index
+    showCurrentCard();
+}
 
-        function showCurrentCard() {
-            console.log('showCurrentCard called');
-            // Get the currently visible stack
-            const visibleStack = document.querySelector('.card-stack[style*="display: flex"]') ||
-                                 document.getElementById('stack1'); // Fallback to stack1
+// FIXED: Updated showStack function for better card stack switching
+function showStack(stackId) {
+    console.log(`Showing stack: ${stackId}`);
+    const stacks = document.querySelectorAll('.card-stack');
 
-            if (!visibleStack) {
-                 console.error("No visible card stack found.");
-                 // Ensure card container is hidden if no stack is found
-                 const cardContainer = document.querySelector('.card-container');
-                 if(cardContainer) cardContainer.style.display = 'none';
-                 return;
-            }
+    // Hide all stacks
+    stacks.forEach(stack => {
+        stack.style.display = 'none';
+    });
 
-            const currentStackId = visibleStack.id;
-            console.log('Current Stack ID:', currentStackId);
+    // Show selected stack
+    const selectedStack = document.getElementById(stackId);
+    if (selectedStack) {
+        selectedStack.style.display = 'flex'; // Use flex for the container
+        
+        // Get stored index for this stack or reset to 0
+        const storedIndex = localStorage.getItem(`currentCardIndex_${stackId}`);
+        window.currentCardIndex = storedIndex ? parseInt(storedIndex) : 0;
+        
+        console.log(`Set index for stack ${stackId} to ${window.currentCardIndex}`);
+        showCurrentCard(); // Show the appropriate card in the new stack
+        
+        // Re-initialize navigation for the new stack
+        initCardNavigation();
+    } else {
+        console.error(`Stack with ID ${stackId} not found.`);
+        // Optionally show a message or default to stack1
+        showMessageBox(`Card stack "${stackId}" not found. Showing default stack.`);
+        showStack('stack1'); // Fallback
+    }
+}
 
-            // Get the stored card index for this specific stack from localStorage
-            const storedIndexKey = `currentCardIndex_${currentStackId}`;
-            let currentCardIndex = parseInt(localStorage.getItem(storedIndexKey)) || 0;
-            console.log('Stored Index:', localStorage.getItem(storedIndexKey));
-            console.log('Initial currentCardIndex:', currentCardIndex);
+// Improved responsive handling
+function handleResize() {
+    const cardContainer = document.querySelector('.card-container');
+    if (!cardContainer) return;
 
-            const cardsInCurrentStack = document.querySelectorAll(`#${currentStackId} .card`);
-            console.log('Number of cards in stack:', cardsInCurrentStack.length);
+    const viewport = {
+        width: window.innerWidth,
+        height: window.innerHeight
+    };
 
-            if (cardsInCurrentStack.length === 0) {
-                 console.warn(`No cards found in stack: ${currentStackId}. Hiding card container.`);
-                 const cardContainer = document.querySelector('.card-container');
-                 if(cardContainer) cardContainer.style.display = 'none';
-                 return;
-            } else {
-                 const cardContainer = document.querySelector('.card-container');
-                 if(cardContainer) cardContainer.style.display = 'flex'; // Ensure container is visible
-            }
+    // Improved card container sizing for better mobile experience
+    if (viewport.width < 480) {
+        // Small phones
+        cardContainer.style.width = '95vw';
+        cardContainer.style.height = '60vh'; // Adjusted height
+    } else if (viewport.width < 768) {
+        // Mobile devices
+        cardContainer.style.width = '90vw';
+        cardContainer.style.height = '65vh'; // Adjusted height
+    } else if (viewport.width < 1024) {
+        // Tablets
+        cardContainer.style.width = '80vw';
+        cardContainer.style.height = '70vh'; // Adjusted height
+    } else {
+        // Desktop
+        cardContainer.style.width = '70vw';
+        cardContainer.style.height = '75vh'; // Adjusted height
+    }
 
+    // Landscape mode specific adjustments with better handling
+    if (viewport.width > viewport.height) {
+        // Make cards less tall in landscape mode, but not too small
+        cardContainer.style.height = Math.min(viewport.height * 0.8, 600) + 'px'; // Max height in landscape
+    }
 
-            // Ensure index is within bounds
-            if (currentCardIndex >= cardsInCurrentStack.length) {
-                currentCardIndex = 0; // Reset to the first card if index is too high
-                console.log('Index out of bounds (too high), resetting to 0');
-            } else if (currentCardIndex < 0) {
-                 currentCardIndex = cardsInCurrentStack.length - 1; // Wrap around to the last card
-                 console.log('Index out of bounds (too low), wrapping to last card');
-            }
-            console.log('Final currentCardIndex:', currentCardIndex);
+    // Adjust card font sizes
+    const cards = document.querySelectorAll('.card');
+    cards.forEach(card => {
+        const cardFront = card.querySelector('.card-front');
+        const cardBack = card.querySelector('.card-back');
 
-
-            // Update cards visibility
-            cardsInCurrentStack.forEach((card, index) => {
-                const cardInner = card.querySelector('.card-inner'); // Get cardInner here
-
-                if (index === currentCardIndex) {
-                    console.log(`Showing card at index: ${index}`);
-                    card.style.display = 'block'; // Set display to block
-
-                    // Ensure any flipped state is preserved and animation initialized
-                    if (cardInner) {
-                        const isFlipped = cardInner.classList.contains('flipped') ||
-                                         cardInner.getAttribute('data-flipped') === 'true';
-
-                        if (isFlipped) {
-                            cardInner.classList.add('flipped');
-                            cardInner.setAttribute('data-flipped', 'true');
-                            cardInner.style.transform = 'rotateY(180deg)';
-                        } else {
-                             cardInner.classList.remove('flipped');
-                             cardInner.setAttribute('data-flipped', 'false');
-                             cardInner.style.transform = 'rotateY(0deg)';
-                        }
-                         // Re-initialize animation and shine for the displayed card
-                         initCardAnimation(card);
-                    }
-                } else {
-                    console.log(`Hiding card at index: ${index}`);
-                    card.style.display = 'none'; // Set display to none
-                    // Ensure cards that are hidden are not flipped or tilted
-                     if (cardInner) {
-                         cardInner.classList.remove('flipped');
-                         cardInner.setAttribute('data-flipped', 'false');
-                         cardInner.style.transform = 'rotateY(0deg)';
-                     }
-                     const shine = card.querySelector('.card-shine');
-                     if(shine) shine.style.opacity = '0';
-                }
-            });
-
-            // Save current index for this stack
-            localStorage.setItem(storedIndexKey, currentCardIndex.toString());
-            window.currentCardIndex = currentCardIndex; // Update global for immediate use
-            console.log('Updated localStorage and window.currentCardIndex');
+        if (viewport.width < 480) {
+            // Extra small font for small phones
+            if (cardFront) cardFront.style.fontSize = '1rem';
+            if (cardBack) cardBack.style.fontSize = '0.9rem';
+        } else if (viewport.width < 768) {
+            // Smaller font on mobile
+            if (cardFront) cardFront.style.fontSize = '1.2rem';
+            if (cardBack) cardBack.style.fontSize = '1rem';
+        } else {
+            // Normal font on larger screens
+            if (cardFront) cardFront.style.fontSize = '1.5rem';
+            if (cardBack) cardBack.style.fontSize = '1.2rem';
         }
-
-        // Enhanced stack selector
-        function showStack(stackId) {
-            console.log(`Showing stack: ${stackId}`);
-            const stacks = document.querySelectorAll('.card-stack');
-
-            // Hide all stacks
-            stacks.forEach(stack => {
-                stack.style.display = 'none';
-            });
-
-            // Show selected stack
-            const selectedStack = document.getElementById(stackId);
-            if (selectedStack) {
-                selectedStack.style.display = 'flex'; // Use flex for the container
-                // Reset card index for the new stack and show the first card
-                window.currentCardIndex = 0; // Reset global index
-                localStorage.setItem(`currentCardIndex_${stackId}`, '0'); // Reset localStorage for this stack
-                console.log(`Reset index for stack ${stackId} to 0`);
-                showCurrentCard(); // Show the first card of the new stack
-            } else {
-                 console.error(`Stack with ID ${stackId} not found.`);
-                 // Optionally show a message or default to stack1
-                 showMessageBox(`Card stack "${stackId}" not found. Showing default stack.`);
-                 showStack('stack1'); // Fallback
-            }
-        }
-
-        // Improved responsive handling
-        function handleResize() {
-            const cardContainer = document.querySelector('.card-container');
-            if (!cardContainer) return;
-
-            const viewport = {
-                width: window.innerWidth,
-                height: window.innerHeight
-            };
-
-            // Improved card container sizing for better mobile experience
-            if (viewport.width < 480) {
-                // Small phones
-                cardContainer.style.width = '95vw';
-                cardContainer.style.height = '60vh'; // Adjusted height
-            } else if (viewport.width < 768) {
-                // Mobile devices
-                cardContainer.style.width = '90vw';
-                cardContainer.style.height = '65vh'; // Adjusted height
-            } else if (viewport.width < 1024) {
-                // Tablets
-                cardContainer.style.width = '80vw';
-                cardContainer.style.height = '70vh'; // Adjusted height
-            } else {
-                // Desktop
-                cardContainer.style.width = '70vw';
-                cardContainer.style.height = '75vh'; // Adjusted height
-            }
-
-            // Landscape mode specific adjustments with better handling
-            if (viewport.width > viewport.height) {
-                // Make cards less tall in landscape mode, but not too small
-                cardContainer.style.height = Math.min(viewport.height * 0.8, 600) + 'px'; // Max height in landscape
-            }
-
-            // Adjust card font sizes
-            const cards = document.querySelectorAll('.card');
-            cards.forEach(card => {
-                const cardFront = card.querySelector('.card-front');
-                const cardBack = card.querySelector('.card-back');
-
-                if (viewport.width < 480) {
-                    // Extra small font for small phones
-                    if (cardFront) cardFront.style.fontSize = '1rem';
-                    if (cardBack) cardBack.style.fontSize = '0.9rem';
-                } else if (viewport.width < 768) {
-                    // Smaller font on mobile
-                    if (cardFront) cardFront.style.fontSize = '1.2rem';
-                    if (cardBack) cardBack.style.fontSize = '1rem';
-                } else {
-                    // Normal font on larger screens
-                    if (cardFront) cardFront.style.fontSize = '1.5rem';
-                    if (cardBack) cardBack.style.fontSize = '1.2rem';
-                }
-            });
-        }
+    });
+}
 
         // DOM ready function with improved initialization
         document.addEventListener('DOMContentLoaded', () => {
