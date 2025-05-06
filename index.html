@@ -61,6 +61,8 @@
         box-shadow: 0 0 25px rgba(179, 59, 46, 0.6);
     }
     
+
+    
     /* Add this for shine effect */
     .card-shine {
         position: absolute;
@@ -74,6 +76,31 @@
         pointer-events: none;
         z-index: 10;
     }
+    #timer {
+            font-size: 5rem;
+            margin: 20px;
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 1.2rem;
+            margin: 5px;
+            cursor: pointer;
+            border: none;
+            border-radius: 8px;
+            background-color: #e94f37;
+            color: white;
+        }
+        input {
+            width: 80px;
+            padding: 10px;
+            font-size: 1.2rem;
+            text-align: center;
+            margin: 5px;
+            border-radius: 8px;
+            border: 1px solid #ccc;
+        }
+    /* Add this for shine effect */
+   
 
 .footer-links {
     display: flex;
@@ -989,7 +1016,10 @@ line-height: 2px;
 
    
     
-    <!-- Modal for Game Rules -->
+    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#rulesModal">
+        Open Game Rules
+    </button>
+
     <div class="modal fade" id="rulesModal" tabindex="-1" aria-labelledby="rulesModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
@@ -997,7 +1027,7 @@ line-height: 2px;
                     <h5 class="modal-title" id="rulesModalLabel">Game Rules</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <div class="modal-body"style="color:black">
+                <div class="modal-body" style="color:black;">
                     <h6>Game Setup</h6>
                     <ol>
                         <li>Pick Your Daily Scenario (or let fate decide):
@@ -1012,6 +1042,9 @@ line-height: 2px;
                     <p>After completing your reps, cool down and stretch to reduce soreness.</p>
                     <h6>Final Word</h6>
                     <p>Repping It isn't just a workout - it's a lifestyle challenge. You'll never watch TV, walk to the shop, or scroll through YouTube the same way again.</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                 </div>
             </div>
         </div>
@@ -1376,76 +1409,136 @@ function handleCardFlip(event) {
     event.stopPropagation();
 }
 
-// Better handling of the timer
+   // Audio context for fallback sound
+   let audioContext;
+
+// Function to initialize audio context
+function initAudioContext() {
+  if (!audioContext) {
+    audioContext = new (window.AudioContext || window.webkitAudioContext)();
+  }
+  
+  // Resume audio context if it's suspended (browser policy requirement)
+  if (audioContext.state === 'suspended') {
+    audioContext.resume();
+  }
+}
+
+// Initialize on page interaction to handle autoplay restrictions
+document.addEventListener('click', initAudioContext);
+document.addEventListener('touchstart', initAudioContext);
+
+// Fallback beep using Web Audio API
+function createBeep() {
+  initAudioContext();
+  
+  const oscillator = audioContext.createOscillator();
+  const gainNode = audioContext.createGain();
+  
+  oscillator.connect(gainNode);
+  gainNode.connect(audioContext.destination);
+  
+  oscillator.type = 'square';
+  oscillator.frequency.value = 800;
+  gainNode.gain.value = 0.5;
+  
+  oscillator.start();
+  
+  // Beep for 0.3 seconds
+  setTimeout(() => {
+    oscillator.stop();
+  }, 300);
+}
+
+// Function to reload and play sound
+function playSound() {
+  // Create new audio element each time instead of reusing
+  const buzzer = new Audio('digital-timer-beeping-epic-stock-media-1-00-08.mp3');
+  
+  // Try to play the audio
+  const playPromise = buzzer.play();
+  
+  if (playPromise !== undefined) {
+    playPromise
+      .then(() => {
+        console.log("Buzzer sound played successfully");
+      })
+      .catch(error => {
+        console.log("Error playing buzzer sound:", error);
+        // Use Web Audio API as fallback
+        createBeep();
+      });
+  }
+}
+
 let countdown;
 let timeLeft = 0;
 
 function startTimer() {
-    clearInterval(countdown);
+  clearInterval(countdown);
 
-    const minutesInput = document.getElementById('minutes');
-    const secondsInput = document.getElementById('seconds');
+  const minutes = parseInt(document.getElementById('minutes').value) || 0;
+  const seconds = parseInt(document.getElementById('seconds').value) || 0;
 
-    const minutes = parseInt(minutesInput?.value) || 0;
-    const seconds = parseInt(secondsInput?.value) || 0;
+  timeLeft = (minutes * 60) + seconds;
 
-    timeLeft = (minutes * 60) + seconds;
+  if (timeLeft <= 0) {
+    alert("Please set a valid time!");
+    return;
+  }
 
-    if (timeLeft <= 0) {
-        showMessageBox("Please set a valid time!"); // Use custom message box
-        return;
-    }
+  // Initialize audio context when timer starts
+  initAudioContext();
+  
+  updateDisplay();
 
-    // Initialize audio context when timer starts
-    initAudioContext();
-
+  countdown = setInterval(() => {
+    timeLeft--;
     updateDisplay();
 
-    countdown = setInterval(() => {
-        timeLeft--;
-        updateDisplay();
-
-        if (timeLeft <= 0) {
-            clearInterval(countdown);
-            playSound();
-        }
-    }, 1000);
+    if (timeLeft <= 0) {
+      clearInterval(countdown);
+      // Try both methods for maximum compatibility
+      playSound();
+      
+      // Also try using the original buzzer element as backup
+      const originalBuzzer = document.getElementById('buzzer');
+      originalBuzzer.currentTime = 0;
+      originalBuzzer.play().catch(() => {
+        console.log("Backup method failed, already tried alternative");
+      });
+    }
+  }, 1000);
 }
 
 function updateDisplay() {
-    const timerDisplay = document.getElementById('timer');
-    if (!timerDisplay) return;
+  const mins = Math.floor(timeLeft / 60);
+  const secs = timeLeft % 60;
 
-    const mins = Math.floor(timeLeft / 60);
-    const secs = timeLeft % 60;
-
-    timerDisplay.textContent =
-        `${mins.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
+  document.getElementById('timer').textContent = 
+    `${mins.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
 }
 
 function resetTimer() {
-    clearInterval(countdown);
-    timeLeft = 0;
-
-    const timerDisplay = document.getElementById('timer');
-    if (timerDisplay) {
-        timerDisplay.textContent = "00:00";
-    }
-
-    const minutesInput = document.getElementById('minutes');
-    if (minutesInput) {
-        minutesInput.value = "";
-    }
-
-    const secondsInput = document.getElementById('seconds');
-    if (secondsInput) {
-        secondsInput.value = "";
-    }
+  clearInterval(countdown);
+  timeLeft = 0;
+  document.getElementById('timer').textContent = "00:00";
+  document.getElementById('minutes').value = "";
+  document.getElementById('seconds').value = "";
+  
+  // Reset audio element when timer is reset
+  const buzzer = document.getElementById('buzzer');
+  buzzer.pause();
+  buzzer.currentTime = 0;
 }
 
-// FIXED: Improved card navigation functions
-// This is the key function that shows the current card based on window.currentCardIndex
-function showCurrentCard() {
+// Double-ensure the audio is properly set up
+document.addEventListener('DOMContentLoaded', () => {
+  // Set the src again to ensure it's properly loaded
+  const buzzer = document.getElementById('buzzer');
+  buzzer.src = 'digital-timer-beeping-epic-stock-media-1-00-08.mp3';
+  buzzer.load();
+});function showCurrentCard() {
     console.log('showCurrentCard called');
     // Get the currently visible stack
     const visibleStack = document.querySelector('.card-stack[style*="display: flex"]') ||
@@ -2046,7 +2139,24 @@ document.addEventListener('DOMContentLoaded', () => {
                 });
                  console.log('Roll dice button listener added.');
             }
+ // --- BEGIN FIX FOR DICE VISIBILITY ---
+ const diceImage = document.getElementById('diceImageElement'); // Use the ID you defined
+    if (diceImage) {
+        diceImage.style.display = 'block'; // Or 'inline-block', matching your CSS
+        diceImage.style.visibility = 'visible';
+        diceImage.style.opacity = '1';
+        // Ensure the src is set if it might be cleared elsewhere (unlikely for 'always showing')
+        // if (!diceImage.src) diceImage.src = 'images/dice-face-1.png';
+        console.log('Dice image visibility ensured.');
+    }
 
+    const diceArea = document.getElementById('diceArea'); // If using a container
+    if (diceArea) {
+        diceArea.style.display = 'block'; // Or 'flex', matching your CSS
+        diceArea.style.visibility = 'visible';
+        diceArea.style.opacity = '1';
+        console.log('Dice area visibility ensured.');
+    }
             // Reset dice button
             const resetDiceBtn = document.getElementById('reset-dice-btn');
             if (resetDiceBtn) {
