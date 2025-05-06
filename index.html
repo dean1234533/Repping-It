@@ -1018,7 +1018,7 @@ line-height: 2px;
     </div>
 
    <script>
-        let audioContext;
+
 
 // Improved audio context initialization with better mobile support
 function initAudioContext() {
@@ -1127,43 +1127,44 @@ function playSound() {
     }
 }
 
-// Improved touch handling for mobile devices
+// Improved touch handling for mobile devices - FIXED TO ALLOW SCROLLING
 function enableTouchSupport() {
-    // Map touch events to mouse events for card interactions
+    // Only handle touch events for interactive elements that need custom behavior
     document.addEventListener('touchstart', function(e) {
-        // Don't prevent default for elements that need native touch behavior
+        // Don't prevent default for scrolling or for most elements
+        // Only handle specific interactive elements that need custom touch handling
         const target = e.target;
-        const targetTagName = target.tagName.toLowerCase();
-        const isInteractive = targetTagName === 'button' ||
-                             targetTagName === 'input' ||
-                             targetTagName === 'select' ||
-                             target.closest('.card-inner'); // Include card-inner for flip
-
-        if (isInteractive) {
-            // Prevent default only if we are handling the interaction
+        
+        // Check if we're interacting with a card-inner element specifically for flipping
+        if (target.closest('.card-inner')) {
+            // We only want to prevent default for card flipping
+            // to avoid both flipping and scrolling at the same time
             e.preventDefault();
-
-            // Map the first touch point to mousedown for interactive elements
+            
+            // Map the touch to a mousedown event for the flip handler
             if (e.touches.length > 0) {
                 const touch = e.touches[0];
                 const mouseEvent = new MouseEvent('mousedown', {
                     clientX: touch.clientX,
                     clientY: touch.clientY,
                     bubbles: true,
-                    cancelable: true // Make event cancelable
+                    cancelable: true
                 });
-                // Dispatch on the actual element that was touched
                 touch.target.dispatchEvent(mouseEvent);
             }
         }
-    }, {passive: false}); // Use passive: false when preventing default
+        // For all other elements, allow default behavior (scrolling)
+    }, {passive: false});
 
     document.addEventListener('touchmove', function(e) {
         // Only handle touch moves for card interactions for the tilt effect
-        if (e.target.closest('.card')) {
-             // Prevent default to avoid scrolling while tilting
+        // and only if we're directly over a card
+        const cardElement = e.target.closest('.card');
+        if (cardElement && e.target.closest('.card-inner')) {
+            // Only prevent default for card tilting, not for general scrolling
             e.preventDefault();
-            // Map the first touch point to mousemove
+            
+            // Map the touch to a mousemove event for the tilt effect
             if (e.touches.length > 0) {
                 const touch = e.touches[0];
                 const mouseEvent = new MouseEvent('mousemove', {
@@ -1171,55 +1172,52 @@ function enableTouchSupport() {
                     clientY: touch.clientY,
                     bubbles: true
                 });
-                // Dispatch on the card element
-                e.target.closest('.card').dispatchEvent(mouseEvent);
+                cardElement.dispatchEvent(mouseEvent);
             }
         }
-    }, {passive: false}); // Use passive: false when preventing default
+        // For all other elements, allow default scrolling behavior
+    }, {passive: false});
 
     document.addEventListener('touchend', function(e) {
-        // For touch end on interactive elements
-         // Prevent default to avoid double-tap zoom and ensure our click fires
-        e.preventDefault();
+        // Only prevent default for card-inner elements to handle flipping
+        if (e.target.closest('.card-inner')) {
+            e.preventDefault();
 
-        if (e.changedTouches.length > 0) {
-            const touch = e.changedTouches[0];
+            if (e.changedTouches.length > 0) {
+                const touch = e.changedTouches[0];
+                const element = document.elementFromPoint(touch.clientX, touch.clientY);
 
-            // Find the element at the release position
-            // Use elementFromPoint for more accurate targeting after touchmove
-            const element = document.elementFromPoint(touch.clientX, touch.clientY);
+                if (element) {
+                    // Dispatch events only on card elements for the flip animation
+                    const mouseUpEvent = new MouseEvent('mouseup', {
+                        clientX: touch.clientX,
+                        clientY: touch.clientY,
+                        bubbles: true,
+                        cancelable: true
+                    });
+                    element.dispatchEvent(mouseUpEvent);
 
-            if (element) {
-                 // Dispatch mouseup and click events
-                const mouseUpEvent = new MouseEvent('mouseup', {
-                    clientX: touch.clientX,
-                    clientY: touch.clientY,
-                    bubbles: true,
-                    cancelable: true
-                });
-                 // Dispatch on the found element
-                element.dispatchEvent(mouseUpEvent);
-
-                const clickEvent = new MouseEvent('click', {
-                    clientX: touch.clientX,
-                    clientY: touch.clientY,
-                    bubbles: true,
-                    cancelable: true
-                });
-                 // Dispatch on the found element
-                element.dispatchEvent(clickEvent);
+                    const clickEvent = new MouseEvent('click', {
+                        clientX: touch.clientX,
+                        clientY: touch.clientY,
+                        bubbles: true,
+                        cancelable: true
+                    });
+                    element.dispatchEvent(clickEvent);
+                }
             }
         }
-    }, {passive: false}); // Use passive: false when preventing default
+        // For all other elements, allow default behavior
+    }, {passive: false});
 
-     // Prevent default touchstart on the body to help prevent unwanted scrolling/zooming
-    document.body.addEventListener('touchstart', function(e) {
-        // Only prevent default if the target is not an input or select
-        const targetTagName = e.target.tagName.toLowerCase();
-        if (targetTagName !== 'input' && targetTagName !== 'select' && targetTagName !== 'button') {
-             e.preventDefault();
-        }
-    }, { passive: false });
+    // REMOVE THIS BLOCK THAT PREVENTS SCROLLING
+    // document.body.addEventListener('touchstart', function(e) {
+    //     // Only prevent default if the target is not an input or select
+    //     const targetTagName = e.target.tagName.toLowerCase();
+    //     if (targetTagName !== 'input' && targetTagName !== 'select' && targetTagName !== 'button') {
+    //          e.preventDefault();
+    //     }
+    // }, { passive: false });
 }
 
 // Enhanced card animation initialization
@@ -1657,7 +1655,7 @@ function showStack(stackId) {
     }
 }
 
-// Improved responsive handling
+// Improved responsive handling - FIXED FOR BETTER MOBILE SCROLLING
 function handleResize() {
     const cardContainer = document.querySelector('.card-container');
     if (!cardContainer) return;
@@ -1669,30 +1667,32 @@ function handleResize() {
 
     // Improved card container sizing for better mobile experience
     if (viewport.width < 480) {
-    // Small phones
-    cardContainer.style.width = '95vw';
-    cardContainer.style.height = '80vh'; // Leave some space for scrolling
-   
-} else if (viewport.width < 768) {
-    // Mobile devices
-    cardContainer.style.width = '90vw';
-    cardContainer.style.height = '85vh'; // Leave some space for scrolling
-   
-} else if (viewport.width < 1024) {
-    // Tablets
-    cardContainer.style.width = '80vw';
-    cardContainer.style.height = '90vh'; // Leave some space for scrolling
-   
-} else {
-    // Desktop
-    cardContainer.style.width = '';
-    cardContainer.style.height = ''; // Adjusted height
-    cardContainer.style.overflowY = 'visible'; // Default behavior
-}
+        // Small phones - CHANGED HEIGHT TO ALLOW SCROLLING
+        cardContainer.style.width = '95vw';
+        cardContainer.style.height = '70vh'; // Reduced from 80vh to allow more scrolling space
+        cardContainer.style.overflowY = 'auto'; // Allow scrolling within container if needed
+    } else if (viewport.width < 768) {
+        // Mobile devices - CHANGED HEIGHT TO ALLOW SCROLLING
+        cardContainer.style.width = '90vw';
+        cardContainer.style.height = '75vh'; // Reduced from 85vh to allow more scrolling space
+        cardContainer.style.overflowY = 'auto'; // Allow scrolling within container if needed
+    } else if (viewport.width < 1024) {
+        // Tablets
+        cardContainer.style.width = '80vw';
+        cardContainer.style.height = '85vh'; // Adjusted to leave some space for scrolling
+        cardContainer.style.overflowY = 'auto'; // Allow scrolling within container if needed
+    } else {
+        // Desktop
+        cardContainer.style.width = '';
+        cardContainer.style.height = ''; // Adjusted height
+        cardContainer.style.overflowY = 'visible'; // Default behavior
+    }
+    
     // Landscape mode specific adjustments with better handling
     if (viewport.width > viewport.height) {
         // Make cards less tall in landscape mode, but not too small
-        cardContainer.style.height = Math.min(viewport.height * 0.8, 600) + 'px'; // Max height in landscape
+        cardContainer.style.height = Math.min(viewport.height * 0.7, 500) + 'px'; // Reduced height in landscape
+        cardContainer.style.overflowY = 'auto'; // Always allow scrolling in landscape mode
     }
 
     // Adjust card font sizes
@@ -1717,80 +1717,79 @@ function handleResize() {
     });
 }
 
-        // DOM ready function with improved initialization
-        document.addEventListener('DOMContentLoaded', () => {
-            console.log('DOMContentLoaded fired');
-            // Set all event listeners
-            const startTimerBtn = document.getElementById('start-timer-btn');
-            if (startTimerBtn) {
-                startTimerBtn.addEventListener('click', startTimer);
-                console.log('Timer start button listener added.');
+// DOM ready function with improved initialization
+document.addEventListener('DOMContentLoaded', () => {
+    console.log('DOMContentLoaded fired');
+    // Set all event listeners
+    const startTimerBtn = document.getElementById('start-timer-btn');
+    if (startTimerBtn) {
+        startTimerBtn.addEventListener('click', startTimer);
+        console.log('Timer start button listener added.');
+    }
+
+    const resetTimerBtn = document.getElementById('reset-timer-btn');
+    if (resetTimerBtn) {
+        resetTimerBtn.addEventListener('click', resetTimer);
+         console.log('Timer reset button listener added.');
+    }
+
+    // Make sure audio elements are loaded properly
+    const buzzer = document.getElementById('buzzer');
+    if (buzzer) {
+         // Ensure the path is correct for your file structure
+        buzzer.src = 'digital-timer-beeping-epic-stock-media-1-00-08.mp3';
+        buzzer.load();
+        buzzer.volume = 0.5; // Lower volume on mobile
+         console.log('Buzzer audio loaded.');
+    }
+
+    // Use event delegation for card flipping
+    // Attach to the card container or a higher parent for efficiency
+    const cardContainer = document.querySelector('.card-container');
+    if(cardContainer) {
+         cardContainer.addEventListener('click', handleCardFlip);
+         console.log('Card container click listener for flip added.');
+    }
+
+    // Initialize touch support
+    enableTouchSupport();
+    console.log('Touch support enabled.');
+
+    // Initialize all cards with animation properties (even if hidden)
+    const allCards = document.querySelectorAll('.card');
+    allCards.forEach(card => {
+        initCardAnimation(card);
+    });
+    console.log(`Initialized animation for ${allCards.length} cards.`);
+
+    // Set up button handlers
+    const shuffleBtn = document.getElementById('shuffle-btn');
+    if (shuffleBtn) {
+        shuffleBtn.addEventListener('click', () => {
+            console.log('Shuffle button clicked.');
+            const activeStack = document.querySelector('.card-stack[style*="display: flex"]');
+            const currentStackId = activeStack?.id || 'stack1';
+
+            if (!currentStackId) {
+                showMessageBox("Please select a stack first!");
+                return;
             }
 
-            const resetTimerBtn = document.getElementById('reset-timer-btn');
-            if (resetTimerBtn) {
-                resetTimerBtn.addEventListener('click', resetTimer);
-                 console.log('Timer reset button listener added.');
+            const cards = Array.from(document.querySelectorAll(`#${currentStackId} .card`));
+
+            if (cards.length === 0) {
+                 showMessageBox(`No cards to shuffle in stack: ${currentStackId}`);
+                 return;
             }
 
-            // Make sure audio elements are loaded properly
-            const buzzer = document.getElementById('buzzer');
-            if (buzzer) {
-                 // Ensure the path is correct for your file structure
-                buzzer.src = 'digital-timer-beeping-epic-stock-media-1-00-08.mp3';
-                buzzer.load();
-                buzzer.volume = 0.5; // Lower volume on mobile
-                 console.log('Buzzer audio loaded.');
-            }
-
-            // Use event delegation for card flipping
-            // Attach to the card container or a higher parent for efficiency
-            const cardContainer = document.querySelector('.card-container');
-            if(cardContainer) {
-                 cardContainer.addEventListener('click', handleCardFlip);
-                 console.log('Card container click listener for flip added.');
-            }
-
-
-            // Initialize touch support
-            enableTouchSupport();
-            console.log('Touch support enabled.');
-
-            // Initialize all cards with animation properties (even if hidden)
-            const allCards = document.querySelectorAll('.card');
-            allCards.forEach(card => {
-                initCardAnimation(card);
+            // Store card contents and their flipped state
+            const cardContents = cards.map(card => {
+                 const cardInner = card.querySelector('.card-inner');
+                return {
+                    html: cardInner ? cardInner.innerHTML : card.innerHTML, // Store innerHTML for front/back
+                    isFlipped: cardInner ? (cardInner.classList.contains('flipped') || cardInner.getAttribute('data-flipped') === 'true') : false
+                };
             });
-            console.log(`Initialized animation for ${allCards.length} cards.`);
-
-            // Set up button handlers
-            const shuffleBtn = document.getElementById('shuffle-btn');
-            if (shuffleBtn) {
-                shuffleBtn.addEventListener('click', () => {
-                    console.log('Shuffle button clicked.');
-                    const activeStack = document.querySelector('.card-stack[style*="display: flex"]');
-                    const currentStackId = activeStack?.id || 'stack1';
-
-                    if (!currentStackId) {
-                        showMessageBox("Please select a stack first!");
-                        return;
-                    }
-
-                    const cards = Array.from(document.querySelectorAll(`#${currentStackId} .card`));
-
-                    if (cards.length === 0) {
-                         showMessageBox(`No cards to shuffle in stack: ${currentStackId}`);
-                         return;
-                    }
-
-                    // Store card contents and their flipped state
-                    const cardContents = cards.map(card => {
-                         const cardInner = card.querySelector('.card-inner');
-                        return {
-                            html: cardInner ? cardInner.innerHTML : card.innerHTML, // Store innerHTML for front/back
-                            isFlipped: cardInner ? (cardInner.classList.contains('flipped') || cardInner.getAttribute('data-flipped') === 'true') : false
-                        };
-                    });
 
                     // Shuffle contents using Fisher-Yates (Knuth) algorithm
                     for (let i = cardContents.length - 1; i > 0; i--) {
