@@ -2059,108 +2059,115 @@ document.addEventListener('DOMContentLoaded', () => {
              }
 
 
-            // Roll dice button
-            const rollDiceBtn = document.getElementById('roll-dice-btn');
-            if (rollDiceBtn) {
-                rollDiceBtn.addEventListener('click', () => {
-                    console.log('Roll dice button clicked.');
-                    rollDiceBtn.disabled = true; // Disable button while rolling
+           // Roll dice button
+const rollDiceBtn = document.getElementById('roll-dice-btn');
+if (rollDiceBtn) {
+    rollDiceBtn.addEventListener('click', () => {
+        console.log('Roll dice button clicked.');
+        rollDiceBtn.disabled = true; // Disable button while rolling
 
-                    const diceImage = document.getElementById('diceImage');
-                    if (!diceImage) {
-                        rollDiceBtn.disabled = false;
-                        console.error('Dice image element not found.');
-                        return;
-                    }
+        const diceImage = document.getElementById('diceImage');
+        if (!diceImage) {
+            rollDiceBtn.disabled = false;
+            console.error('Dice image element not found.');
+            return;
+        }
 
-                    // Default dice images (replace with your actual paths for 1-6)
-                    // Make sure you have IMG_4702_1.PNG, IMG_4702_2.PNG, ..., IMG_4702_6.PNG
-                    const diceImagePaths = [
-                        'IMG_4702_1.PNG', 'IMG_4702_1.PNG', 'IMG_4702_1.PNG',
-                        'IMG_4702_1.PNG', 'IMG_4702_1.PNG', 'IMG_4702_1.PNG'
-                    ];
+        // Actual dice images paths - update these with your correct paths
+        const diceImagePaths = [
+            'IMG_4702_1.PNG', 
+            'IMG_4702_2.PNG', 
+            'IMG_4702_3.PNG',
+            'IMG_4702_4.PNG', 
+            'IMG_4702_5.PNG', 
+            'IMG_4702_6.PNG'
+        ];
 
-                     if (diceImagePaths.length === 0) {
-                         console.error('Dice image paths are not configured.');
-                         rollDiceBtn.disabled = false;
-                         return;
-                     }
+        // Check if images exist and are accessible
+        const imageExists = (url) => {
+            const img = new Image();
+            img.src = url;
+            return img.complete;
+        };
 
+        // Validate the first image exists
+        if (!imageExists(diceImagePaths[0])) {
+            console.warn('Dice image not found: ' + diceImagePaths[0]);
+            // Continue anyway as images might load asynchronously
+        }
 
-                    diceImage.classList.add('rolling'); // Start animation
+        diceImage.classList.add('rolling'); // Start animation
 
-                    let rollCount = 0;
-                    const rollInterval = setInterval(() => {
-                        // Show random dice faces during the roll animation
-                        const randomIndex = Math.floor(Math.random() * diceImagePaths.length);
-                        diceImage.src = diceImagePaths[randomIndex];
-                        rollCount++;
+        let rollCount = 0;
+        const rollInterval = setInterval(() => {
+            // Show random dice faces during the roll animation
+            const randomIndex = Math.floor(Math.random() * diceImagePaths.length);
+            diceImage.src = diceImagePaths[randomIndex];
+            rollCount++;
 
-                        if (rollCount >= 15) { // Roll for a bit longer for visual effect
-                            clearInterval(rollInterval);
+            if (rollCount >= 15) { // Roll for a bit longer for visual effect
+                clearInterval(rollInterval);
 
-                            // Final roll (1-6)
-                            const finalRoll = Math.floor(Math.random() * 6) + 1;
-                            // Ensure the image path is correct for the final roll value
-                            diceImage.src = diceImagePaths[finalRoll - 1];
-                            console.log(`Final dice roll: ${finalRoll}`);
+                // Final roll (1-6)
+                const finalRoll = Math.floor(Math.random() * 6) + 1;
+                // Use the correct image path for the final roll value
+                diceImage.src = diceImagePaths[finalRoll - 1];
+                console.log(`Final dice roll: ${finalRoll}`);
 
-                            // Calculate reps based on difficulty
-                            let currentDifficulty = 'low';
-                            if (document.getElementById('medium-btn')?.classList.contains('active')) {
-                                currentDifficulty = 'medium';
-                            } else if (document.getElementById('high-btn')?.classList.contains('active')) {
-                                currentDifficulty = 'high';
-                            }
-                             console.log(`Current difficulty for reps: ${currentDifficulty}`);
+                // Calculate reps based on difficulty
+                let currentDifficulty = 'low';
+                if (document.getElementById('medium-btn')?.classList.contains('active')) {
+                    currentDifficulty = 'medium';
+                } else if (document.getElementById('high-btn')?.classList.contains('active')) {
+                    currentDifficulty = 'high';
+                }
+                console.log(`Current difficulty for reps: ${currentDifficulty}`);
 
-                            // Get rep count based on the final roll and difficulty level
-                            const repsArray = difficultyLevels[currentDifficulty]?.reps || difficultyLevels['low'].reps; // Fallback to low
-                            const repCount = repsArray[Math.min(finalRoll - 1, repsArray.length - 1)]; // Get reps based on roll index
-                            console.log(`Calculated rep count: ${repCount}`);
+                // Get rep count based on the final roll and difficulty level
+                const repsArray = difficultyLevels[currentDifficulty]?.reps || difficultyLevels['low'].reps; // Fallback to low
+                const repCount = repsArray[Math.min(finalRoll - 1, repsArray.length - 1)]; // Get reps based on roll index
+                console.log(`Calculated rep count: ${repCount}`);
 
+                // Update total reps display
+                const totalRepsDisplay = document.getElementById('totalReps');
+                if (totalRepsDisplay) {
+                    const currentTotal = parseInt(totalRepsDisplay.textContent.replace('Total Reps: ', '') || '0');
+                    totalRepsDisplay.textContent = `Total Reps: ${currentTotal + repCount}`;
+                    console.log(`Total reps updated to: ${currentTotal + repCount}`);
+                }
 
-                            // Update total reps display
-                            const totalRepsDisplay = document.getElementById('totalReps');
-                            if (totalRepsDisplay) {
-                                const currentTotal = parseInt(totalRepsDisplay.textContent.replace('Total Reps: ', '') || '0');
-                                totalRepsDisplay.textContent = `Total Reps: ${currentTotal + repCount}`;
-                                console.log(`Total reps updated to: ${totalRepsDisplay.textContent}`);
-                            }
-
-                            // Stop animation and re-enable button after a short delay
-                            setTimeout(() => {
-                                diceImage.classList.remove('rolling');
-                                rollDiceBtn.disabled = false;
-                                console.log('Dice roll animation finished, button re-enabled.');
-                            }, 500); // Match animation duration
-                        }
-                    }, 100); // Change dice image every 100ms
-                });
-                 console.log('Roll dice button listener added.');
+                // Stop animation and re-enable button after a short delay
+                setTimeout(() => {
+                    diceImage.classList.remove('rolling');
+                    rollDiceBtn.disabled = false;
+                    console.log('Dice roll animation finished, button re-enabled.');
+                }, 500); // Match animation duration
             }
- 
-            // Reset dice button
-            const resetDiceBtn = document.getElementById('reset-dice-btn');
-            if (resetDiceBtn) {
-                resetDiceBtn.addEventListener('click', () => {
-                    console.log('Reset dice button clicked.');
-                    const totalRepsDisplay = document.getElementById('totalReps');
-                    if (totalRepsDisplay) {
-                        totalRepsDisplay.textContent = 'Total Reps: 0';
-                         console.log('Total reps reset to 0.');
-                    }
+        }, 100); // Change dice image every 100ms
+    });
+    console.log('Roll dice button listener added.');
+}
 
-                    const diceImage = document.getElementById('diceImage');
-                    if (diceImage) {
-                         // Set back to the default dice image (e.g., showing 1)
-                        diceImage.src = 'IMG_4702_1.PNG'; // Or your preferred default
-                         console.log('Dice image reset.');
-                    }
-                });
-                 console.log('Reset dice button listener added.');
-            }
+// Reset dice button
+const resetDiceBtn = document.getElementById('reset-dice-btn');
+if (resetDiceBtn) {
+    resetDiceBtn.addEventListener('click', () => {
+        console.log('Reset dice button clicked.');
+        const totalRepsDisplay = document.getElementById('totalReps');
+        if (totalRepsDisplay) {
+            totalRepsDisplay.textContent = 'Total Reps: 0';
+            console.log('Total reps reset to 0.');
+        }
 
+        const diceImage = document.getElementById('diceImage');
+        if (diceImage) {
+            // Set back to the default dice image (showing 1)
+            diceImage.src = 'IMG_4702_1.PNG';
+            console.log('Dice image reset to default.');
+        }
+    });
+    console.log('Reset dice button listener added.');
+}
             // Tally buttons
             const tallyBtn = document.getElementById('tally-btn');
             if (tallyBtn) {
