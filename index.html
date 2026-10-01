@@ -958,6 +958,7 @@ line-height: 2px;
             <div class="dice">
                 <img id="diceImage" src="IMG_4702.PNG" alt="Dice" />
             </div>
+            <div id="diceResult" style="font-size: 20px; margin-top: 100px;"></div>
             <div class="dice-controls">
                 <button id="roll-dice-btn">Roll Dice</button>
                 <button id="reset-dice-btn">Reset Dice</button>
@@ -2074,36 +2075,19 @@ if (rollDiceBtn) {
             return;
         }
 
-        // Actual dice images paths - update these with your correct paths
-        const diceImagePaths = [
-            'IMG_4702_1.PNG', 
-            'IMG_4702_2.PNG', 
-            'IMG_4702_3.PNG',
-            'IMG_4702_4.PNG', 
-            'IMG_4702_5.PNG', 
-            'IMG_4702_6.PNG'
-        ];
-
-        // Check if images exist and are accessible
-        const imageExists = (url) => {
-            const img = new Image();
-            img.src = url;
-            return img.complete;
-        };
-
-        // Validate the first image exists
-        if (!imageExists(diceImagePaths[0])) {
-            console.warn('Dice image not found: ' + diceImagePaths[0]);
-            // Continue anyway as images might load asynchronously
-        }
+        // Only one dice image exists in the repo (IMG_4702.PNG), so it is used
+        // for every roll; the rolled number is shown as text below the image.
+        const diceImageSrc = 'IMG_4702.PNG';
+        const diceResult = document.getElementById('diceResult');
 
         diceImage.classList.add('rolling'); // Start animation
 
         let rollCount = 0;
         const rollInterval = setInterval(() => {
-            // Show random dice faces during the roll animation
-            const randomIndex = Math.floor(Math.random() * diceImagePaths.length);
-            diceImage.src = diceImagePaths[randomIndex];
+            // Show random numbers during the roll animation
+            const randomFace = Math.floor(Math.random() * 6) + 1;
+            diceImage.src = diceImageSrc;
+            if (diceResult) diceResult.textContent = `Rolling... ${randomFace}`;
             rollCount++;
 
             if (rollCount >= 15) { // Roll for a bit longer for visual effect
@@ -2111,8 +2095,8 @@ if (rollDiceBtn) {
 
                 // Final roll (1-6)
                 const finalRoll = Math.floor(Math.random() * 6) + 1;
-                // Use the correct image path for the final roll value
-                diceImage.src = diceImagePaths[finalRoll - 1];
+                diceImage.src = diceImageSrc;
+                if (diceResult) diceResult.textContent = `You rolled: ${finalRoll}`;
                 console.log(`Final dice roll: ${finalRoll}`);
 
                 // Calculate reps based on difficulty
@@ -2162,10 +2146,12 @@ if (resetDiceBtn) {
 
         const diceImage = document.getElementById('diceImage');
         if (diceImage) {
-            // Set back to the default dice image (showing 1)
-            diceImage.src = 'IMG_4702_1.PNG';
+            // Set back to the default dice image (the only one in the repo)
+            diceImage.src = 'IMG_4702.PNG';
             console.log('Dice image reset to default.');
         }
+        const diceResult = document.getElementById('diceResult');
+        if (diceResult) diceResult.textContent = '';
     });
     console.log('Reset dice button listener added.');
 }
