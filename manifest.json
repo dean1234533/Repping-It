@@ -1,21 +1,18 @@
-{{
+{
   "name": "Repping It",
-  "version": "1.0",
+  "short_name": "Repping It",
   "description": "Your fitness-themed game",
-  "manifest_version": 3,
-  "action": {
-    "default_icon": {
-      "16": "photo-output 7.PNG",
-      "48": "photo-output 7.PNG",
-      "128": "photo-output 7.PNG"
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#1a1a1a",
+  "theme_color": "#b33b2e",
+  "icons": [
+    {
+      "src": "photo-output 7.PNG",
+      "sizes": "any",
+      "type": "image/png",
+      "purpose": "any"
     }
-  },
-  "background": {
-    "service_worker": "background.js"
-  },
-  "icons": {
-    "16": "photo-output 7.PNG",
-    "48": "photo-output 7.PNG",
-    "128": "photo-output 7.PNG"
-  }
+  ]
 }
