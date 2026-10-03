@@ -4,16 +4,12 @@ const CACHE_NAME = 'repping-it-cache-v1';
 const urlsToCache = [
   '.',
   'index.html',
-  'css/style.css',
-  'js/main.js',
-  
-  'photo-output 7.PNG',
+  'manifest.json',
+  'photo-output%207.PNG',
   'digital-timer-beeping-epic-stock-media-1-00-08.mp3',
   'annie-spratt-6a3nqQ1YwBw-unsplash.jpg',
   'IMG_4715.JPG',
-  'IMG_4702.PNG',
-
-  'https://dean1234533.github.io/Repping-It/' // Ensure the base URL is included for offline navigation
+  'IMG_4702.PNG'
 ];
 
 self.addEventListener('install', (event) => {
